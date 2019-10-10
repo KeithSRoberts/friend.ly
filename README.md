@@ -1,4 +1,4 @@
-**INFO 442 TEAM 2**
+# Friend.ly
 
 *Our Mission Statement:* “Making technology to bring people together...”
 
