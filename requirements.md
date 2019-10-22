@@ -1,5 +1,4 @@
 # Friend.ly Requirements Specification
-## By Brian Kim, Leo Kwo, Keith Roberts, Anuraag Polisetty
 
 ### Final Requirements:
 
