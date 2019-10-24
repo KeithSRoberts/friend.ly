@@ -13,7 +13,7 @@ Our design for our interface includes the following:
 1. A sign up page for new users in which they can enter in any number of keyword-based interests that they associate. The users can enter in whatever they please for interests in the form token input fields, but can also select general interests that are provided by default. This page should also include an additional sign in tab/page where users who have already signed up can input their information to login. If the user does not have the credentials of a created profile, the login page will reject that login. For MVP, the user will only be able to input their interests on signup, having the user change their interests after registration is a stretch goal.
 
 
-![register page](https://github.com/Info442-team-2/friendly-mvp/blob/master/img/registration.jpg)
+![register](https://github.com/Info442-team-2/friendly-mvp/blob/master/img/register.jpg)
 
 ![signup](https://github.com/Info442-team-2/friendly-mvp/blob/master/img/signup.jpg)
 
