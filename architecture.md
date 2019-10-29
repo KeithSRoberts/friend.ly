@@ -1,16 +1,16 @@
 # Friend.ly Architecture & Components
 
 ### Search Bar Component
-*Source files: components/searchBar.js, components/search.js, components/searchResults.js
-*This component will handle all searching and editing the DOM to show search results. This component retrieves all groups from our database, and filters them based on the users query. Upon pressing the search button (searchBar.js), the user’s search query is used to filter the list of all groups from firebase down to relevant matches (using search.js). The relevant matches are populated in the DOM using searchResults.js.
-*The components interact with the Dashboard views, as well as group views such that the user is shown a group’s page when they click on that group.
-*The search bar UI resides on the client side, but our searching code will reside on the server-side, such that searching for groups does not slow down client computers as we scale.
+* Source files: components/searchBar.js, components/search.js, components/searchResults.js
+* This component will handle all searching and editing the DOM to show search results. This component retrieves all groups from our database, and filters them based on the users query. Upon pressing the search button (searchBar.js), the user’s search query is used to filter the list of all groups from firebase down to relevant matches (using search.js). The relevant matches are populated in the DOM using searchResults.js.
+* The components interact with the Dashboard views, as well as group views such that the user is shown a group’s page when they click on that group.
+* The search bar UI resides on the client side, but our searching code will reside on the server-side, such that searching for groups does not slow down client computers as we scale.
 
 ### Sign-up & Sign-in View
-*Source file: components/verifyUser.js
-*The responsibility of verifyUser.js is to handle all log-in and sign-up functionality on our site. Users can type in a username and password and click “login”,or “signup” to create a new account. For user accounts and verification, we will utilize the Firebase Authentication SDK on our backend.
-*The component must interact with the dashboard view to show the user that they are currently signed into the account. It should also interact with the other views to provide the current user’s username and userID once they are signed in.
-*The UI flow is setup on the client side, but the authentication is all handled on the server-side through Firebase.
+* Source file: components/verifyUser.js
+* The responsibility of verifyUser.js is to handle all log-in and sign-up functionality on our site. Users can type in a username and password and click “login”,or “signup” to create a new account. For user accounts and verification, we will utilize the Firebase Authentication SDK on our backend.
+* The component must interact with the dashboard view to show the user that they are currently signed into the account. It should also interact with the other views to provide the current user’s username and userID once they are signed in.
+* The UI flow is setup on the client side, but the authentication is all handled on the server-side through Firebase.
 
 ### Dashboard View
 * Source file: components/groups.js
