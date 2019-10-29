@@ -21,3 +21,29 @@ export const updateProfile = (uid, profileObj) => {
 export const getUserProfile = uid => {
 
 };
+
+// takes in a group JSON object
+// creates a new group in the database
+// pre-condition: user must be logged in and all group object fields must
+// have values
+// post-condition: must create a new group with the specified details 
+// and one member (the user) 
+export const createGroup = groupObj => {
+
+};
+
+// returns a list of all groups in the database
+// pre-condition: user must be logged in and on the groups page
+// post-condition: must return a list of groups as an array of JSON objects
+export const getGroups = () => {
+
+};
+
+// takes in a group id
+// returns a list of all members belonging to a group
+// pre-condition: user must be logged in and on the viewGroup page
+// post-condition: must return a list of group members as an array of
+// JSON objects
+export const getGroupMembers = gid => {
+
+}
