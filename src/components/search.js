@@ -1,4 +1,4 @@
-import React, { Component }  from 'react';
+import React, { Component }  from "react";
 
 class Search extends Component {
   constructor() {
@@ -12,7 +12,7 @@ class Search extends Component {
   }
   // Pre: searchterm is provided to search groups with
   // Post: groups with all relevant matching names are returned.
-  getResults(searchTerm) {
+  getResults = (searchTerm) => {
     groupMatch = [];
     //filter by searchterm
     return groupMatch
@@ -20,16 +20,17 @@ class Search extends Component {
 
   // Pre: there are groups to show
   // Post: results are populated into the DOM
-  populateResults(groupMatch){
+  populateResults = (groupMatch) => {
 
   }
+
   render() {
     return(
       <div>
         show search results cards
       </div>
     );
-    }
+  }
 }
 
 export default Search;

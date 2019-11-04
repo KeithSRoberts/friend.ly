@@ -1,4 +1,4 @@
-import React, { Component }  from 'react';
+import React, { Component }  from "react";
 
 class Groups extends Component {
   constructor() {
@@ -7,8 +7,8 @@ class Groups extends Component {
         recommended: [],
         groups: []
     };
-    this.state.groups = fetchGroupList();
-    this.state.recommended = getRecommendations(this.state.groups);
+    this.state.groups = this.fetchGroupList();
+    this.state.recommended = this.getRecommendations(this.state.groups);
   }
 
   render() {
@@ -19,14 +19,14 @@ class Groups extends Component {
     );
   }
 
-  fetchGroupList() {
+  fetchGroupList = () => {
     // Preconditions: This.props.user is not null (user is signed in)
     // Postconditions: Groups array is populated with group data and returned
     let groups = []
     return groups;
   }
 
-  getRecommendations(groupsList) {
+  getRecommendations = (groupsList) => {
     /* Preconditions: This.props.user is not null (user is signed in)
                       The passed groups array is populated with group data
        Postconditions: Recommendations array contains recommended groups and

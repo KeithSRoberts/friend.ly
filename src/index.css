@@ -1,0 +1,39 @@
+body {
+  font-family: "Monaco", "Consolas", "Lucida Console", monospace;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+body, body * {
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: monospace, "Monaco";
+  margin: 0;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+p {
+  font-family: sans-serif, "Acumin Variable Concept", "Regular";
+  font-size: 1em;
+}
+
+#root, #root * {
+  flex: 1;
+}

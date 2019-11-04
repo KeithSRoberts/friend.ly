@@ -1,4 +1,4 @@
-import React, { Component }  from 'react';
+import React, { Component }  from "react";
 
 class ViewGroup extends Component {
   constructor() {
@@ -11,23 +11,22 @@ class ViewGroup extends Component {
       discussion: ""
     }
 
-
-    this.state.links = fetchLinks();
-    this.state.members = fetchMembers();
-    this.state.discussion = fetchDiscussion();
+    this.state.links = this.fetchLinks();
+    this.state.members = this.fetchMembers();
+    this.state.discussion = this.fetchDiscussion();
   }
 
   // Pre: Param newDescription is different than the current title
-  // Post: The group's description state will be updated and displayed on the user interface
-  updateDescription(newDescription) {
+  // Post: The group"s description state will be updated and displayed on the user interface
+  updateDescription = (newDescription) => {
     this.setState({
       description: newDescription
     })
   }
 
   // Pre: This.props.user is not null (user is signed in)
-  // Post: Returns an array with all the links associated with this Group's component
-  fetchLinks() {
+  // Post: Returns an array with all the links associated with this Group"s component
+  fetchLinks = () => {
     let links = [];
     return links;
   }
@@ -35,15 +34,15 @@ class ViewGroup extends Component {
   // Pre: this.props.user is not null (user is signed in) 
   //      and Member list is not 0
   // Post: returns an array with name of every member within the group
-  fetchMembers() {
+  fetchMembers = () => {
     let members = [];
     return members;
   }
 
   // Pre: newMember is a user who exists within the database
   // Post: updates the list of members within the group and adds the new member to the group
-  updateMembers(newMember) {
-    groupMembers = fetchMembers();
+  updateMembers = (newMember) => {
+    let groupMembers = this.fetchMembers();
     this.setState({
       members: groupMembers
     })
@@ -54,7 +53,7 @@ class ViewGroup extends Component {
   // Pre: User is signed in (this.props.user is not null) 
   // Post: fetches the posts made in the group from the firebase database and displays them to 
   //       the user
-  fetchDiscussion() {
+  fetchDiscussion = () => {
 
   }
 

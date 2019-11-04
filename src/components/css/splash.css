@@ -1,0 +1,86 @@
+.splash-bg {
+  background-color: black;
+  background-image: url("../../constants/images/splashbg.jpg");
+  background-size: 100% 100%;
+}
+
+#splash-blur {
+  backdrop-filter: blur(150px);
+  left: 0;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.splash-button-group {
+  flex-direction: row;
+}
+
+.splash-content {
+  height: 20%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  width: 20%;
+}
+
+.splash-header {
+  color: #b6a579;
+  left: 11%;
+  position: absolute;
+  top: 7%;
+}
+
+.splash-input {
+  margin-bottom: 20px;
+}
+
+.splash-logo {
+  background-image: url("../../constants/images/logo.png");
+  background-size: 100% 100%;
+  position: absolute;
+  z-index: 1;
+  top: 4%;
+  left: 2%;
+  height: 114px;
+  width: 144px;
+}
+
+#splash-button-signin {
+  align-items: center;
+  background-color: #4b2e83;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin-left: 10px;
+  width: 40%;
+}
+
+#splash-button-signup {
+  align-items: center;
+  background-color: #85754d;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin-right: 10px;
+  width: 40%;
+}
+
+#splash-username, #splash-password {
+  background-color: rgba(255, 255, 255, 0.4);
+  border: none;
+  border-radius: 15px;
+  color: black;
+  margin-bottom: 20px;
+  padding: 0 1.5em;
+}
+
+#splash-username::placeholder, #splash-password::placeholder {
+  color: #d3d3d3;
+}
