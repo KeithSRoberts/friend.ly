@@ -2,6 +2,7 @@
   background-color: black;
   background-image: url("../../constants/images/splashbg.jpg");
   background-size: 100% 100%;
+  flex: 1;
 }
 
 #splash-blur {
@@ -15,8 +16,10 @@
 
 .splash-button-group {
   flex-direction: row;
+  flex: 1;
 }
 
+/* Position text in the middle of the page/image */
 .splash-content {
   height: 20%;
   left: 50%;
@@ -55,6 +58,7 @@
   border-radius: 15px;
   color: white;
   display: flex;
+  flex: 1;
   justify-content: center;
   margin-left: 10px;
   width: 40%;
@@ -67,6 +71,7 @@
   border-radius: 15px;
   color: white;
   display: flex;
+  flex: 1;
   justify-content: center;
   margin-right: 10px;
   width: 40%;
@@ -77,6 +82,7 @@
   border: none;
   border-radius: 15px;
   color: black;
+  flex: 1;
   margin-bottom: 20px;
   padding: 0 1.5em;
 }

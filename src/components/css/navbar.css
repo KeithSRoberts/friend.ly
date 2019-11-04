@@ -1,0 +1,70 @@
+.account {
+    background-image: url("../../constants/icons/Profile.png");
+    background-size: 100% 100%;
+    height: 30px;
+    width: 30px;
+}
+
+.create {
+    background-image: url("../../constants/icons/Create.png");
+    background-size: 100% 100%;
+    height: 30px;
+    width: 30px;
+}
+
+.home {
+    background-image: url("../../constants/icons/Home.png");
+    background-size: 100% 100%;
+    height: 30px;
+    width: 30px;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.icon-group {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.logo {
+    background-image: url("../../constants/images/logo.png");
+    background-size: 100% 100%;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+}
+
+.logo-group {
+    align-items: center;
+    flex-direction: row;
+}
+
+.search {
+    background-image: url("../../constants/icons/Search.png");
+    background-size: 100% 100%;
+    height: 30px;
+    width: 30px;
+}
+
+.navigation-bar {
+    background: white;
+    border-bottom: 1px solid #d3d3d3;
+    flex-direction: row;
+    height: 60px;
+}
+
+.nav-group {
+    flex: 1;
+}
+
+.nav-group-inner-main {
+    flex: 4;
+}
+
+.nav-group-main {
+    flex: 3;
+    flex-direction: row;
+}
