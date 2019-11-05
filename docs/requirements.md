@@ -41,6 +41,10 @@ profile details. As such, assert() statements in our API will be used to verify 
 
 ##### Verification:
 
+* We will be verifying the search feature works properly by manually inputting different strings and confirming that the proper matching groups show up. We will also test with nonmatching strings to ensure that no groups show up in the results. In addition, we can have assertions within our code to make sure that only valid strings can be inputted into the search bar.
+* After the search results are populated in the dashboard view, we will verify that all the information about each group shows up in the groups's card by visually comparing the string and the matching groups.
+* Navigation to the group view and back to the dashboard will be manually tested by clicking through our UI buttons on the group cards and the back button to visually identify that the correct view shows up.
+
 #### Groups Feature:
 * A list of 10 groups will be displayed on the dashboard view. Additional groups can be seen by clicking on the right arrow at the bottom of the list. This will then display the groups numbered 11-20. Users can return back to the original page by clicking the left arrow at the bottom of the list. If there are no more groups left to navigate to, then the corresponding arrow will turn opaque that will not be able to be clicked.
 * The user can click on a card entry for any of these listed groups to go to the “group view” for that group. The group view displays the group title at the top of the page, followed by the description underneath, and then any group url links if they were provided after that. The user can scroll down further to view the central discussion board within the group. Along with this, the user can scroll down further to see a list of the members names within that group.
