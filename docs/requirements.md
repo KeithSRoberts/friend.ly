@@ -12,12 +12,19 @@
 * The ‘enter interests’ page will have token input fields for each of these categories: TV/movies, books, video games, sports, music and other. The user will be able to input whatever they like about their interests into these token input fields, and there will be no limit to how many interests the user can input. The ‘enter interests’ page will also have a ‘sign-up’ button that will make an account for the user when pressed, automatically log them into the newly created account, and redirecting them to the dashboard page.
 * After a user signs in for the first time, they will be greeted by a short paragraph describing what a group is and explaining how to create a group. (“Click on the ‘Create’ button to start your first group.
 
+##### Verification:
+* As the UI for the User Registration & Sign-in is being built, we will be systematically testing that the site is functional by manually going through registration/sign-in process in the browser to ensure that users are able to successfully create accounts/sign-in by inputting e-mails, passwords (and interests for registration).
+* We will also use assert() statements in our API around every call to the database to ensure that the type of the response from the database is a non-empty JSON object.
+* When running our client locally (`npm start`), if any assert should fail it will crash our local instance which will immediately notify us that something unexpected happened. We will then inspect console out to pinpoint which assert failed, and inspect the database to determine if the values we expected are indeed present.
+* We will use the metric of all assert() statements passing and the ability to go through the entire registration/sign-in process without errors or unexpected behavior multiple (at least 10) times as means to verify correctness.
+
 #### User Profiles:
 
 * Logged in users will have access to their own ‘Profile’ page which will have editable text-fields for username and password and token input fields for their interests.
 * If a user makes a change to their profile page (editing any of the text/token fields), they can persist those changes by clicking the ‘Save Changes’ button located at the bottom of the ‘Profile page’.
 * Users can also view other users’ profile pages by clicking on another user’s username (which will redirect them to that user’s profile page). These profile pages will be read-only (not editable by the user) and the password field will be absent.
 
+##### Verification:
 
 #### Search Feature:
 
@@ -25,6 +32,8 @@
 * The user will be presented with a search results page consisting of a list of card entries for each relevant group that matches, which they can scroll down. The search results section no longer scrolls down when there are no more matching results.
 * Users will be able to visit a group’s page from the results by clicking/tapping on its card entry, which will bring the user to the group page/view for that group
 * Users can click on a navigation button at the top left of the results page to navigate back to the dashboard page from the search results page.
+
+##### Verification:
 
 #### Groups Feature:
 * A list of 10 groups will be displayed on the dashboard view below recommended groups. Additional groups can be seen by clicking on the right arrow at the bottom of the list. This will then display the groups numbered 11-20. Users can return back to the original page by clicking the left arrow at the bottom of the list. If there are no more groups left to navigate to, then the corresponding arrow will turn opaque that will not be able to be clicked. 
@@ -35,6 +44,8 @@
 * The user can navigate back to the dashboard view by clicking on the left arrow at the top left of the page within the group view. 
 * When viewing the list of groups displayed in the dashboard view, if the user already belongs to a group, they can leave that group by clicking on the “Leave” button located on the top right corner of that group entry. When the user clicks the button to leave, they no longer are part of that group and the button becomes a “join” button.
 
+##### Verification:
+
 #### Recommendation feature:
 
 * The system displays groups to the user on the dashboard view as recommendations at the top of the page. The user can click/tap on a card entry for a group in order to bring them to the group page of that group as if they were any other group displayed on the dashboard.
@@ -43,9 +54,13 @@
 * The recommended group will display the number of members with common interests on each group entry in the bottom right corner of the card entry, labeled by “Members with shared interests”
 * The system will prioritize showing recommendations that have more common interests by placing these recommended groups closer to the top of the recommendations
 
+##### Verification:
+
 #### User Interface:
 * Prioritize the color purple for any main interaction element: like the join button in group view page
 * Any Gaussian blur effect should be 70px
 * Any rounded edges should be 15px
 * Any opacity settings should be 40% only
+
+##### Verification:
 
