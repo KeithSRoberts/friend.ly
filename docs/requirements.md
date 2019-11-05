@@ -13,10 +13,11 @@
 * After a user signs in for the first time, they will be greeted by a short paragraph describing what a group is and explaining how to create a group. (“Click on the ‘Create’ button to start your first group.
 
 ##### Verification:
-* As the UI for the User Registration & Sign-in is being built, we will be systematically testing that the site is functional by manually going through registration/sign-in process in the browser to ensure that users are able to successfully create accounts/sign-in by inputting e-mails, passwords (and interests for registration).
+* As the UI for the User Registration & Sign-in is being built, we will be systematically testing that the site is functional by manually going through registration/sign-in process in the browser to ensure that users are able to successfully create accounts/sign-in by inputting e-mails, passwords (and interests for registration) with all the expected behavior detailed above (error messages for bad input etc.).
 * We will also use assert() statements in our API around every call to the database to ensure that the type of the response from the database is a non-empty JSON object.
 * When running our client locally (`npm start`), if any assert should fail it will crash our local instance which will immediately notify us that something unexpected happened. We will then inspect console out to pinpoint which assert failed, and inspect the database to determine if the values we expected are indeed present.
 * We will use the metric of all assert() statements passing and the ability to go through the entire registration/sign-in process without errors or unexpected behavior multiple (at least 10) times as means to verify correctness.
+* The main team member in charge of verifying the correctness of user registration and sign-in is **Kyler Griffith**
 
 #### User Profiles:
 
@@ -25,6 +26,11 @@
 * Users can also view other users’ profile pages by clicking on another user’s username (which will redirect them to that user’s profile page). These profile pages will be read-only (not editable by the user) and the password field will be absent.
 
 ##### Verification:
+* Like registration/signin, the user profile page will need to make calls to the database should the user make changes to their own
+profile details. As such, assert() statements in our API will be used to verify that the response from the database is a non-empty JSON object (and will crash the program if this is not true).
+* As the user profile is being built, manual tests in the browser will verify that the user can only edit their own profile - and that if the user makes changes without saving those changes will not still persist on the page if the user leaves and returns to their profile (and vice versa).
+* We will use the metric of all assert() statements passing and the ability to edit and save user profile details without errors or unexpected behavior multiple (at least 10) times as means to verify correctness.
+* The main team member in charge of verifying the correctness of user registration and sign-in is **Kyler Griffith**
 
 #### Search Feature:
 
