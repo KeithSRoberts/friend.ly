@@ -42,7 +42,7 @@ profile details. As such, assert() statements in our API will be used to verify 
 ##### Verification:
 
 #### Groups Feature:
-* A list of 10 groups will be displayed on the dashboard view below recommended groups. Additional groups can be seen by clicking on the right arrow at the bottom of the list. This will then display the groups numbered 11-20. Users can return back to the original page by clicking the left arrow at the bottom of the list. If there are no more groups left to navigate to, then the corresponding arrow will turn opaque that will not be able to be clicked. 
+* A list of 10 groups will be displayed on the dashboard view. Additional groups can be seen by clicking on the right arrow at the bottom of the list. This will then display the groups numbered 11-20. Users can return back to the original page by clicking the left arrow at the bottom of the list. If there are no more groups left to navigate to, then the corresponding arrow will turn opaque that will not be able to be clicked.
 * The user can click on a card entry for any of these listed groups to go to the “group view” for that group. The group view displays the group title at the top of the page, followed by the description underneath, and then any group url links if they were provided after that. The user can scroll down further to view the central discussion board within the group. Along with this, the user can scroll down further to see a list of the members names within that group.
 * Users can create a group by clicking on the “create” button provided at the top of the application in the nav-bar. This will pop up a form modal with text-input fields for group title, group description, and group links. The user can enter up to 50 characters for the title, 400 for the description, and 50 for each link field. Once the user has filled out a title and description field, the user can submit the form by clicking on the submit button at the bottom of the form, or cancel the creation by clicking on the cancel button to the left of the submit button to bring them back to the dashboard view.
 * When viewing the list of groups displayed in the dashboard view, the user can join a group by clicking on the “Join” button located on the top right corner of each group entry if the user has not already joined the group. When the user clicks the button to join, they are added as a member of that group, and the join button becomes a “leave” button.
@@ -51,22 +51,19 @@ profile details. As such, assert() statements in our API will be used to verify 
 * When viewing the list of groups displayed in the dashboard view, if the user already belongs to a group, they can leave that group by clicking on the “Leave” button located on the top right corner of that group entry. When the user clicks the button to leave, they no longer are part of that group and the button becomes a “join” button.
 
 ##### Verification:
-
-#### Recommendation feature:
-
-* The system displays groups to the user on the dashboard view as recommendations at the top of the page. The user can click/tap on a card entry for a group in order to bring them to the group page of that group as if they were any other group displayed on the dashboard.
-* Potential recommendations for groups will be included by the system based on how many members share a common interest in that group
-* A recommended group entry displayed to the users will have at least one member in that group with a common and shared interest. 
-* The recommended group will display the number of members with common interests on each group entry in the bottom right corner of the card entry, labeled by “Members with shared interests”
-* The system will prioritize showing recommendations that have more common interests by placing these recommended groups closer to the top of the recommendations
-
-##### Verification:
+* The display of the groups on the dashboard view will be primarily tested manaully. We will systematically go through the process of viewing the dashboard, confirming a list of 10 groups are displayed, confirming that the user can page through the list of groups and click on a group card to be brought to the group view for that group. Although, we will also have assertions in our code to verify that the group data is successfully passed to the group view when calling our API, as this is critical to displaying the groups list.
+* Navigation between the group view, create group form, create post form, & dashboard will all be manually tested through clicking through our UIs buttons
+* Creating a group via the create group form will have client side and server side validation of the user-submitted data to ensure the data can be stored properly. Creating a discussion post on a group will follow the same validation to ensure no errors arise from our data. We will provide further verification of our data flow and APIs through assertions that will check that the user has submitted inputs that are within required length and input type. Users will not be able to submit a form to create a group or create a discussion post for a group without passing this validation.
+* The entire process of creating a group and then subequently viewing the group, as well as posting to that group will all be tested by the owner of this component, by going through the entire process manually and confirming that the group is viewable after creation along with the newly created post. This will be confirmed/validated further by checking that the data for that group/post is stored when performing the test.
+* Joining and leaving a group will be tested in a similar manual fashion, in which the owner will verify that they can click join and be added to that group. We will also confirm that you can click leave and you will no longer be part of the group. The owner will further confirm this by checking the stored data and confirming that the user is added to that groups data and removed accordingly.
+* As previously mentioned, our APIs for creating groups/posts will include validation, but will also be automatically tested against 5 different possible payloads of data (2 correct, 3 incorrect).These tests will ensure no data will corrupt our application, and give us assurances about the format of data we will display and use throughout other places in the application.
 
 #### User Interface:
 * Prioritize the color purple for any main interaction element: like the join button in group view page
-* Any Gaussian blur effect should be 70px
 * Any rounded edges should be 15px
 * Any opacity settings should be 40% only
 
 ##### Verification:
+* The majority of user-interface requirements will be confirm simply through the css, and confirming that our css properties confrom to our requirements.
+* The CDO will also be in charge of verfiying that each page/components UI matches what was outlined in our design document
 

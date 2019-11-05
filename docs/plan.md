@@ -38,7 +38,7 @@ We have laid out a flexible timeline of when/what we expect to complete within o
 * Week 3: Functionality for group creation and viewing
     - Users can view a list of all groups, and can view page for a group
     - Users can fill out and submit group creation form, upload an image to the database, and are added to it
-    - Users can see what interests members of a group have in common with them
+    - Users can join and leave groups, and see group content that was created.
 * Week 4: Functionality for discussion boards & group search
     - Users can view & post to a group discussion board
     - Users can search using the search bar
