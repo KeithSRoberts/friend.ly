@@ -1,38 +1,114 @@
 import React, { Component }  from "react";
 import { Button, Input } from 'reactstrap';
+import { Link } from "react-router-dom";
+
+import * as routes from "../constants/routes";
 
 import "./css/splash.css";
 
 class Splash extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
       loggedIn: false,
       userID: 0,
-      userName: ""
+      userName: "",
+      password: "",
+      email: "",
+      register: false,
+      validEmail: false,
     }
   }
 
   // Pre: Username and password provided from user
   // Post: Authenticates username and password, returns true if sucessful login,
   // otherwise returns false
-  signIn(providedUserName, providedPass) {
+  signIn = (providedUserName, providedPass) => {
     //firebase signin authentication
-    return true
+    this.props.history.push(routes.GROUPS);
+  }
+
+  showEmail = () => {
+    this.setState({ register: true });
+  }
+
+  validateEmail = () => {
+    this.setState({ validEmail: true });
+  }
+
+  updateUsername = (userName) => {
+    this.setState({ userName });
+  }
+
+  updatePassword =  (password) => {
+    this.setState({ password });
+  }
+
+  updateEmail = (email) => {
+    this.setState({ email });
+  }
+
+  renderChoice = () => {
+    return(
+      <div className="splash-form-choice">
+        <Input id="splash-username" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={this.state.userName} />
+        <Input id="splash-password" onChange={(e) => this.updatePassword(e.target.value)} placeholder="Password" type="password" value={this.state.password} />
+        <div className="splash-button-group">
+          <Button id="splash-button-signup" onClick={() => this.showEmail()}>Signup</Button>
+          <Button id="splash-button-signin" onClick={() => this.signIn()}>Login</Button>
+        </div>
+      </div>
+    );
+  }
+
+  renderEmail = () => {
+    const { username } = this.state;
+
+    return(
+      <div className="splash-form-email">
+        <Input id="splash-username" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={this.state.userName} />
+        <Input id="splash-password" onChange={(e) => this.updatePassword(e.target.value)} placeholder="Password" type="password" value={this.state.password} />
+        <Input id="splash-email" onChange={(e) => this.updateEmail(e.target.value)} placeholder="Email" value={this.state.email} />
+        <div className="splash-button-group">
+          <Button id="splash-button-interests" onClick={() => this.validateEmail()}>Next: Interests</Button>
+        </div>
+      </div>
+    );
+  }
+
+  reset = () => {
+    window.location.reload();
+  }
+
+  renderInterests = () => {
+    return(
+      <div className="splash-form-email">
+        <div>
+        </div>
+      </div>
+    );
   }
   
   render() {
+    let form;
+
+    if (this.state.validEmail) {
+      form = this.renderInterests();
+    } else if (this.state.register) {
+      form = this.renderEmail()
+    } else {
+      form = this.renderChoice();
+    }
+    
     return(
       <div className="splash-bg">
-        <div id="splash-blur"></div>
-        <div className="splash-logo"></div>
+        <div className="splash-top">
+          <div className="splash-logo" onClick={this.reset}></div>
+          <h1 className="splash-header"></h1>
+        </div>
         <div className="splash-content">
-          <Input id="splash-username" placeholder="Username" />
-          <Input id="splash-password" placeholder="Password" type="password" />
-          <div className="splash-button-group">
-            <Button id="splash-button-signup">Signup</Button>
-            <Button id="splash-button-signin">Login</Button>
-          </div>
+          {form}
         </div>
       </div>
     );

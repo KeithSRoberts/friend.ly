@@ -14,23 +14,23 @@ class App extends Component {
     return(
       <BrowserRouter>
         <Switch>
-          <Route exact path={routes.SPLASH} component={() => <Splash />} />
+          <Route exact path={routes.SPLASH} render={(props) => <Splash {...props} />} />
           <Route exact path={`${routes.ACCOUNT}/:userId`} render={(props) =>
             <React.Fragment>
               <Navbar />
               <Account {...props} />
             </React.Fragment>
           } />
-          <Route exact path={routes.CREATE_GROUP} component={() => 
+          <Route exact path={routes.CREATE_GROUP} render={(props) => 
             <React.Fragment>
               <Navbar />
-              <CreateGroup />
+              <CreateGroup {...props} />
             </React.Fragment>
           } />
-          <Route exact path={routes.GROUPS} component={() => 
+          <Route exact path={routes.GROUPS} render={(props) => 
             <React.Fragment>
               <Navbar />
-              <Groups />
+              <Groups {...props} />
             </React.Fragment>
           } />
           <Route exact path={`${routes.VIEW_GROUP}/:groupId`} render={(props) =>

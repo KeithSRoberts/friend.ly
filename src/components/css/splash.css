@@ -1,17 +1,8 @@
 .splash-bg {
   background-color: black;
-  background-image: url("../../constants/images/splashbg.jpg");
+  background-image: url("../../constants/images/splashbg.png");
   background-size: 100% 100%;
   flex: 1;
-}
-
-#splash-blur {
-  backdrop-filter: blur(150px);
-  left: 0;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  width: 100%;
 }
 
 .splash-button-group {
@@ -19,21 +10,26 @@
   flex: 1;
 }
 
-/* Position text in the middle of the page/image */
 .splash-content {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.splash-form-choice {
   height: 20%;
-  left: 50%;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 50%;
+  margin-bottom: 180px;
+  width: 20%;
+}
+
+.splash-form-email {
+  height: 30%;
+  margin-bottom: 180px;
   width: 20%;
 }
 
 .splash-header {
   color: #b6a579;
-  left: 11%;
-  position: absolute;
-  top: 7%;
 }
 
 .splash-input {
@@ -43,12 +39,15 @@
 .splash-logo {
   background-image: url("../../constants/images/logo.png");
   background-size: 100% 100%;
-  position: absolute;
-  z-index: 1;
-  top: 4%;
-  left: 2%;
+  cursor: pointer;
+  margin: 20px;
   height: 114px;
   width: 144px;
+}
+
+.splash-top {
+  flex-direction: row;
+  align-items: center;
 }
 
 #splash-button-signin {
@@ -61,7 +60,6 @@
   flex: 1;
   justify-content: center;
   margin-left: 10px;
-  width: 40%;
 }
 
 #splash-button-signup {
@@ -74,10 +72,20 @@
   flex: 1;
   justify-content: center;
   margin-right: 10px;
-  width: 40%;
 }
 
-#splash-username, #splash-password {
+#splash-button-interests {
+  align-items: center;
+  background-color: #85754d;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+#splash-username, #splash-password, #splash-email {
   background-color: rgba(255, 255, 255, 0.4);
   border: none;
   border-radius: 15px;
@@ -87,6 +95,8 @@
   padding: 0 1.5em;
 }
 
-#splash-username::placeholder, #splash-password::placeholder {
+#splash-username::placeholder,
+#splash-password::placeholder,
+#splash-email::placeholder {
   color: #d3d3d3;
 }

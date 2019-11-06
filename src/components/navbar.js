@@ -12,7 +12,7 @@ class Navbar extends Component {
         <div className="nav-group"></div>
         <div className="nav-group-main">
           <div className="logo-group nav-group">
-            <Link to={routes.GROUPS}>
+            <Link to={routes.SPLASH}>
               <div className="logo"></div>
             </Link>
           </div>
