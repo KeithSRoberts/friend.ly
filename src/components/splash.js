@@ -1,6 +1,5 @@
 import React, { Component }  from "react";
 import { Button, Input } from 'reactstrap';
-import { Link } from "react-router-dom";
 
 import * as routes from "../constants/routes";
 
@@ -63,8 +62,6 @@ class Splash extends Component {
   }
 
   renderEmail = () => {
-    const { username } = this.state;
-
     return(
       <div className="splash-form-email">
         <Input id="splash-username" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={this.state.userName} />
@@ -105,7 +102,7 @@ class Splash extends Component {
       <div className="splash-bg">
         <div className="splash-top">
           <div className="splash-logo" onClick={this.reset}></div>
-          <h1 className="splash-header"></h1>
+          <h1 className="splash-header">{""}</h1>
         </div>
         <div className="splash-content">
           {form}

@@ -38,3 +38,7 @@ p {
 #root {
   height: 100%;
 }
+
+script {
+  display: none;
+}
