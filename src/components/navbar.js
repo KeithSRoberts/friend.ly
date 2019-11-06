@@ -29,7 +29,6 @@ class Navbar extends Component {
             <Link to={routes.ACCOUNT + '/123'}>
               <div className="account icon" />
             </Link>
-            
           </div>
         </div>
         <div className="nav-group" />
