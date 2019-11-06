@@ -10,12 +10,13 @@ class Splash extends Component {
     super(props);
 
     this.state = {
+      email: "",
+      header: "",
       loggedIn: false,
+      register: false,
+      password: "",
       userID: 0,
       userName: "",
-      password: "",
-      email: "",
-      register: false,
       validEmail: false,
     }
   }
@@ -34,6 +35,7 @@ class Splash extends Component {
 
   validateEmail = () => {
     this.setState({ validEmail: true });
+    this.setState({ header: "Tell us your interests!" });
   }
 
   updateUsername = (userName) => {
@@ -102,7 +104,7 @@ class Splash extends Component {
       <div className="splash-bg">
         <div className="splash-top">
           <div className="splash-logo" onClick={this.reset}></div>
-          <h1 className="splash-header">{""}</h1>
+          <h1 className="splash-header">{this.state.header}</h1>
         </div>
         <div className="splash-content">
           {form}
