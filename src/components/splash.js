@@ -34,8 +34,7 @@ class Splash extends Component {
   }
 
   validateEmail = () => {
-    this.setState({ validEmail: true });
-    this.setState({ header: "Tell us your interests!" });
+    this.setState({ validEmail: true, header: "Tell us your interests!" });
   }
 
   updateUsername = (userName) => {
@@ -51,10 +50,12 @@ class Splash extends Component {
   }
 
   renderChoice = () => {
+    const { userName, password } = this.state;
+
     return(
       <div className="splash-form-choice">
-        <Input id="splash-username" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={this.state.userName} />
-        <Input id="splash-password" onChange={(e) => this.updatePassword(e.target.value)} placeholder="Password" type="password" value={this.state.password} />
+        <Input id="splash-username" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={userName} />
+        <Input id="splash-password" onChange={(e) => this.updatePassword(e.target.value)} placeholder="Password" type="password" value={password} />
         <div className="splash-button-group">
           <Button id="splash-button-signup" onClick={() => this.showEmail()}>Signup</Button>
           <Button id="splash-button-signin" onClick={() => this.signIn()}>Login</Button>
@@ -64,11 +65,13 @@ class Splash extends Component {
   }
 
   renderEmail = () => {
+    const { userName, password, email } = this.state;
+
     return(
       <div className="splash-form-email">
-        <Input id="splash-username" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={this.state.userName} />
-        <Input id="splash-password" onChange={(e) => this.updatePassword(e.target.value)} placeholder="Password" type="password" value={this.state.password} />
-        <Input id="splash-email" onChange={(e) => this.updateEmail(e.target.value)} placeholder="Email" value={this.state.email} />
+        <Input id="splash-username" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={userName} />
+        <Input id="splash-password" onChange={(e) => this.updatePassword(e.target.value)} placeholder="Password" type="password" value={password} />
+        <Input id="splash-email" onChange={(e) => this.updateEmail(e.target.value)} placeholder="Email" value={email} />
         <div className="splash-button-group">
           <Button id="splash-button-interests" onClick={() => this.validateEmail()}>Next: Interests</Button>
         </div>
@@ -90,11 +93,13 @@ class Splash extends Component {
   }
   
   render() {
+    const { header, register, validEmail } = this.state;
+
     let form;
 
-    if (this.state.validEmail) {
+    if (validEmail) {
       form = this.renderInterests();
-    } else if (this.state.register) {
+    } else if (register) {
       form = this.renderEmail()
     } else {
       form = this.renderChoice();
@@ -103,8 +108,8 @@ class Splash extends Component {
     return(
       <div className="splash-bg">
         <div className="splash-top">
-          <div className="splash-logo" onClick={this.reset}></div>
-          <h1 className="splash-header">{this.state.header}</h1>
+          <div className="splash-logo" onClick={this.reset} />
+          <h1 className="splash-header">{header}</h1>
         </div>
         <div className="splash-content">
           {form}
