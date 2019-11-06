@@ -56,6 +56,10 @@
     height: 60px;
 }
 
+.nav-friend {
+    color: #b6a579;
+}
+
 .nav-group {
     flex: 1;
 }
@@ -67,4 +71,13 @@
 .nav-group-main {
     flex: 3;
     flex-direction: row;
+}
+
+.nav-ly {
+    color: #4b2d83;
+}
+
+.nav-title {
+    flex-direction: row;
+    margin-left: 20px;
 }

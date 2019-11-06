@@ -15,6 +15,7 @@ class Navbar extends Component {
             <Link to={routes.SPLASH}>
               <div className="logo"></div>
             </Link>
+            <h1 className="nav-title"><span className="nav-friend">Friend</span><span className="nav-ly">.ly</span></h1>
           </div>
           <div className="nav-group-inner-main"></div>
           <div className="icon-group nav-group">
