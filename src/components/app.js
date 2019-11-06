@@ -1,5 +1,5 @@
 import React, { Component }  from "react";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import { HashRouter, Route, Redirect, Switch } from "react-router-dom";
 import Account from "./account";
 import CreateGroup from "./createGroup";
 import Groups from "./groups";
@@ -12,7 +12,7 @@ import * as routes from "../constants/routes";
 class App extends Component {
   render() {
     return(
-      <BrowserRouter>
+      <HashRouter basename='/'>
         <Switch>
           <Route exact path={routes.SPLASH} render={(props) => <Splash {...props} />} />
           <Route exact path={`${routes.ACCOUNT}/:userId`} render={(props) =>
@@ -41,7 +41,7 @@ class App extends Component {
           } />
           <Redirect to={routes.SPLASH}/>
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }

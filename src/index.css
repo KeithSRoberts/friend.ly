@@ -35,10 +35,10 @@ p {
   font-size: 1em;
 }
 
-#root {
-  height: 100%;
-}
-
 script {
   display: none;
+}
+
+#root {
+  height: 100%;
 }
