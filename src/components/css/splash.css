@@ -1,9 +1,31 @@
+.interest {
+  background-color: #140b3a;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 20px;
+  outline: 0;
+  padding: 20px;
+}
+
+.interest-icon {
+  background-size: 100% 100%;
+  height: 100px;
+  width: 100px;
+  filter: invert(51%) sepia(4%) saturate(3993%) hue-rotate(358deg) brightness(98%) contrast(87%);
+}
+
+.interestRow {
+  flex-direction: row;
+}
+
 .splash-bg {
   background-color: black;
   background-image: url("../../constants/images/splashbg.png");
   background-size: 100% 100%;
   flex: 1;
 }
+
+/* #9d7d4a #1e022b */
 
 .splash-button-group {
   flex-direction: row;
@@ -23,9 +45,13 @@
 }
 
 .splash-form-email {
-  height: 30%;
+  height: 35%;
   margin-bottom: 180px;
   width: 20%;
+}
+
+.splash-form-interests {
+  margin-bottom: 180px;
 }
 
 .splash-header {
@@ -85,11 +111,26 @@
   justify-content: center;
 }
 
-#splash-username, #splash-password, #splash-email {
-  background-color: rgba(255, 255, 255, 0.4);
+#splash-button-social {
+  align-items: center;
+  background-color: #85754d;
   border: none;
   border-radius: 15px;
-  color: black;
+  color: white;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  margin: 0 20px;
+}
+
+#splash-username, 
+#splash-password, 
+#splash-email,
+#splash-confirm-password {
+  background-color: rgba(24, 26, 27, 0.4);
+  border: none;
+  border-radius: 15px;
+  color: white;
   flex: 1;
   margin-bottom: 20px;
   padding: 0 1.5em;
@@ -97,6 +138,76 @@
 
 #splash-username::placeholder,
 #splash-password::placeholder,
-#splash-email::placeholder {
+#splash-email::placeholder,
+#splash-confirm-password::placeholder {
   color: #d3d3d3;
+}
+
+#splash-username:focus,
+#splash-password:focus,
+#splash-email:focus,
+#splash-confirm-password:focus,
+#splash-button-signin:focus,
+#splash-button-signup:focus,
+#splash-button-interests:focus,
+#splash-button-social:focus,
+.interest:focus,
+#splash-username:active,
+#splash-password:active,
+#splash-email:active,
+#splash-confirm-password:active,
+#splash-button-signin:active,
+#splash-button-signup:active,
+#splash-button-interests:active,
+#splash-button-social:focus,
+.interest:active {
+  box-shadow: rgba(255, 255, 128, 0.75) 0px 0px 0px 0.2rem;
+}
+
+#splash-music {
+  background-image: url("../../constants/icons/music.png");
+}
+
+#splash-sports {
+  background-image: url("../../constants/icons/sports.png");
+}
+
+#splash-video_games {
+  background-image: url("../../constants/icons/video_games.png");
+}
+
+#splash-travel {
+  background-image: url("../../constants/icons/travel.png");
+}
+
+#splash-politics {
+  background-image: url("../../constants/icons/politics.png");
+}
+
+#splash-photography {
+  background-image: url("../../constants/icons/photography.png");
+}
+
+#splash-art {
+  background-image: url("../../constants/icons/art.png");
+}
+
+#splash-theater {
+  background-image: url("../../constants/icons/theater.png");
+}
+
+#splash-food {
+  background-image: url("../../constants/icons/food.png");
+}
+
+#splash-books {
+  background-image: url("../../constants/icons/books.png");
+}
+
+#splash-board_games {
+  background-image: url("../../constants/icons/board_games.png");
+}
+
+#splash-other {
+  background-image: url("../../constants/icons/other.png");
 }
