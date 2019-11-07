@@ -39,7 +39,7 @@ class App extends Component {
               <ViewGroup {...props} />
             </React.Fragment>
           } />
-          <Redirect to={routes.SPLASH}/>
+          <Redirect to={routes.SPLASH} />
         </Switch>
       </HashRouter>
     );

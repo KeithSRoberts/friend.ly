@@ -142,13 +142,12 @@ class Splash extends Component {
     if (validEmail) {
       form = this.renderInterests();
     } else if (register) {
-      form = this.renderEmail()
+      form = this.renderEmail();
     } else {
       form = this.renderChoice();
     }
     
-    return(
-      
+    return( 
       <div className="splash-bg">
         <div className="splash-top">
           <div className="splash-logo" onClick={this.reset} />
