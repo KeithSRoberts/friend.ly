@@ -16,14 +16,14 @@ class discussionBoard extends Component {
   // post: returns an array of posts that can be viewed on the user interface from the viewGroup
   //       component
   renderPosts() {
-    posts = [];
+    let posts = [];
     return posts;
   }
 
 
   render() {
 
-    posts = this.renderPosts();
+    let posts = this.renderPosts();
 
     const [modal, setModal] = useState(false);
 
