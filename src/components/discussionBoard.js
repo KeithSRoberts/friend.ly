@@ -1,7 +1,7 @@
-import React, { Component, useState }  from "react";
-import { Button, Modal, ModalBody, Input } from 'reactstrap';
+import React, { Component }  from "react";
+import { Button } from 'reactstrap';
 
-import * as routes from '../constants/routes';
+// import * as routes from '../constants/routes';
 
 class discussionBoard extends Component {
   constructor() {
@@ -23,16 +23,16 @@ class discussionBoard extends Component {
 
   render() {
 
-    let posts = this.renderPosts();
+    // let posts = this.renderPosts();
 
-    const [modal, setModal] = useState(false);
+    // const [modal, setModal] = useState(false);
 
-    const toggle = () => setModal(!modal);
-
+    // const toggle = () => setModal(!modal);
+ 
     return(
       <div>
-        {/* <Button>Create Post</Button>
-        <Modal onClick={toggle}>
+        <Button>Create Post</Button>
+        {/* <Modal onClick={toggle}>
           <ModalBody>
             Make a post
           </ModalBody>
@@ -41,7 +41,7 @@ class discussionBoard extends Component {
           Discussion Board content
           <div className="discussion-content">
             <div className="discussion-posts">
-              {posts}
+              {this.state.posts}
               Posts go here
             </div>
           </div>
