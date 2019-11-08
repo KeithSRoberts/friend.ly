@@ -1,9 +1,14 @@
 import React, { Component }  from "react";
+import MembersBoard from "./membersBoard";
+import DiscussionBoard from "./discussionBoard";
+
+import "./css/viewGroup.css";
 
 class ViewGroup extends Component {
   constructor() {
     super();
     this.state = {
+      showMembers: true,
       title: "",
       description: "",
       links: [],
@@ -57,11 +62,36 @@ class ViewGroup extends Component {
 
   }
 
-  
+  changeContent() {
+    this.setState({
+      showMembers: !this.state.showMembers
+    })
+  }
+
   render() {
     return(
-      <div classname="group">
-        View Group content goes here
+      <div id="groups-page">
+        <div id="groups-content">
+          <div id="group-heading">
+            <div id="group-pic">
+              <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/short-haired-dogs-boston-terrier-1563206936.jpg?crop=0.668xw:1.00xh;0.167xw,0&resize=640:*"/>
+            </div>
+            <div id="group-desc">
+              This is the view for group number { this.props.match.params.groupId }
+            </div>
+          </div>
+          <div id="content-select">
+            <button onClick={this.changeContent.bind(this)}>Members</button>
+            <button onClick={this.changeContent.bind(this)}>Discussion</button>
+          </div>
+          <div id="content-view">
+            { this.state.showMembers ? (
+                <MembersBoard />
+            ) : (
+                <DiscussionBoard />
+            )}
+          </div>
+        </div>
       </div>
     );
   }

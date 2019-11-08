@@ -1,27 +1,27 @@
 import React, { Component }  from "react";
 
-class discussionBoard extends Component {
+class membersBoard extends Component {
   constructor() {
     super();
     this.state = {
-      posts: []
+      members: []
     }
-    this.state.posts = this.getPosts();
+    this.state.members = this.getMembers();
   }
 
   // pre: user must be logged in order to see posts (this.props.user != null)
   // post: returns an array of posts that can be viewed on the user interface from the viewGroup
   //       component
-  getPosts() {
-    let posts = [];
-    return posts;
+  getMembers() {
+    let members = [];
+    return members;
   }
 
 
   render() {
     return(
       <div>
-        Discussion Board content goes here
+        Members list content goes here
       </div>
     );
   }
@@ -32,4 +32,4 @@ class discussionBoard extends Component {
 
 }
 
-export default discussionBoard;
+export default membersBoard;
