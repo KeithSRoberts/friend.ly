@@ -4,11 +4,9 @@ class Groups extends Component {
   constructor() {
     super();
     this.state = {
-        recommended: [],
         groups: []
     };
     this.state.groups = this.fetchGroupList();
-    this.state.recommended = this.getRecommendations(this.state.groups);
   }
 
   render() {
@@ -24,16 +22,6 @@ class Groups extends Component {
     // Postconditions: Groups array is populated with group data and returned
     let groups = []
     return groups;
-  }
-
-  getRecommendations = (groupsList) => {
-    /* Preconditions: This.props.user is not null (user is signed in)
-                      The passed groups array is populated with group data
-       Postconditions: Recommendations array contains recommended groups and
-                       returned
-    */
-    let recommendations = [];
-    return recommendations;
   }
 }
 

@@ -64,11 +64,7 @@
     flex: 1;
 }
 
-.nav-group-inner-main {
-    flex: 4;
-}
-
-.nav-group-main {
+.nav-group-main, .nav-group-inner-main {
     flex: 3;
     flex-direction: row;
 }
