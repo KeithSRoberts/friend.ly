@@ -9,8 +9,9 @@ class ViewGroup extends Component {
     super();
     this.state = {
       showMembers: true,
-      title: "",
-      description: "",
+      image: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/short-haired-dogs-boston-terrier-1563206936.jpg?crop=0.668xw:1.00xh;0.167xw,0&resize=640:*",
+      title: "Group Title ",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id nisi placerat, luctus nisi ac, semper tellus. Aenean tristique auctor quam,     vitae accumsan enim posuere sit amet. Vivamus porta nulla quis nisi bibendum, et rutrum leo rutrum. Aenean fermentum lorem odio utrum leo rutrum",
       links: [],
       members: [],
       discussion: ""
@@ -19,6 +20,12 @@ class ViewGroup extends Component {
     this.state.links = this.fetchLinks();
     this.state.members = this.fetchMembers();
     this.state.discussion = this.fetchDiscussion();
+  }
+
+  componentDidMount() {
+    this.state.showMembers = true;
+    this.refs.discussButton.style.color = "gray";
+    this.refs.discussButton.disabled = false;
   }
 
   // Pre: Param newDescription is different than the current title
@@ -66,6 +73,17 @@ class ViewGroup extends Component {
     this.setState({
       showMembers: !this.state.showMembers
     })
+    if (this.state.showMembers) {
+        this.refs.memberButton.style.color = "gray";
+        this.refs.discussButton.style.color = "black";
+        this.refs.discussButton.disabled = true;
+        this.refs.memberButton.disabled = false;
+    } else {
+        this.refs.memberButton.style.color = "black";
+        this.refs.discussButton.style.color = "gray";
+        this.refs.discussButton.disabled = false;
+        this.refs.memberButton.disabled = true;
+    }
   }
 
   render() {
@@ -74,19 +92,21 @@ class ViewGroup extends Component {
         <div id="groups-content">
           <div id="group-heading">
             <div id="group-pic">
-              <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/short-haired-dogs-boston-terrier-1563206936.jpg?crop=0.668xw:1.00xh;0.167xw,0&resize=640:*" alt="Dog"/>
+              <img src={this.state.image} />
             </div>
             <div id="group-desc">
-              This is the view for group number { this.props.match.params.groupId }
+                <h3>{ this.state.title }{ this.props.match.params.groupId }</h3>
+                <p>{ this.state.description }</p>
+                <button>Join</button>
             </div>
           </div>
           <div id="content-select">
-            <button onClick={this.changeContent.bind(this)}>Members</button>
-            <button onClick={this.changeContent.bind(this)}>Discussion</button>
+            <button id="member-button" ref="memberButton" onClick={this.changeContent.bind(this)}>Members</button>
+            <button id="discuss-button" ref="discussButton" onClick={this.changeContent.bind(this)}>Discussion</button>
           </div>
           <div id="content-view">
             { this.state.showMembers ? (
-                <MembersBoard />
+                <MembersBoard members={this.state.members}/>
             ) : (
                 <DiscussionBoard />
             )}

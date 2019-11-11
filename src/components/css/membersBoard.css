@@ -1,0 +1,26 @@
+.member-card {
+    display: grid;
+    padding: 3px 10px 3px 10px;
+    margin: 15px 20px 5px 20px;
+    grid-template-columns: 160px 340px;
+    border-radius: 20px;
+    border: 1px solid #F0F0F0;
+    background-color: #f7fbfc;
+}
+
+.member-text {
+    padding-top: 15px;
+    font-size: 10pt;
+}
+
+.member-title {
+    padding-top: 5px;
+}
+
+.member-pic img {
+    max-width: 145px;
+    max-height: 145px;
+    padding: 10px 10px 10px 10px;
+    border-radius: 15%;
+}
+
