@@ -1,4 +1,8 @@
 import React, { Component }  from "react";
+import { Button, Input } from 'reactstrap';
+import Profile from '../constants/icons/Profile.png'
+
+import "./css/account.css";
 
 class Account extends Component {
   constructor(props) {
@@ -74,9 +78,24 @@ class Account extends Component {
   // current user details filled in
   render() {
     return(
-      <div>
-        User profile goes here
-      </div>
+        <div id="cardWrapper">
+          <div id="accountHeader">
+            <div id='profilepic' />
+            <div>
+              <Input id="account-username" className="profile-input" placeholder="Username" />
+              <Input id="account-password" className="profile-input"  placeholder="Password" type="password" />
+            </div>
+          </div>
+          <h2>Your Interests</h2>
+
+          <h2>Your Social Links</h2>
+          <div>
+            <div>
+              <div id='profilepic' />
+            </div>
+          </div>
+          <Button id="saveChanges">Save Changes</Button>
+        </div>
     );
   }
 }
