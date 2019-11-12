@@ -1,6 +1,5 @@
 import React, { Component }  from "react";
 import { Button, Input } from 'reactstrap';
-import Profile from '../constants/icons/Profile.png'
 
 import "./css/account.css";
 
