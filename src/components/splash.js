@@ -115,7 +115,7 @@ class Splash extends Component {
         interestDivs.push(
           <div key={(6 * i) + j} className="interest" tabIndex="0">
             <div 
-              id={`splash-${interestKeys[(3 * i) + j]}`}
+              id={`splash-${interestKeys[(6 * i) + j]}`}
               key={(6 * i) + j}
               className="interest-icon"
             />

@@ -1,20 +1,124 @@
+.mediaIcon, .profile-interest-icon {
+    background-size: 100% 100%;
+    height: 60px;
+    margin: 20px;
+    width: 60px;
+}
+
+.mediaWrapper {
+    align-items: center;
+    flex-direction: row;
+}
+
+.profile-input {
+    margin: 10px 0px;
+}
+
+.profile-interest {
+    align-items: center;
+    flex: 1;
+    flex-direction: row;
+}
+
 #accountHeader {
     flex-direction: row;
+    margin-bottom: 20px;
 }
 
 #cardWrapper {
     align-self: center;
+    background-color: white;
+    border-radius: 15px;
+    margin-top: 30px;
+    padding: 30px;
     width: 40%;
 }
 
+#facebookPic {
+    background-image: url("../../constants/icons/facebook.png");
+}
+
+#instaPic {
+    background-image: url("../../constants/icons/instagram.png");
+}
+
+#socialHeader {
+    margin-top: 20px;
+}
+
+#profileInputWrapper {
+    flex: 1;
+    justify-content: center;
+}
+
 #profilepic {
+    background-image: url("../../constants/icons/Profile.png");
+    background-size: 100% 100%;
     height: 100px;
     margin: 20px;
     width: 100px;
 }
 
+#snapPic {
+    background-image: url("../../constants/icons/snapchat.png");
+}
+
+#twitterPic {
+    background-image: url("../../constants/icons/twitter.png");
+}
+
 #saveChanges {
     align-items: center;
     background-color: #4b2e83;
+    border-radius: 8px;
+    margin-top: 20px;
     justify-content: center;
+}
+
+#profile-music {
+    background-image: url("../../constants/icons/music.png");
+}
+
+#profile-sports {
+    background-image: url("../../constants/icons/sports.png");
+}
+
+#profile-video_games {
+    background-image: url("../../constants/icons/video_games.png");
+}
+
+#profile-travel {
+    background-image: url("../../constants/icons/travel.png");
+}
+
+#profile-politics {
+    background-image: url("../../constants/icons/politics.png");
+}
+
+#profile-photography {
+    background-image: url("../../constants/icons/photography.png");
+}
+
+#profile-art {
+    background-image: url("../../constants/icons/art.png");
+}
+
+#profile-theater {
+    background-image: url("../../constants/icons/theater.png");
+}
+
+#profile-food {
+    background-image: url("../../constants/icons/food.png");
+}
+
+#profile-books {
+    background-image: url("../../constants/icons/books.png");
+}
+
+#profile-board_games {
+    background-image: url("../../constants/icons/board_games.png");
+}
+
+#profile-other {
+    background-image: url("../../constants/icons/other.png");
 }
