@@ -47,7 +47,7 @@ class CreateGroup extends Component {
                     <img src={row[0]} />
                   </div>
                   <div class="interest-input">
-                    <textarea cols="5" rows="3">
+                    <textarea cols="9" rows="3">
                     </textarea>
                   </div>
               </div>
@@ -56,7 +56,7 @@ class CreateGroup extends Component {
                     <img src={row[1]} />
                   </div>
                   <div class="interest-input">
-                    <textarea cols="5" rows="3">
+                    <textarea cols="9" rows="3">
                     </textarea>
                   </div>
               </div>
