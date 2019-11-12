@@ -38,7 +38,6 @@
 }
 
 .logo-group {
-    align-items: center;
     flex-direction: row;
 }
 
@@ -54,15 +53,15 @@
     border-bottom: 1px solid #d3d3d3;
     flex-direction: row;
     height: 60px;
+    position: relative
+
 }
 
 .nav-friend {
     color: #b6a579;
 }
 
-.nav-group {
-    flex: 1;
-}
+
 
 .nav-group-main, .nav-group-inner-main {
     flex: 3;
@@ -77,3 +76,19 @@
     flex-direction: row;
     margin-left: 20px;
 }
+.nav-buttons {
+    width: 100%;
+    text-align: center;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #e8e3d3 !important;
+}
+
+.nav-pills a {
+    color: #4b2e83 !important;
+}
+.nav-pills a:hover {
+    color:#85754d !important;
+}
+
