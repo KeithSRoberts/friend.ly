@@ -1,6 +1,7 @@
 import React, { Component, useState }  from "react";
 import { Link } from "react-router-dom";
-import { Nav, NavItem, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, NavLink } from 'reactstrap';
+import { Nav, NavItem, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, NavLink} from 'reactstrap';
+import Search from "../components/search"
 
 import * as routes from "../constants/routes";
 
@@ -33,6 +34,8 @@ class Navbar extends Component {
             <NavLink disabled href="#" id="nav-pill">Disabled Link</NavLink>
           </NavItem>
         </Nav>
+        <Search id="search-bar">
+        </Search>
     </div>
 
     );

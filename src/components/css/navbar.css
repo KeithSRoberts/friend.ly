@@ -91,4 +91,7 @@
 .nav-pills a:hover {
     color:#85754d !important;
 }
+#search-bar {
+    justify-content: right;
+}
 

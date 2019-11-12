@@ -1,0 +1,6 @@
+.search-box #search-button {
+    background-color: red !important;
+}
+.input-group>.form-control {
+    width: 20% !important;
+}
