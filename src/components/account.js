@@ -1,4 +1,7 @@
 import React, { Component }  from "react";
+import { Button, Input } from 'reactstrap';
+
+import "./css/account.css";
 
 class Account extends Component {
   constructor(props) {
@@ -9,19 +12,18 @@ class Account extends Component {
       username: "",
       password: "",
       interests: {
-        art: [],  
-        foods: [],
-        movies: [],
         music: [],
-        other: [],
-        politics: [],
-        readings: [],
-        shows: [],
         sports: [],
-        tabletop_games: [],
-        theater: [],
+        video_games: [],
         travel: [],
-        video_games: []
+        politics: [],
+        photography: [],
+        art: [],
+        theater: [],
+        food: [],
+        books: [],
+        board_games: [],
+        other: []
       }
     }
   }
@@ -68,15 +70,73 @@ class Account extends Component {
 
   }
   
+  renderInterests = () => {
+    const { interests } = this.state;
+    let interestRows = [];
+    let interestKeys = Object.keys(interests);
+
+    for (let i = 0; i < 6; i++) {
+      let interestDivs = [];
+
+      for (let j = 0; j < 2; j++) {
+        interestDivs.push(
+          <div key={(2 * i) + j} className="profile-interest" tabIndex="0">
+            <div 
+              id={`profile-${interestKeys[(2 * i) + j]}`}
+              key={(2 * i) + j}
+              className="profile-interest-icon"
+            />
+            <Input />
+          </div>
+        );
+      }
+
+      interestRows.push(<div className="interestRow" key={i}>{interestDivs}</div>);
+    }
+
+    return(
+      <div className="profile-interests">
+        {interestRows}
+      </div>
+    );
+  }
   // renders user profile
   // pre-condition: user must be logged in
   // post-condition: user"s profile form must be displayed on page with 
   // current user details filled in
   render() {
     return(
-      <div>
-        User profile goes here
-      </div>
+        <div id="cardWrapper">
+          <div id="accountHeader">
+            <div id='profilepic' className='profileIcon' />
+            <div id='profileInputWrapper'>
+              <Input id="account-username" className="profile-input" placeholder="Username" />
+              <Input id="account-password" className="profile-input"  placeholder="Password" type="password" />
+            </div>
+          </div>
+          <h2>Your Interests</h2>
+          {this.renderInterests()}
+          <h2 id="socialHeader">Your Social Links</h2>
+          <div>
+            <div className='mediaWrapper'>
+              <div id="facebookPic" className='mediaIcon' />
+              <Input id="account-facebook" className="profile-input" placeholder="Facebook profile" />
+            </div>
+            <div className='mediaWrapper'>
+              <div id="instaPic" className='mediaIcon' />
+              <Input id="account-insta" className="profile-input" placeholder="Instagram profile" />
+            </div>
+            <div className='mediaWrapper'>
+              <div id="twitterPic" className='mediaIcon' />
+              <Input id="account-twitter" className="profile-input" placeholder="Twitter profile" />
+            </div>
+            <div className='mediaWrapper'>
+              <div id="snapPic" className='mediaIcon' />
+              <Input id="account-snap" className="profile-input" placeholder="Snapchat profile" />
+            </div>
+          </div>
+          <Button id="saveChanges">Save Changes</Button>
+        </div>
     );
   }
 }

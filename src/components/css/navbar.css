@@ -85,6 +85,10 @@
     background-color: #e8e3d3 !important;
 }
 
+.nav-pills .nav-link.disabled {
+    background-color: lightgrey !important;
+}
+
 .nav-pills a {
     color: #4b2e83 !important;
 }
@@ -93,5 +97,15 @@
 }
 #search-bar {
     justify-content: right;
+}
+
+.search-box {
+    width: 50%;
+}
+
+.navigation-bar-inside {
+    margin-left: 3%;
+    margin-right: 3%;
+    flex-grow: 1;
 }
 

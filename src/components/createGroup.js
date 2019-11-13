@@ -8,7 +8,6 @@ import instagram from "../constants/icons/instagram.png";
 import music from "../constants/icons/music.png";
 import other from "../constants/icons/other.png";
 import travel from "../constants/icons/travel.png";
-import photography from "../constants/icons/photography.png";
 import politics from "../constants/icons/politics.png";
 import sports from "../constants/icons/sports.png";
 import theater from "../constants/icons/theater.png";
@@ -24,12 +23,12 @@ class CreateGroup extends Component {
       groupLinks: [],
       groupMembers: [],
       formImages: [
-        new Array(music, art),
-        new Array(sports, theater),
-        new Array(video_games, food),
-        new Array(travel, books),
-        new Array(politics, board_games),
-        new Array(instagram, other)
+        [ music, art ],
+        [ sports, theater],
+        [ video_games, food ],
+        [ travel, books ],
+        [ politics, board_games ],
+        [ instagram, other ]
       ]
     }
   }
@@ -44,7 +43,7 @@ class CreateGroup extends Component {
       return <div class="interest-row">
               <div class="interest-category">
                   <div class="interest-img">
-                    <img src={row[0]} />
+                    <img src={row[0]} alt=""/>
                   </div>
                   <div class="interest-input">
                     <textarea cols="9" rows="3">
@@ -53,7 +52,7 @@ class CreateGroup extends Component {
               </div>
               <div class="interest-category">
                   <div class="interest-img">
-                    <img src={row[1]} />
+                    <img src={row[1]} alt=""/>
                   </div>
                   <div class="interest-input">
                     <textarea cols="9" rows="3">
@@ -71,7 +70,7 @@ class CreateGroup extends Component {
         <div id="create-content">
           <div id="create-desc">
             <div id="create-img">
-              <img src={create} />
+              <img src={create} alt=""/>
             </div>
             <div id="create-title">
               <textarea id="title-input" rows="1" placeholder="Name">

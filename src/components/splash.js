@@ -29,6 +29,7 @@ class Splash extends Component {
       header: "",
       loggedIn: false,
       register: false,
+      finish: false,
       password: "",
       userID: 0,
       userName: "",
@@ -50,6 +51,14 @@ class Splash extends Component {
 
   validateEmail = () => {
     this.setState({ validEmail: true, header: "Tell us your interests!" });
+  }
+
+  finish = () => {
+    this.setState({ finish: true, header: "You can add social links to connect with people and groups" });
+  }
+
+  register = () => {
+    this.props.history.push(routes.GROUPS);
   }
 
   updateUsername = (userName) => {
@@ -115,7 +124,7 @@ class Splash extends Component {
         interestDivs.push(
           <div key={(6 * i) + j} className="interest" tabIndex="0">
             <div 
-              id={`splash-${interestKeys[(3 * i) + j]}`}
+              id={`splash-${interestKeys[(6 * i) + j]}`}
               key={(6 * i) + j}
               className="interest-icon"
             />
@@ -129,17 +138,43 @@ class Splash extends Component {
     return(
       <div className="splash-form-interests">
         {interestRows}
-        <Button id="splash-button-social" onClick={() => this.validateEmail()}>Next: social links</Button>
+        <Button id="splash-button-social" onClick={() => this.finish()}>Next: social links</Button>
       </div>
     );
   }
+
+  renderSocial = () => {
+    return(
+      <div className="splash-form-social">
+        <div className='splash-mediaWrapper'>
+          <div id="splash-facebookPic" className='splash-mediaIcon' />
+          <Input id="splash-facebook" placeholder="Facebook profile" />
+        </div>
+        <div className='splash-mediaWrapper'>
+          <div id="splash-instaPic" className='splash-mediaIcon' />
+          <Input id="splash-insta"placeholder="Instagram profile" />
+        </div>
+        <div className='splash-mediaWrapper'>
+          <div id="splash-twitterPic" className='splash-mediaIcon' />
+          <Input id="splash-twitter" placeholder="Twitter profile" />
+        </div>
+        <div className='splash-mediaWrapper'>
+          <div id="splash-snapPic" className='splash-mediaIcon' />
+          <Input id="splash-snap" placeholder="Snapchat profile" />
+        </div>
+        <Button id="splash-button-register" onClick={() => this.register()}>Finish signup</Button>
+      </div>
+    )
+  }
   
   render() {
-    const { header, register, validEmail } = this.state;
+    const { finish, header, register, validEmail } = this.state;
 
     let form;
 
-    if (validEmail) {
+    if (finish) {
+      form = this.renderSocial();
+    } else if (validEmail) {
       form = this.renderInterests();
     } else if (register) {
       form = this.renderEmail();
