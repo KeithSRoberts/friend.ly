@@ -23,7 +23,6 @@ class ViewGroup extends Component {
   }
 
   componentDidMount() {
-    this.setState({ showMembers: true });
     this.refs.discussButton.style.color = "gray";
     this.refs.discussButton.disabled = false;
   }
