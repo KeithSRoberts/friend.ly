@@ -23,7 +23,7 @@ class ViewGroup extends Component {
   }
 
   componentDidMount() {
-    this.state.showMembers = true;
+    this.setState({ showMembers: true });
     this.refs.discussButton.style.color = "gray";
     this.refs.discussButton.disabled = false;
   }
@@ -92,7 +92,7 @@ class ViewGroup extends Component {
         <div id="groups-content">
           <div id="group-heading">
             <div id="group-pic">
-              <img src={this.state.image} />
+              <img src={this.state.image} alt=""/>
             </div>
             <div id="group-desc">
                 <h3>{ this.state.title }{ this.props.match.params.groupId }</h3>

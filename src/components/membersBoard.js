@@ -18,7 +18,7 @@ class membersBoard extends Component {
   }
 
   componentDidMount() {
-    this.state.members = this.props.members;
+    this.setState({ members: this.props.members });
   }
 
   // pre: user must be logged in order to see posts (this.props.user != null)
@@ -33,13 +33,13 @@ class membersBoard extends Component {
     let cards = this.state.members.map((member) => {
       return(
         <div>
-          <div class="member-card">
-            <div class="member-pic">
-              <img src={member.image} />
+          <div className="member-card">
+            <div className="member-pic">
+              <img src={member.image} alt=""/>
             </div>
-            <div class="member-desc">
-              <h5 class="member-title"> {member.name} </h5>
-              <p class="member-text"> {member.text} </p>
+            <div className="member-desc">
+              <h5 className="member-title"> {member.name} </h5>
+              <p className="member-text"> {member.text} </p>
             </div>
           </div>
         </div>
