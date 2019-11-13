@@ -1,5 +1,5 @@
 import React, { Component }  from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap';
 import "./css/discussionBoard.css";
 import createPost from "./createPost";
 
@@ -67,6 +67,25 @@ class discussionBoard extends Component {
     return posts;
   }
 
+  renderModal() {
+    return(
+      <Modal isOpen={this.state.modal} toggle={this.toggle}>
+        <ModalHeader>Create a post</ModalHeader>
+        <ModalBody id="create-post-body">
+          <Input id="post-title-form" placeholder="Title"/>
+          <Input id="post-text-form" placeholder="Text"/>
+          <Input id="post-links-form" placeholder="Relevant links"/>
+        </ModalBody>
+        <ModalFooter>
+          <div className="modal-buttons">
+            <Button id="submit-post-button" onClick={this.toggle}>Submit Post</Button>
+            <Button id="cancel-post-button" onClick={this.toggle}>Cancel</Button>
+          </div>
+        </ModalFooter>
+      </Modal>
+    )
+  }
+
   toggle() {
     this.setState({
       modal: !this.state.modal
@@ -77,28 +96,13 @@ class discussionBoard extends Component {
   render() {
 
     // let posts = this.renderPosts();
-
-    // const [modal, setModal] = useState(false);
-
-    // const toggle = () => setModal(!modal);
  
     return(
       <div>
         <div className="discussion-body">
           <div className="create-post-button-area">
             <Button id="create-post-button" onClick={this.toggle}>New Post</Button>
-            <Modal isOpen={this.state.modal} toggle={this.toggle}>
-              <ModalHeader>Create a post</ModalHeader>
-              <ModalBody>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </ModalBody>
-              <ModalFooter>
-                <div className="modal-buttons">
-                  <Button onClick={this.toggle}>Submit Post</Button>
-                  <Button onClick={this.toggle}>Cancel</Button>
-                </div>
-              </ModalFooter>
-            </Modal>
+            {this.renderModal()}
           </div>
           <div className="discussion-content">
             {this.renderPosts()}

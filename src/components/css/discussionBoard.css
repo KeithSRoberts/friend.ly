@@ -12,10 +12,10 @@
    /* width: 200px; */
 }
 
-#create-post-button {
+#create-post-button{
    background-color: #4b2e83;
-   border-radius: 15px;
-   width: 150px;
+   border-radius: 5px;
+   width: 100px;
    text-align: center;
    margin: 1.5rem;
    padding-left: auto;
@@ -46,8 +46,8 @@ Button {
 .button-upvote {
    background-image: url("../../constants/images/button-upvote.png");
    background-size: 100%;
-   background-repeat: no-repeat;
-   max-width: 45px;
+   /* background-repeat: no-repeat; */
+   max-width: 44px;
    height: 26px;
    border: none !important;
 }
@@ -55,15 +55,15 @@ Button {
 .button-downvote {
    background-image: url("../../constants/images/button-downvote.png");
    background-size: 100%;
-   max-width: 45px;
-   height: 26px;
+   max-width: 44px;
+   height: 28px;
    border: none !important;
 
 }
 
 .post-content {
    /* display: flex; */
-   padding: 15px 20px 5px 25px;
+   padding: 0px 0px 15px 20px;
    margin: 15px 20px 5px 20px;
    border-radius: 20px;
    border: 1px solid #F0F0F0;
@@ -77,10 +77,6 @@ Button {
    /* padding: 15px 5px 5px 5px; */
 }
 
-.post-author {
-   padding-left: 10px;
-
-}
 
 .post-image {
    display: inline-block;
@@ -89,6 +85,8 @@ Button {
    height: 30px;
    overflow: hidden;
    border-radius: 15px;
+   /* margin-left: 15px; */
+   margin-top: 20px;
 }
 
 .post-image img{
@@ -104,4 +102,14 @@ Button {
    display: flex;
    flex-direction: row;
    justify-content: space-between;
+}
+
+#submit-post-button {
+   border-radius: 5px;
+   background-color: #85754d;
+}
+
+#cancel-post-button {
+   border-radius: 5px;
+   background-color: #4b2e83;
 }
