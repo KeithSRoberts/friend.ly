@@ -103,3 +103,9 @@
     width: 50%;
 }
 
+.navigation-bar-inside {
+    margin-left: 3%;
+    margin-right: 3%;
+    flex-grow: 1;
+}
+
