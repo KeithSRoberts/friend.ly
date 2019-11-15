@@ -1,5 +1,9 @@
 import React, { Component }  from "react";
 import { HashRouter, Route, Redirect, Switch } from "react-router-dom";
+import withFirebaseAuth from 'react-with-firebase-auth'
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import firebaseConfig from '../firebase/firebaseConfig';
 import Account from "./account";
 import CreateGroup from "./createGroup";
 import Groups from "./groups";
@@ -8,6 +12,14 @@ import Splash from "./splash";
 import ViewGroup from "./viewGroup";
 
 import * as routes from "../constants/routes";
+
+const firebaseApp = firebase.initializeApp(firebaseConfig); 
+const firebaseAppAuth = firebaseApp.auth();
+
+const providers = {
+  googleProvider: new firebase.auth.GoogleAuthProvider(),
+}
+
 
 class App extends Component {
   render() {
@@ -46,4 +58,9 @@ class App extends Component {
   }
 }
 
-export default App;
+
+// wrap app export with Firebase authentication and supported providers
+export default withFirebaseAuth({
+  providers, 
+  firebaseAppAuth,
+}) (App);
