@@ -4,6 +4,7 @@ import App from "./components/app";
 import * as serviceWorker from "./serviceWorker";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-customize-token-input/dist/react-customize-token-input.css';
 import "./index.css";
 
 ReactDOM.render(<App />, document.getElementById("root"));
