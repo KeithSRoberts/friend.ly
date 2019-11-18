@@ -13,7 +13,9 @@ import ViewGroup from "./viewGroup";
 
 import * as routes from "../constants/routes";
 
+require("firebase/database");
 const firebaseApp = firebase.initializeApp(firebaseConfig); 
+export const db = firebase.database();
 const firebaseAppAuth = firebaseApp.auth();
 
 const providers = {
