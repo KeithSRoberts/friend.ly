@@ -1,4 +1,4 @@
-import { auth } from "./firebase";
+import { auth } from "./firebaseConfig";
 
 // takes in an email, username, and password
 // makes a new user with given email, username and password in database
