@@ -1,6 +1,7 @@
 import React, { Component }  from "react";
 import { Button, Input } from 'reactstrap';
-import ChipInput from 'material-ui-chip-input'
+import ChipInput from 'material-ui-chip-input';
+import { withFirebase } from '../firebase';
 
 import * as routes from "../constants/routes";
 
@@ -60,6 +61,11 @@ class Splash extends Component {
   }
 
   register = () => {
+    const { userName, password, email, interests } = this.state;
+    const { firebase } = this.props;
+
+    firebase.doCreateUser(userName, password, email, interests)
+
     this.props.history.push(routes.GROUPS);
   }
 
@@ -250,4 +256,4 @@ class Splash extends Component {
   }
 }
 
-export default Splash;
+export default withFirebase(Splash);
