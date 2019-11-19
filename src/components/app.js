@@ -53,4 +53,6 @@ class App extends Component {
   }
 }
 
+
+// wrap app export with Firebase authentication and supported providers
 export default App;

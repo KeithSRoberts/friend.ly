@@ -1,5 +1,7 @@
 import React, { Component }  from "react";
 import { Button, Input } from 'reactstrap';
+import ChipInput from 'material-ui-chip-input';
+import { withFirebase } from '../firebase';
 
 import * as routes from "../constants/routes";
 
@@ -26,9 +28,16 @@ class Splash extends Component {
         board_games: [],
         other: []
       },
+      media: {
+        facebook: "",
+        instagram: "",
+        snapchat: "",
+        twitter: ""
+      },
       header: "",
       loggedIn: false,
       register: false,
+      interestIndex: -1,
       finish: false,
       password: "",
       userID: 0,
@@ -58,6 +67,11 @@ class Splash extends Component {
   }
 
   register = () => {
+    const { userName, password, email, interests } = this.state;
+    const { firebase } = this.props;
+
+    firebase.doCreateUser(userName, password, email, interests)
+
     this.props.history.push(routes.GROUPS);
   }
 
@@ -112,6 +126,55 @@ class Splash extends Component {
     window.location.reload();
   }
 
+  setInterest = (interestIndex) => {
+    this.setState({ interestIndex });
+  }
+
+  addInterest = (index, e) => {
+    const { interests } = this.state;
+    let interestKeys = Object.keys(interests);
+    
+    let newInterests = Object.assign({}, interests);;
+
+    newInterests[interestKeys[index]].push(e);
+
+    this.setState({ interests: newInterests });
+  }
+
+  removeInterest = (index, e, i) => {
+    const { interests } = this.state;
+    let interestKeys = Object.keys(interests);
+    
+    let newInterests = Object.assign({}, interests);;
+
+    newInterests[interestKeys[index]].splice(i, 1);
+
+    this.setState({ interests: newInterests });
+  }
+
+  renderInterest = () => {
+    const { interests, interestIndex } = this.state;
+    let interestKeys = Object.keys(interests);
+
+    return(
+      <div id="chipDiv">
+        <div id="chipIcon" className="interest">
+          <div 
+            id={`splash-${interestKeys[interestIndex]}`}
+            className="interest-icon"
+          />
+        </div>
+        <ChipInput
+          className="chipInput"
+          value={interests[interestKeys[interestIndex]]}
+          onAdd={(e) => this.addInterest(interestIndex, e)}
+          onDelete={(e, i) => this.removeInterest(interestIndex, e, i)}
+        />
+        <Button id="done" onClick={() => this.setState({ interestIndex: -1 })}>Done</Button>
+      </div>
+    );
+  }
+
   renderInterests = () => {
     const { interests } = this.state;
     let interestRows = [];
@@ -122,7 +185,7 @@ class Splash extends Component {
 
       for (let j = 0; j < 6; j++) {
         interestDivs.push(
-          <div key={(6 * i) + j} className="interest" tabIndex="0">
+          <div key={(6 * i) + j} className="interest" tabIndex="0" onClick={() => this.setInterest((6 * i) + j)}>
             <div 
               id={`splash-${interestKeys[(6 * i) + j]}`}
               key={(6 * i) + j}
@@ -168,14 +231,18 @@ class Splash extends Component {
   }
   
   render() {
-    const { finish, header, register, validEmail } = this.state;
+    const { finish, header, interestIndex, register, validEmail } = this.state;
 
     let form;
 
     if (finish) {
       form = this.renderSocial();
     } else if (validEmail) {
-      form = this.renderInterests();
+      if (interestIndex > -1) {
+        form = this.renderInterest();
+      } else {
+        form = this.renderInterests();
+      }
     } else if (register) {
       form = this.renderEmail();
     } else {
@@ -196,4 +263,4 @@ class Splash extends Component {
   }
 }
 
-export default Splash;
+export default withFirebase(Splash);
