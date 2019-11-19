@@ -28,6 +28,12 @@ class Splash extends Component {
         board_games: [],
         other: []
       },
+      media: {
+        facebook: "",
+        instagram: "",
+        snapchat: "",
+        twitter: ""
+      },
       header: "",
       loggedIn: false,
       register: false,
@@ -151,19 +157,20 @@ class Splash extends Component {
     let interestKeys = Object.keys(interests);
 
     return(
-      <div>
-        <div className="interest">
+      <div id="chipDiv">
+        <div id="chipIcon" className="interest">
           <div 
             id={`splash-${interestKeys[interestIndex]}`}
             className="interest-icon"
           />
         </div>
         <ChipInput
+          className="chipInput"
           value={interests[interestKeys[interestIndex]]}
           onAdd={(e) => this.addInterest(interestIndex, e)}
           onDelete={(e, i) => this.removeInterest(interestIndex, e, i)}
         />
-        <Button onClick={() => this.setState({ interestIndex: -1 })}>Done</Button>
+        <Button id="done" onClick={() => this.setState({ interestIndex: -1 })}>Done</Button>
       </div>
     );
   }

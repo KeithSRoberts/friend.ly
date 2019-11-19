@@ -1,3 +1,34 @@
+.chipInput {
+  margin-left: 20px !important;
+  margin-bottom: 10px !important;
+  padding: 5px 16px !important;
+  background-color: rgba(24, 26, 27, 0.4);
+  border-radius: 15px;
+}
+
+.chipInput input {
+  color: white !important;
+}
+
+.chipInput > div:before, .chipInput > div, .chipInput > div:after {
+  background-color: transparent !important;
+}
+
+#chipIcon {
+  height: 140px;
+  width: 140px;
+}
+
+#chipDiv {
+  margin-bottom: 180px;
+  width: 50%;
+}
+
+.MuiButtonBase-root {
+  margin: 3px 8px 3px 0 !important;
+  flex-direction: row;
+}
+
 .interest {
   background-color: #140b3a;
   border-radius: 15px;
@@ -131,7 +162,7 @@
   justify-content: center;
 }
 
-#splash-button-register {
+#splash-button-register, #done {
   align-items: center;
   background-color: #4b2e83;
   border: none;
@@ -198,6 +229,7 @@
 #splash-button-signin:focus,
 #splash-button-signup:focus,
 #splash-button-interests:focus,
+#done:focus,
 #splash-button-social:focus,
 .interest:focus,
 #splash-username:active,
@@ -207,6 +239,7 @@
 #splash-button-signin:active,
 #splash-button-signup:active,
 #splash-button-interests:active,
+#done:active,
 #splash-button-social:focus,
 .interest:active,
 #splash-facebook:focus,

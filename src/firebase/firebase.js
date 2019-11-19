@@ -20,6 +20,7 @@ class Firebase {
     this.db = app.database();
   }
 
+  /*
   doCreateUserWithEmailAndPassword = (email, password) =>
     this.auth.createUserWithEmailAndPassword(email, password);
   
@@ -30,6 +31,7 @@ class Firebase {
 
   doPasswordUpdate = (password) =>
     this.auth.currentUser.updatePassword(password);
+  */
 
   doCreateUser = (username, password, email, interests) => {
     let userIndex = this.db.ref("userIndex");
