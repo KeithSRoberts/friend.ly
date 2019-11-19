@@ -5,6 +5,7 @@ import CreateGroup from "./createGroup";
 import Groups from "./groups";
 import Navbar from "./navbar";
 import Splash from "./splash";
+import Dash from "./dash";
 import ViewGroup from "./viewGroup";
 
 import * as routes from "../constants/routes";
@@ -29,7 +30,7 @@ class App extends Component {
           } />
           <Route exact path={routes.GROUPS} render={(props) => 
             <React.Fragment>
-              <Navbar />
+              <Navbar currentPage="groups"/>
               <Groups {...props} />
             </React.Fragment>
           } />
@@ -37,6 +38,12 @@ class App extends Component {
             <React.Fragment>
               <Navbar />
               <ViewGroup {...props} />
+            </React.Fragment>
+          } />
+          <Route exact path={routes.DASH} render={(props) =>
+            <React.Fragment>
+              <Navbar currentPage="dash"/>
+              <Dash {...props} />
             </React.Fragment>
           } />
           <Redirect to={routes.SPLASH} />

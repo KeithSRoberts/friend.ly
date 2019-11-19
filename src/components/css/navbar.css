@@ -78,10 +78,13 @@
 }
 .nav-buttons {
     width: 100%;
-    text-align: center;
 }
 
 .nav-pills .nav-link.active {
+    background-color: #e8e3d3 !important;
+}
+
+#nav-pill-active{
     background-color: #e8e3d3 !important;
 }
 
