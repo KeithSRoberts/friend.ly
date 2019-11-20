@@ -38,7 +38,7 @@
   grid-template-columns: 125px 160px;
 }
 
-#desc-input, #title-input, .interest-input textarea {
+#desc-input, #title-input, .interest-input textarea, .interest-input > div {
   outline: none;
   background-color: #f7fbfc;
   border-radius: 10px;
@@ -49,12 +49,22 @@
   width: 420px;
 }
 
-.interest-input textarea {
+.interest-input textarea, .interest-input > div {
   padding: 10px 20px 10px 20px;
   margin: 20px 15px 0px 10px;
   box-shadow: 0px -2px 1px #F0F0F0;
   font-size: 10pt;
+  border-bottom: none;
   width: 180px;
+  height: 100px;
+}
+
+.interest-input .MuiChip-clickable {
+  flex-direction: row;
+}
+
+.interest-input .WAMuiChipInput-chipContainer-4 {
+  overflow: scroll;
 }
 
 #create-group-btn {
@@ -75,7 +85,7 @@ h5 {
 }
 
 @media screen and (max-width: 1060px) {
-  .interest-input textarea {
+  .interest-input > div {
     width: 120px;
   }
 
