@@ -22,17 +22,17 @@ class Navbar extends Component {
           {/* Pills */}
           <Nav pills className="navbar navbar-expand-lg nav-buttons d-flex justify-content-center">
             <NavItem>
-              <NavLink href="dash" active id="nav-pill">Dashboard</NavLink>
+              <Link to={routes.GROUPS} active id="nav-pill">Dashboard</Link>
             </NavItem>
             
             <NavItem>
-              <NavLink href="#" id="nav-pill">asdf</NavLink>
+              <Link to={routes.SPLASH} id="nav-pill">asdf</Link>
             </NavItem>
             <NavItem>
-              <NavLink href="#" id="nav-pill">Link</NavLink>
+              <Link to={routes.SPLASH} id="nav-pill">Link</Link>
             </NavItem>
             <NavItem>
-              <NavLink disabled href="#" id="nav-pill">Hello</NavLink>
+              <Link disabled to={routes.SPLASH} id="nav-pill">Hello</Link>
             </NavItem>
           </Nav>
           <Search id="search-bar">

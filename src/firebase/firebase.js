@@ -59,11 +59,16 @@ class Firebase {
 
   createNewGroup = (groupObj) => {
     let currIndex;
+
     this.db.ref('groupIndex').once('value').then((snapshot) => {
         currIndex = snapshot.val();
+
         currIndex++;
+
         groupObj['groupId'] = currIndex;
+
         this.db.ref('groups/' + currIndex).set(groupObj);
+
         this.db.ref('groupIndex').set(currIndex);
     });
   }
