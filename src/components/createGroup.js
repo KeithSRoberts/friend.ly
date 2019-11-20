@@ -1,6 +1,6 @@
 import React, { Component }  from "react";
 import ChipInput from 'material-ui-chip-input';
-import { db } from "./app";
+import { withFirebase } from '../firebase';
 import "./css/createGroup.css"
 import art from "../constants/icons/art.png";
 import board_games from "../constants/icons/board_games.png";
@@ -54,35 +54,31 @@ class CreateGroup extends Component {
   // Pre: User is signed in (this.props.user is not null)
   // Post: Updates new group in firebase database
   createNewGroup() {
-    let currIndex;
-    db.ref('groupIndex').once('value').then((snapshot) => {
-        currIndex = snapshot.val();
-        currIndex++;
-        db.ref('groups/' + currIndex).set({
-          groupId: currIndex,
-          groupTitle: this.state.groupTitle,
-          groupDescription: this.state.groupDescr,
-          groupImage: this.state.groupImage,
-          groupInterests: {
-            music: this.state.music,
-            art: this.state.art,
-            sports: this.state.sports,
-            theater: this.state.theater,
-            video_games: this.state.video_games,
-            food: this.state.food,
-            travel: this.state.travel,
-            books: this.state.books,
-            politics: this.state.politics,
-            board_games: this.state.board_games,
-            social: this.state.instagram,
-            other: this.state.other
-          },
-          groupMembers: []
-        });
-        db.ref('groupIndex').set(currIndex);
-        alert("New group successfully created!");
-        this.props.history.push('/groups');
-    });
+    const { firebase } = this.props;
+    let payload = {
+        groupId: 0,
+        groupTitle: this.state.groupTitle,
+        groupDescription: this.state.groupDescr,
+        groupImage: this.state.groupImage,
+        groupInterests: {
+          music: this.state.music,
+          art: this.state.art,
+          sports: this.state.sports,
+          theater: this.state.theater,
+          video_games: this.state.video_games,
+          food: this.state.food,
+          travel: this.state.travel,
+          books: this.state.books,
+          politics: this.state.politics,
+          board_games: this.state.board_games,
+          social: this.state.instagram,
+          other: this.state.other
+        },
+        groupMembers: []
+    }
+    firebase.createNewGroup(payload)
+    alert("New group successfully created!");
+    this.props.history.push('/groups');
   }
 
   createFormRows() {
@@ -164,4 +160,4 @@ class CreateGroup extends Component {
   }
 }
 
-export default CreateGroup;
+export default withFirebase(CreateGroup);

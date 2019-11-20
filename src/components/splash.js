@@ -1,6 +1,7 @@
 import React, { Component }  from "react";
 import { Button, Input } from 'reactstrap';
-import ChipInput from 'material-ui-chip-input'
+import ChipInput from 'material-ui-chip-input';
+import { withFirebase } from '../firebase';
 
 import * as routes from "../constants/routes";
 
@@ -26,6 +27,12 @@ class Splash extends Component {
         books: [],
         board_games: [],
         other: []
+      },
+      media: {
+        facebook: "",
+        instagram: "",
+        snapchat: "",
+        twitter: ""
       },
       header: "",
       loggedIn: false,
@@ -60,6 +67,11 @@ class Splash extends Component {
   }
 
   register = () => {
+    const { userName, password, email, interests } = this.state;
+    const { firebase } = this.props;
+
+    firebase.doCreateUser(userName, password, email, interests)
+
     this.props.history.push(routes.GROUPS);
   }
 
@@ -145,19 +157,20 @@ class Splash extends Component {
     let interestKeys = Object.keys(interests);
 
     return(
-      <div>
-        <div className="interest">
+      <div id="chipDiv">
+        <div id="chipIcon" className="interest">
           <div 
             id={`splash-${interestKeys[interestIndex]}`}
             className="interest-icon"
           />
         </div>
         <ChipInput
+          className="chipInput"
           value={interests[interestKeys[interestIndex]]}
           onAdd={(e) => this.addInterest(interestIndex, e)}
           onDelete={(e, i) => this.removeInterest(interestIndex, e, i)}
         />
-        <Button onClick={() => this.setState({ interestIndex: -1 })}>Done</Button>
+        <Button id="done" onClick={() => this.setState({ interestIndex: -1 })}>Done</Button>
       </div>
     );
   }
@@ -250,4 +263,4 @@ class Splash extends Component {
   }
 }
 
-export default Splash;
+export default withFirebase(Splash);
