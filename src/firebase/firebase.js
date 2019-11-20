@@ -33,7 +33,7 @@ class Firebase {
     this.auth.currentUser.updatePassword(password);
   */
 
-  doCreateUser = (username, password, email, interests) => {
+  doCreateUser = (username, password, email, interests, media) => {
     let userIndex = this.db.ref("userIndex");
     let index = 1;
 
@@ -48,7 +48,8 @@ class Firebase {
         username,
         password,
         email,
-        interests
+        interests,
+        media
       });
 
       userIndex.update({ index });
