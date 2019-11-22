@@ -49,9 +49,21 @@ class Splash extends Component {
   // Pre: Username and password provided from user
   // Post: Authenticates username and password, returns true if sucessful login,
   // otherwise returns false
-  signIn = (providedUserName, providedPass) => {
-    //firebase signin authentication
-    this.props.history.push(routes.GROUPS);
+  signIn = () => {
+    const { firebase } = this.props;
+    const { userName, password } = this.state;
+
+    firebase.doSignInUser(userName, password, () => this.props.history.push(routes.GROUPS));
+
+    /*
+    firebase.doSignInUser(userName, password, () => {
+      if (global.userId !== -1) {
+        this.props.history.push(routes.GROUPS);
+      } else {
+        console.log("throw invalid credentials error");
+      }
+    });
+    */
   }
 
   showEmail = (register) => {
