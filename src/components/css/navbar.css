@@ -19,28 +19,6 @@
     width: 30px;
 }
 
-.icon {
-    cursor: pointer;
-}
-
-.icon-group {
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.logo {
-    background-image: url("../../constants/images/logo_no_text.png");
-    background-size: 100% 100%;
-    cursor: pointer;
-    height: 51px;
-    width: 91px;
-}
-
-.logo-group {
-    flex-direction: row;
-}
-
 .search {
     background-image: url("../../constants/icons/Search.png");
     background-size: 100% 100%;
@@ -48,25 +26,45 @@
     width: 30px;
 }
 
+/* .icon {
+    cursor: pointer;
+} */
+
+/* .icon-group {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+} */
+
+.logo {
+    background-image: url("../../constants/images/logo_no_text.png");
+    background-size: 100% 100%;
+    cursor: pointer;
+    height: 40px;
+    width: 71px;
+    margin-top: 8px;
+}
+
+.logo-group {
+    flex-direction: row;
+}
+
 .navigation-bar {
     background: white;
     border-bottom: 1px solid #d3d3d3;
     flex-direction: row;
     height: 60px;
-    position: relative
-
+    /* position: relative */
 }
 
 .nav-friend {
     color: #b6a579;
 }
 
-
-
-.nav-group-main, .nav-group-inner-main {
+/* .nav-group-main, .nav-group-inner-main {
     flex: 3;
     flex-direction: row;
-}
+} */
 
 .nav-ly {
     color: #4b2d83;
@@ -75,26 +73,53 @@
 .nav-title {
     flex-direction: row;
     margin-left: 20px;
+    margin-top: 4px;
 }
-.nav-buttons {
+/* .nav-buttons {
     width: 100%;
     text-align: center;
-}
+} */
 
-.nav-pills .nav-link.active {
+/* .nav-pill .nav-link.active {
     background-color: #e8e3d3 !important;
 }
 
-.nav-pills .nav-link.disabled {
+.nav-pill .nav-link.disabled {
     background-color: lightgrey !important;
+} */
+/* #icons {
+    position: absolute;
+    right: 1000px;
+    flex-direction: row;
+} */
+#icons {
+    display: block;
+    position: absolute;
+    right: 12em;
+    flex-direction: row;
+    display: inline-flex;
+    height: 60px;
 }
 
-.nav-pills a {
-    color: #4b2e83 !important;
+.nav-buttons {
+    justify-content: right;
 }
-.nav-pills a:hover {
+
+.nav-pill {
+    margin-top: 15px;
+    margin-left: 1em;
+}
+
+/* .nav-pill a {
+    color: #4b2e83 !important;
+    font-size: 15px;
+    margin-top: 10px;
+} */
+
+.nav-pill a:hover {
     color:#85754d !important;
 }
+
 #search-bar {
     justify-content: right;
 }
@@ -104,8 +129,8 @@
 }
 
 .navigation-bar-inside {
-    margin-left: 3%;
-    margin-right: 3%;
-    flex-grow: 1;
+    margin-left: 2em;
+    /* margin-right: 3%; */
+    /* flex-grow: 1; */
 }
 
