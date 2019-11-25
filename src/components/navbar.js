@@ -2,7 +2,7 @@ import React, { Component, useState }  from "react";
 import { Link } from "react-router-dom";
 import { Nav, NavItem, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, NavLink} from 'reactstrap';
 import Search from "../components/search"
-
+ 
 import * as routes from "../constants/routes";
 
 import "./css/navbar.css";
@@ -67,7 +67,21 @@ class Navbar extends Component {
               </Link>
             </div>
           {/* Pills */}
-          {pills}
+          <Nav pills className="navbar navbar-expand-lg nav-buttons d-flex justify-content-center">
+            <NavItem>
+              <Link to={routes.GROUPS} active id="nav-pill">Dashboard</Link>
+            </NavItem>
+            
+            <NavItem>
+              <Link to={routes.SPLASH} id="nav-pill">asdf</Link>
+            </NavItem>
+            <NavItem>
+              <Link to={routes.SPLASH} id="nav-pill">Link</Link>
+            </NavItem>
+            <NavItem>
+              <Link disabled to={routes.SPLASH} id="nav-pill">Hello</Link>
+            </NavItem>
+          </Nav>
           <Search id="search-bar">
           </Search>
         </div>
@@ -78,6 +92,9 @@ class Navbar extends Component {
 }
 
 {/* Dropdown Item 
+  This is for a menu dropdown item
+  When I add this into the menu need to format nav lin
+  
 <Dropdown nav isOpen={false} toggle={false}>
             <DropdownToggle nav caret>
               Dropdown
