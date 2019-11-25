@@ -1,6 +1,7 @@
 import React, { Component }  from "react";
 import ChipInput from 'material-ui-chip-input';
 import { withFirebase } from '../firebase';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import "./css/createGroup.css"
 import art from "../constants/icons/art.png";
 import board_games from "../constants/icons/board_games.png";
@@ -20,9 +21,13 @@ class CreateGroup extends Component {
   constructor() {
     super();
     this.state = {
+      modal: false,
+      previewError: false,
+      urlInput: "",
+      errorText: " ",
       groupTitle: "",
       groupDescr: "",
-      groupImage: "",
+      groupImage: create,
       groupLinks: [],
       groupMembers: [],
       formImages: [
@@ -49,6 +54,10 @@ class CreateGroup extends Component {
       instagram: [],
       other: []
     }
+    this.toggle = this.toggle.bind(this);
+    this.loadImage = this.loadImage.bind(this);
+    this.confirmImage = this.confirmImage.bind(this);
+    this.validImage = this.validImage.bind(this);
   }
 
   // Pre: User is signed in (this.props.user is not null)
@@ -76,7 +85,7 @@ class CreateGroup extends Component {
         },
         groupMembers: []
     }
-    firebase.createNewGroup(payload)
+    firebase.createNewGroup(payload);
     alert("New group successfully created!");
     this.props.history.push('/groups');
   }
@@ -118,8 +127,8 @@ class CreateGroup extends Component {
   }
 
   validForm() {
-    return (this.state.groupTitle == "" ||
-            this.state.groupDescr == "" ||
+    return (this.state.groupTitle === "" ||
+            this.state.groupDescr === "" ||
             this.state.music.length > 10 ||
             this.state.art.length > 10 ||
             this.state.board_games.length > 10 ||
@@ -134,13 +143,105 @@ class CreateGroup extends Component {
             this.state.video_games.length > 10);
   }
 
+  changeImage() {
+    this.toggle();
+  }
+
+  toggle() {
+    this.setState({
+        modal: !this.state.modal,
+        previewError: false,
+        errorText: "",
+        urlInput: "",
+    });
+  }
+
+  validImage() {
+    if (!this.state.previewError && this.state.urlInput.length > 0 && document.getElementById("preview-image").src !== create) {
+        return true;
+    } else {
+        return false;
+    }
+  }
+
+  confirmImage() {
+    if (this.validImage()) {
+      let url = document.getElementById("image-input").value;
+      this.setState({
+          groupImage: url
+      });
+      this.toggle()
+    }
+  }
+
+  loadImage() {
+    let unChanged = false;
+    let originalSource = document.getElementById("preview-image").src;
+    if (document.getElementById("preview-image").src === create) {
+        unChanged = true;
+    }
+    let url = document.getElementById("image-input").value;
+    let image = document.getElementById("preview-image");
+    image.onerror = (msg) => {
+        if (unChanged) {
+          image.src = create;
+        } else {
+          image.src = originalSource;
+        }
+        this.setState({
+            previewError: true,
+            errorText: "Picture URL could not be loaded"
+        });
+        image.onload = () => {
+            this.setState({
+                previewError: true,
+                errorText: "Picture URL could not be loaded"
+            });
+        }
+
+    }
+
+    image.onload = () => {
+        this.setState({
+            previewError: false,
+            errorText: ""
+        });
+    }
+
+    image.src = url;
+    this.inputChange(url);
+  }
+
+  inputChange(e) {
+    this.setState({
+        urlInput: e
+    });
+  }
+
   render() {
     return(
       <div id="create-page">
+        <Modal isOpen={this.state.modal} toggle={this.toggle} >
+          <ModalHeader id="image-preview">
+            <div id="preview-container">
+              <img id="preview-image" src={this.state.groupImage} alt="preview"/>
+            </div>
+            <p>Image URL:</p>
+          </ModalHeader>
+          <ModalBody>
+            <input id="image-input" onChange={(e) => this.inputChange(e.target.value)}></input>
+          </ModalBody>
+          <p id="error-message">{this.state.errorText}</p>
+          <ModalFooter id="modal-buttons">
+            <Button color="primary" onClick={this.loadImage}>Load Image</Button>
+            <Button color="success" id="confirm-button" onClick={this.confirmImage}>Confirm</Button>
+            <Button color="danger" onClick={this.toggle}>Cancel</Button>
+          </ModalFooter>
+        </Modal>
         <div id="create-content">
           <div id="create-desc">
             <div id="create-img">
-              <img src={create} alt=""/>
+              <img src={this.state.groupImage} alt="" onClick={() => this.changeImage()}/>
             </div>
             <div id="create-title">
               <textarea id="title-input" rows="1" placeholder="Name" onChange={(event) => this.handleChange(event.target.value, "groupTitle")} maxLength="40">
@@ -153,7 +254,9 @@ class CreateGroup extends Component {
           <div id="create-interests">
             { this.createFormRows() }
           </div>
-          <button id="create-group-btn" onClick={() => this.createNewGroup()} disabled={this.validForm()}>Create Group</button>
+          <div id="create-button">
+            <button id="create-group-btn" onClick={() => this.createNewGroup()} disabled={this.validForm()}>Create Group</button>
+          </div>
         </div>
       </div>
     );
