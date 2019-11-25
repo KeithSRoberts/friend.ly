@@ -1,0 +1,2 @@
+global.userId = -1;
+

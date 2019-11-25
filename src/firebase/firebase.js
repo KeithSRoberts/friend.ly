@@ -33,22 +33,44 @@ class Firebase {
     this.auth.currentUser.updatePassword(password);
   */
 
-  doCreateUser = (username, password, email, interests) => {
+  doSignInUser = (username, password, callback) => {
+    let users = this.db.ref("users");
+
+    users.once("value", (snapshot) => {
+      let userList = snapshot.val();
+
+      for (let i = 0; i < userList.length; i++) {
+        let user = userList[i];
+
+        if (user.username === username && user.password === password) {
+          global.userId = i;
+          break;
+        }
+      }
+
+      callback();
+    }, (errorObject) => {
+      console.log("The read failed: " + errorObject.code);
+    });
+  }
+
+  doCreateUser = (username, password, email, interests, media) => {
     let userIndex = this.db.ref("userIndex");
-    let index = 1;
+    let index = 0;
 
     userIndex.once("value", (snapshot) => {
       let value = snapshot.val();
 
       if (!!value) {
-        index += value.index;
+        index += value.index + 1;
       }
 
       this.db.ref('users/' + index).set({
         username,
         password,
         email,
-        interests
+        interests,
+        media
       });
 
       userIndex.update({ index });
