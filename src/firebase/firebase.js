@@ -146,6 +146,13 @@ class Firebase {
         this.db.ref('groupIndex').set(currIndex);
     });
   }
+
+  fetchGroup = async (groupId) => {
+    const group = this.db.ref('groups/' + groupId);
+    const snapshot = await group.once('value');
+    const value = snapshot.val();
+    return value;
+  }
 }
 
 export default Firebase;

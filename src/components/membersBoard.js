@@ -2,19 +2,19 @@ import React, { Component }  from "react";
 import "./css/membersBoard.css";
 
 class membersBoard extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
-      members: []
+      members: props.members
     }
-    let testMember = {
-        name: "Member Name",
-        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id nisi placerat, luctus nisi ac, semper tellus. Aenean tristique auctor quam    ,     vitae accumsan enim posuere sit amet.",
-        image: "https://t2conline.com/wp-content/uploads/2017/12/vizslasf4.jpg"
+  }
+
+  shouldComponentUpdate(previousProps, previousState) {
+    if (previousProps.data !== this.props.data) {
+        this.setState({ members: this.props.members });
+        return true;
     }
-    this.state.members[0] = testMember;
-    this.state.members[1] = testMember;
-    this.state.members[2] = testMember;
+    return false;
   }
 
   componentDidUpdate(previousProps, previousState) {
