@@ -49,9 +49,21 @@ class Splash extends Component {
   // Pre: Username and password provided from user
   // Post: Authenticates username and password, returns true if sucessful login,
   // otherwise returns false
-  signIn = (providedUserName, providedPass) => {
-    //firebase signin authentication
-    this.props.history.push(routes.GROUPS);
+  signIn = () => {
+    const { firebase } = this.props;
+    const { userName, password } = this.state;
+
+    firebase.doSignInUser(userName, password, () => this.props.history.push(routes.GROUPS));
+
+    /*
+    firebase.doSignInUser(userName, password, () => {
+      if (global.userId !== -1) {
+        this.props.history.push(routes.GROUPS);
+      } else {
+        console.log("throw invalid credentials error");
+      }
+    });
+    */
   }
 
   showEmail = (register) => {
@@ -67,10 +79,10 @@ class Splash extends Component {
   }
 
   register = () => {
-    const { userName, password, email, interests } = this.state;
+    const { userName, password, email, interests, media } = this.state;
     const { firebase } = this.props;
 
-    firebase.doCreateUser(userName, password, email, interests)
+    firebase.doCreateUser(userName, password, email, interests, media)
 
     this.props.history.push(routes.GROUPS);
   }
@@ -106,6 +118,16 @@ class Splash extends Component {
     );
   }
 
+  updateMedia = (val, key) => {
+    const { media } = this.state;
+
+    let newMedia = Object.assign({}, media);
+
+    newMedia[key] = val;
+
+    this.setState({ media: newMedia });
+  }
+
   renderEmail = () => {
     const { userName, confirmPassword, password, email } = this.state;
 
@@ -134,7 +156,7 @@ class Splash extends Component {
     const { interests } = this.state;
     let interestKeys = Object.keys(interests);
     
-    let newInterests = Object.assign({}, interests);;
+    let newInterests = Object.assign({}, interests);
 
     newInterests[interestKeys[index]].push(e);
 
@@ -211,19 +233,19 @@ class Splash extends Component {
       <div className="splash-form-social">
         <div className='splash-mediaWrapper'>
           <div id="splash-facebookPic" className='splash-mediaIcon' />
-          <Input id="splash-facebook" placeholder="Facebook profile" />
+          <Input id="splash-facebook" placeholder="Facebook profile" onChange={(e) => this.updateMedia(e.target.value, 'facebook')} />
         </div>
         <div className='splash-mediaWrapper'>
           <div id="splash-instaPic" className='splash-mediaIcon' />
-          <Input id="splash-insta"placeholder="Instagram profile" />
+          <Input id="splash-insta"placeholder="Instagram profile" onChange={(e) => this.updateMedia(e.target.value, 'instagram')} />
         </div>
         <div className='splash-mediaWrapper'>
           <div id="splash-twitterPic" className='splash-mediaIcon' />
-          <Input id="splash-twitter" placeholder="Twitter profile" />
+          <Input id="splash-twitter" placeholder="Twitter profile" onChange={(e) => this.updateMedia(e.target.value, 'twitter')} />
         </div>
         <div className='splash-mediaWrapper'>
           <div id="splash-snapPic" className='splash-mediaIcon' />
-          <Input id="splash-snap" placeholder="Snapchat profile" />
+          <Input id="splash-snap" placeholder="Snapchat profile" onChange={(e) => this.updateMedia(e.target.value, 'snapchat')}/>
         </div>
         <Button id="splash-button-register" onClick={() => this.register()}>Finish signup</Button>
       </div>
