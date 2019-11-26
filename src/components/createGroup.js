@@ -21,6 +21,7 @@ class CreateGroup extends Component {
   constructor() {
     super();
     this.state = {
+      userId: 1,
       modal: false,
       previewError: false,
       urlInput: "",
@@ -83,7 +84,13 @@ class CreateGroup extends Component {
           social: this.state.instagram,
           other: this.state.other
         },
-        groupMembers: []
+        groupMembers: {
+            [this.state.userId]: {
+                name: "Test user",
+                image: "",
+                text: "Lorem Ipsum"
+            }
+        }
     }
     firebase.createNewGroup(payload);
     alert("New group successfully created!");
@@ -129,6 +136,7 @@ class CreateGroup extends Component {
   validForm() {
     return (this.state.groupTitle === "" ||
             this.state.groupDescr === "" ||
+            this.state.groupImage === create ||
             this.state.music.length > 10 ||
             this.state.art.length > 10 ||
             this.state.board_games.length > 10 ||

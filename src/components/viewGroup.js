@@ -1,30 +1,55 @@
 import React, { Component }  from "react";
 import MembersBoard from "./membersBoard";
 import DiscussionBoard from "./discussionBoard";
+import { withFirebase } from '../firebase';
 
 import "./css/viewGroup.css";
 
 class ViewGroup extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
+      userId: 1,
       showMembers: true,
-      image: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/short-haired-dogs-boston-terrier-1563206936.jpg?crop=0.668xw:1.00xh;0.167xw,0&resize=640:*",
-      title: "Group Title ",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id nisi placerat, luctus nisi ac, semper tellus. Aenean tristique auctor quam,     vitae accumsan enim posuere sit amet. Vivamus porta nulla quis nisi bibendum, et rutrum leo rutrum. Aenean fermentum lorem odio utrum leo rutrum",
+      image: "http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png",
+      title: String.fromCharCode(160),
+      description: String.fromCharCode(160),
       links: [],
       members: [],
+      groupId: props.match.params.groupId,
       discussion: ""
     }
 
     this.state.links = this.fetchLinks();
     this.state.members = this.fetchMembers();
     this.state.discussion = this.fetchDiscussion();
+    const { firebase } = props;
+    this.fetchGroupData(firebase);
+    this.forceUpdate();
   }
 
   componentDidMount() {
     this.refs.discussButton.style.color = "gray";
     this.refs.discussButton.disabled = false;
+  }
+
+  fetchGroupData(firebase) {
+    firebase.fetchGroup(this.state.groupId).then((data) => {
+        if (data != null) {
+            this.setState({
+                title: data.groupTitle,
+                description: data.groupDescription,
+                image: data.groupImage,
+                discussion: data.groupDiscussion,
+                members: data.groupMembers
+            });
+        } else {
+            this.setState({
+                title: "This group does not exist",
+                description: "No group could be found for groupID: " + this.state.groupId
+            });
+        }
+    });
   }
 
   // Pre: Param newDescription is different than the current title
@@ -94,7 +119,7 @@ class ViewGroup extends Component {
               <img src={this.state.image} alt=""/>
             </div>
             <div id="group-desc">
-                <h3>{ this.state.title }{ this.props.match.params.groupId }</h3>
+                <h3>{ this.state.title }</h3>
                 <p>{ this.state.description }</p>
                 <button>Join</button>
             </div>
@@ -105,7 +130,7 @@ class ViewGroup extends Component {
           </div>
           <div id="content-view">
             { this.state.showMembers ? (
-                <MembersBoard members={this.state.members}/>
+                <MembersBoard key={this.state.title} members={this.state.members}/>
             ) : (
                 <DiscussionBoard />
             )}
@@ -116,4 +141,4 @@ class ViewGroup extends Component {
   }
 }
 
-export default ViewGroup;
+export default withFirebase(ViewGroup);
