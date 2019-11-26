@@ -62,15 +62,8 @@ class Navbar extends Component {
               <Link to={routes.SPLASH}>
                 <div className="logo" />
               </Link>
-<<<<<<< HEAD
-              <Link to={routes.SPLASH}>
-              <h1 className="nav-title"><span className="nav-friend">Friend</span><span className="nav-ly">.ly</span></h1>
-              </Link>
-            </div>
-=======
             <h1 className="nav-title"><span className="nav-friend">Friend</span><span className="nav-ly">.ly</span></h1>
           </div>
->>>>>>> 8a1c0257eb829c3466a7589426390429a29f4a27
           {/* Pills */}
           {/* <Nav pills className="navbar navbar-expand-lg nav-buttons d-flex justify-content-center">
             <NavItem>
@@ -144,14 +137,7 @@ class Navbar extends Component {
   }
 }
 
-<<<<<<< HEAD
-{/* Dropdown Item 
-  This is for a menu dropdown item
-  When I add this into the menu need to format nav lin
-  
-=======
 {/* Dropdown Item
->>>>>>> 8a1c0257eb829c3466a7589426390429a29f4a27
 <Dropdown nav isOpen={false} toggle={false}>
             <DropdownToggle nav caret>
               Dropdown

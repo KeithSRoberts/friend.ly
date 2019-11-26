@@ -62,6 +62,7 @@ class discussionBoard extends Component {
 
     post['groupIndex'] = this.state.groupIndex;
     post['author'] = "Bojack";
+    post['upvotes'] = 0;
     firebase.doCreatePost(post, this.state.groupIndex)
 
   }

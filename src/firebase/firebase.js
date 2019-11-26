@@ -47,8 +47,8 @@ class Firebase {
       let testPost = {
         author: "Bojack",
         upvotes: 9,
+        title: "test post 1",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id nisi placerat, luctus nisi ac, semper tellus. Aenean tristique auctor quam    ,     vitae accumsan enim posuere sit amet.",
-        image: "https://t2conline.com/wp-content/uploads/2017/12/vizslasf4.jpg"
       }
       posts.push(testPost);
 
@@ -82,12 +82,6 @@ class Firebase {
         // this.db.ref('groups/' + group + '/groupDiscussion/post-' + i).set()
       }
       // console.log(post);
-
-      // currIndex++;
-      // post['postID'] = currIndex;
-      // console.log(post);
-
-
     })
   }
 
