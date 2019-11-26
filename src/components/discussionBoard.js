@@ -21,6 +21,7 @@ class discussionBoard extends Component {
     }
     // this.state.posts = this.fetchPosts();
     this.toggle = this.toggle.bind(this);
+    this.fetchPosts = this.fetchPosts.bind(this);
     this.createNewPost = this.createNewPost.bind(this);
 
     // this.postsRef = withFirebase.ref('groups/' + this.state.groupIndex + '/groupDiscussion');
@@ -38,10 +39,11 @@ class discussionBoard extends Component {
   }
 
   renderPosts() {
-    // setTimeout(this.fetchPosts, 10000);
     setTimeout(function() {
       this.fetchPosts();
     }, 2000)
+
+    
     let posts = this.state.posts.map((p, index) => {
       return(
         <Post key={"post-" + index} post={p} />
