@@ -34,16 +34,17 @@ class discussionBoard extends Component {
   fetchPosts = () => {
     const { firebase } = this.props;
 
-    let allPosts = firebase.doRenderPosts(this.state.groupIndex);
-    this.setState({posts : allPosts});
+    firebase.doRenderPosts(this.state.groupIndex).then((allPosts) => {
+      this.setState({posts : allPosts});
+    });
   }
 
   renderPosts() {
-    setTimeout(function() {
+    // setTimeout(function() {
       this.fetchPosts();
-    }, 2000)
+    // }, 2000)
 
-    
+
     let posts = this.state.posts.map((p, index) => {
       return(
         <Post key={"post-" + index} post={p} />
