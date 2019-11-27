@@ -153,6 +153,20 @@ class Firebase {
     const value = snapshot.val();
     return value;
   }
+
+  doLeaveGroup = (groupId, userId) => {
+    const group = this.db.ref('groups/' + groupId + '/groupMembers/' + userId);
+    group.remove();
+  }
+
+  doJoinGroup = (groupId, userId, username, userText, userImage) => {
+    const group = this.db.ref('groups/' + groupId + '/groupMembers/' + userId);
+    group.set({
+        name: username,
+        text: userText,
+        image: userImage
+    });
+  }
 }
 
 export default Firebase;

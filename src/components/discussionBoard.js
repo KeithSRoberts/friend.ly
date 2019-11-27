@@ -23,6 +23,7 @@ class discussionBoard extends Component {
     this.toggle = this.toggle.bind(this);
     this.fetchPosts = this.fetchPosts.bind(this);
     this.createNewPost = this.createNewPost.bind(this);
+    this.state.posts = props.posts;
 
     // this.postsRef = withFirebase.ref('groups/' + this.state.groupIndex + '/groupDiscussion');
     

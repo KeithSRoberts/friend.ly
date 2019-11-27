@@ -53,7 +53,7 @@ class Splash extends Component {
     const { firebase } = this.props;
     const { userName, password } = this.state;
 
-    firebase.doSignInUser(userName, password, () => this.props.history.push(routes.GROUPS));
+    firebase.doSignInUser(userName, password, () => this.props.history.push(routes.DASH));
 
     /*
     firebase.doSignInUser(userName, password, () => {

@@ -32,16 +32,16 @@ class membersBoard extends Component {
   }
 
   createCards() {
-    let cards = this.state.members.map((member, index) => {
+    let cards = Object.keys(this.state.members).map((member, index) => {
       return(
         <div key={index}>
           <div className="member-card">
             <div className="member-pic">
-              <img src={member.image} alt=""/>
+              <img src={this.state.members[member].image} alt=""/>
             </div>
             <div className="member-desc">
-              <h5 className="member-title"> {member.name} </h5>
-              <p className="member-text"> {member.text} </p>
+              <h5 className="member-title"> {this.state.members[member].name} </h5>
+              <p className="member-text"> {this.state.members[member].text} </p>
             </div>
           </div>
         </div>
