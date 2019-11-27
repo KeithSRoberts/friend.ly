@@ -47,6 +47,7 @@
 
 .interestRow {
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .splash-bg {
@@ -85,11 +86,13 @@
   height: 35%;
   justify-content: center;
   margin-bottom: 180px;
-  width: 20%;
+  /* width: 20%; */
+  width: auto;
 }
 
 .splash-form-interests {
   margin-bottom: 180px;
+  width: 100%;
 }
 
 .splash-header {
@@ -317,4 +320,22 @@
 
 #splash-snapPic {
   background-image: url("../../constants/icons/snapchat.png");
+}
+
+@media screen and (min-width: 768px) {
+  .splash-form-interests {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .splash-form-interests {
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .splash-form-interests {
+    width: 50%;
+  }
 }
