@@ -10,6 +10,7 @@ class ViewGroup extends Component {
     super();
     this.state = {
       userId: 1,
+      username: "Test User",
       showMembers: true,
       image: "http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png",
       title: String.fromCharCode(160),
@@ -17,12 +18,10 @@ class ViewGroup extends Component {
       links: [],
       members: [],
       groupId: props.match.params.groupId,
-      discussion: ""
+      discussion: "",
+      isMember: false
     }
 
-    this.state.links = this.fetchLinks();
-    this.state.members = this.fetchMembers();
-    this.state.discussion = this.fetchDiscussion();
     const { firebase } = props;
     this.fetchGroupData(firebase);
     this.forceUpdate();
@@ -37,12 +36,21 @@ class ViewGroup extends Component {
     firebase.fetchGroup(this.state.groupId).then((data) => {
         if (data != null) {
             this.setState({
+                members: data.groupMembers,
                 title: data.groupTitle,
                 description: data.groupDescription,
                 image: data.groupImage,
                 discussion: data.groupDiscussion,
-                members: data.groupMembers
             });
+            if (data.groupMembers !== undefined && data.groupMembers.hasOwnProperty(this.state.userId)) {
+                this.setState({
+                  isMember: true
+                });
+            } else {
+                this.setState({
+                  isMember: false
+                });
+            }
         } else {
             this.setState({
                 title: "This group does not exist",
@@ -93,6 +101,18 @@ class ViewGroup extends Component {
 
   }
 
+  joinGroup = () => {
+    const { firebase } = this.props;
+    firebase.doJoinGroup(this.state.groupId, this.state.userId, "Test User", "Test Text", "https://scx2.b-cdn.net/gfx/news/hires/2018/2-dog.jpg");
+    this.fetchGroupData(firebase);
+  }
+
+  leaveGroup = () => {
+    const { firebase } = this.props;
+    firebase.doLeaveGroup(this.state.groupId, this.state.userId);
+    this.fetchGroupData(firebase);
+  }
+
   changeContent() {
     this.setState({
       showMembers: !this.state.showMembers
@@ -121,7 +141,11 @@ class ViewGroup extends Component {
             <div id="group-desc">
                 <h3>{ this.state.title }</h3>
                 <p>{ this.state.description }</p>
-                <button>Join</button>
+                { this.state.isMember ? (
+                  <button onClick={this.leaveGroup.bind(this)}id="leave-button">Leave</button>
+                ) : (
+                  <button onClick={this.joinGroup.bind(this)}id="join-button">Join</button>
+                )}
             </div>
           </div>
           <div id="content-select">
@@ -130,9 +154,9 @@ class ViewGroup extends Component {
           </div>
           <div id="content-view">
             { this.state.showMembers ? (
-                <MembersBoard key={this.state.title} members={this.state.members}/>
+                <MembersBoard key={this.state.members !== undefined ? this.state.members.length + "" : "0"} members={this.state.members !== undefined ? this.state.members : {} }/>
             ) : (
-                <DiscussionBoard key={this.state.title} posts={this.state.discussion} groupId={this.state.groupId}/>
+                <DiscussionBoard key={this.state.title} posts={this.state.discussion !== undefined ? this.state.discussion : [] } groupId={this.state.groupId}/>
             )}
           </div>
         </div>

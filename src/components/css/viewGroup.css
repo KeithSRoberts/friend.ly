@@ -10,6 +10,16 @@
     box-shadow: 0px -2px 2px #F0F0F0;
 }
 
+#leave-button {
+    background-color: red;
+    width: 60px;
+    border-radius: 15%;
+    color: white;
+    margin-left: 260px;
+    margin-bottom: 15px;
+    padding: 3px 3px 3px 3px;
+}
+
 #group-pic img {
     max-width: 225px;
     max-height: 225px;
@@ -31,7 +41,7 @@
     padding-top: 25px;
 }
 
-#group-desc button {
+#group-desc #join-button {
     width: 60px;
     border-radius: 15%;
     background-color: #4b2d83;
@@ -44,8 +54,9 @@
 #group-desc p {
     padding-top: 12px;
     font-size: 10pt;
-    height: 110px;
+    height: 100px;
     padding-right: 20px;
+    margin-bottom: 0px;
 }
 
 #content-select button {

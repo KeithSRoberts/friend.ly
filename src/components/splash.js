@@ -53,7 +53,7 @@ class Splash extends Component {
     const { firebase } = this.props;
     const { userName, password } = this.state;
 
-    firebase.doSignInUser(userName, password, () => this.props.history.push(routes.GROUPS));
+    firebase.doSignInUser(userName, password, () => this.props.history.push(routes.DASH));
 
     /*
     firebase.doSignInUser(userName, password, () => {
@@ -174,6 +174,59 @@ class Splash extends Component {
     this.setState({ interests: newInterests });
   }
 
+  // renderInterest = () => {
+  //   const { interests, interestIndex } = this.state;
+  //   let interestKeys = Object.keys(interests);
+
+  //   return(
+  //     <div id="chipDiv">
+  //       <div id="chipIcon" className="interest">
+  //         <div 
+  //           id={`splash-${interestKeys[interestIndex]}`}
+  //           className="interest-icon"
+  //         />
+  //       </div>
+  //       <ChipInput
+  //         className="chipInput"
+  //         value={interests[interestKeys[interestIndex]]}
+  //         onAdd={(e) => this.addInterest(interestIndex, e)}
+  //         onDelete={(e, i) => this.removeInterest(interestIndex, e, i)}
+  //       />
+  //       <Button id="done" onClick={() => this.setState({ interestIndex: -1 })}>Done</Button>
+  //     </div>
+  //   );
+  // }
+
+  // renderInterests = () => {
+  //   const { interests } = this.state;
+  //   let interestRows = [];
+  //   let interestKeys = Object.keys(interests);
+
+  //   for (let i = 0; i < 2; i++) {
+  //     let interestDivs = [];
+
+  //     for (let j = 0; j < 6; j++) {
+  //       interestDivs.push(
+  //         <div key={(6 * i) + j} className="interest" tabIndex="0" onClick={() => this.setInterest((6 * i) + j)}>
+  //           <div 
+  //             id={`splash-${interestKeys[(6 * i) + j]}`}
+  //             key={(6 * i) + j}
+  //             className="interest-icon"
+  //           />
+  //         </div>
+  //       );
+  //     }
+
+  //     interestRows.push(<div className="interestRow" key={i}>{interestDivs}</div>);
+  //   }
+
+  //   return(
+  //     <div className="splash-form-interests">
+  //       {interestRows}
+  //       <Button id="splash-button-social" onClick={() => this.finish()}>Next: social links</Button>
+  //     </div>
+  //   );
+  // }
   renderInterest = () => {
     const { interests, interestIndex } = this.state;
     let interestKeys = Object.keys(interests);
@@ -202,23 +255,35 @@ class Splash extends Component {
     let interestRows = [];
     let interestKeys = Object.keys(interests);
 
-    for (let i = 0; i < 2; i++) {
+    // for (let i = 0; i < 2; i++) {
       let interestDivs = [];
 
-      for (let j = 0; j < 6; j++) {
+      // for (let j = 0; j < 6; j++) {
+      //   interestDivs.push(
+      //     <div key={(6 * i) + j} className="interest" tabIndex="0" onClick={() => this.setInterest((6 * i) + j)}>
+      //       <div 
+      //         id={`splash-${interestKeys[(6 * i) + j]}`}
+      //         key={(6 * i) + j}
+      //         className="interest-icon"
+      //       />
+      //     </div>
+      //   );
+      // }
+      for (let j = 0; j < 12; j++) {
         interestDivs.push(
-          <div key={(6 * i) + j} className="interest" tabIndex="0" onClick={() => this.setInterest((6 * i) + j)}>
+          <div key={j} className="interest" tabIndex="0" onClick={() => this.setInterest(j)}>
             <div 
-              id={`splash-${interestKeys[(6 * i) + j]}`}
-              key={(6 * i) + j}
+              id={`splash-${interestKeys[j]}`}
+              key={j}
               className="interest-icon"
             />
           </div>
         );
       }
 
-      interestRows.push(<div className="interestRow" key={i}>{interestDivs}</div>);
-    }
+      // interestRows.push(<div className="interestRow" key={i}>{interestDivs}</div>);
+      interestRows.push(<div className="interestRow">{interestDivs}</div>);
+    // }
 
     return(
       <div className="splash-form-interests">
