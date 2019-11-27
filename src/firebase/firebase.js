@@ -72,16 +72,13 @@ class Firebase {
     this.db.ref('groups/' + group + '/groupDiscussion').once('value').then((snapshot) => {
 
       let value = snapshot.val();
+      console.log(value);
       let numPosts = value.numPosts + 1;    
 
       // create new post-# and update number of posts in groupDiscussion
-      this.db.ref('groups/' + group + '/groupDiscussion/post-' + numPosts).set(post)
+      this.db.ref('groups/' + group + '/groupDiscussion/posts/post-' + numPosts).set(post)
       this.db.ref('groups/' + group + '/groupDiscussion/numPosts').set(numPosts);
 
-      for(let i = 1; i < value.numPosts; i++){
-        // this.db.ref('groups/' + group + '/groupDiscussion/post-' + i).set()
-      }
-      // console.log(post);
     })
   }
 

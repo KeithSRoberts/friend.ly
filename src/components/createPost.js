@@ -12,8 +12,9 @@ class CreatePost extends Component {
         // post.author.length !== 0
       ) {
         this.props.createNewPost(post);
+        // alert("Your post has been submitted!")
       } else {
-        console.log("invalid post");
+        alert("Please enter valid text");
       }
 
     // render() {

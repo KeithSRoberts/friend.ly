@@ -4,6 +4,7 @@ import "./css/discussionBoard.css";
 import { withFirebase } from '../firebase';
 import CreatePost from "./createPost";
 import Post from './post';
+// import globals from  '../constants/globals'
 // import app from 'firebase/app';
 // import 'firebase/auth';
 // import 'firebase/database'
@@ -15,14 +16,15 @@ class discussionBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: [],
+      posts: [],//this.props.posts.posts,
+      numPosts: 0, //this.props.posts.numPosts,
       isModalOpen: false,
-      groupIndex: 0 //this.props.groupIndex
+      groupIndex: 0//this.props.groupId
     }
     // this.state.posts = this.fetchPosts();
     this.toggle = this.toggle.bind(this);
-    this.fetchPosts = this.fetchPosts.bind(this);
     this.createNewPost = this.createNewPost.bind(this);
+    console.log(this.props);
 
     // this.postsRef = withFirebase.ref('groups/' + this.state.groupIndex + '/groupDiscussion');
     
@@ -31,26 +33,38 @@ class discussionBoard extends Component {
   // pre: user must be logged in order to see posts (this.props.user != null)
   // post: returns an array of posts that can be viewed on the user interface from the viewGroup
   //       component
-  fetchPosts = () => {
-    const { firebase } = this.props;
+  // fetchPosts = () => {
+  //   const { firebase } = this.props;
 
-    firebase.doRenderPosts(this.state.groupIndex).then((allPosts) => {
-      this.setState({posts : allPosts});
-    });
-  }
+  //   firebase.doRenderPosts(this.state.groupIndex).then((allPosts) => {
+  //     this.setState({posts : allPosts});
+  //   });
+  // }
 
   renderPosts() {
-    // setTimeout(function() {
-      this.fetchPosts();
-    // }, 2000)
+    console.log(this.state.posts);
+    console.log(this.state.numPosts);
 
+    let allPosts = [];
 
-    let posts = this.state.posts.map((p, index) => {
-      return(
-        <Post key={"post-" + index} post={p} />
-      )
-    })
-    return posts
+    for(let i = 1; i <= this.state.numPosts; i++) {
+      console.log(this.state.posts['post-' + i]);
+      // allPosts.push(
+      //     <Post key={"post-" + i} post={this.state.posts['post-' + i]} />
+      // )
+    }
+    console.log(allPosts);
+
+    // let posts = this.state.posts.posts.map((p, index) => {
+      // return(
+      //   <Post key={"post-" + index} post={p} />
+      // )
+      // console.log(p);
+    // }
+    // return posts
+    // this.setState({
+    //   posts: allPosts
+    // })
   }
 
   renderModal() {
@@ -67,7 +81,7 @@ class discussionBoard extends Component {
     post['author'] = "Bojack";
     post['upvotes'] = 0;
     firebase.doCreatePost(post, this.state.groupIndex)
-
+    this.toggle();
   }
     
  
@@ -83,6 +97,7 @@ class discussionBoard extends Component {
   render() {
 
     // let posts = this.renderPosts();
+    let posts = [];
  
     return(
       <div>
