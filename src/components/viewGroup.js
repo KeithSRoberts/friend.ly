@@ -132,7 +132,7 @@ class ViewGroup extends Component {
             { this.state.showMembers ? (
                 <MembersBoard key={this.state.title} members={this.state.members}/>
             ) : (
-                <DiscussionBoard />
+                <DiscussionBoard key={this.state.title} posts={this.state.discussion} groupId={this.state.groupId}/>
             )}
           </div>
         </div>
