@@ -9,8 +9,7 @@ class ViewGroup extends Component {
   constructor(props) {
     super();
     this.state = {
-      userId: 1,
-      username: "Test User",
+      userId: global.userId,
       showMembers: true,
       image: "http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png",
       title: String.fromCharCode(160),
@@ -24,7 +23,6 @@ class ViewGroup extends Component {
 
     const { firebase } = props;
     this.fetchGroupData(firebase);
-    this.forceUpdate();
   }
 
   componentDidMount() {

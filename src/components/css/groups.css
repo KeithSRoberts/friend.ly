@@ -1,0 +1,49 @@
+.dash-card-image img {
+    height: 180px;
+    width: 180px;
+    border-radius: 15px 15px 15px 15px;
+}
+
+.dash-card {
+    flex-direction: row;
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px 15px 15px 15px;
+    border: 2px solid #F0F0F0;
+    box-shadow: 0px -2px 2px #F0F0F0;
+    margin-bottom: 20px;
+}
+
+#dash-content {
+    margin-left: 20%;
+    margin-right: 20%;
+    width: 60%;
+    margin-top: 3%;
+}
+
+.dash-card-text {
+    text-align: left;
+    padding-left: 20px;
+    width: 100%;
+}
+
+.dash-card-title {
+    font-size: 22pt;
+    padding-top: 0px;
+    padding-left: 0px;
+}
+
+.dash-card-desc {
+    font-size: 11pt;
+    height: 85px;
+}
+
+.dash-card-button {
+    align-self: flex-end;
+    background-color: #b7a57a;
+    width: 120px;
+    border-radius: 15px 15px 15px 15px;
+    color: white;
+    padding: 6px 3px 6px 12px;
+    font-size: 11pt;
+}
