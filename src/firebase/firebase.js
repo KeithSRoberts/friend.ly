@@ -151,6 +151,17 @@ class Firebase {
     return value;
   }
 
+  fetchGroups = async () => {
+    let result = []
+    const groups = this.db.ref('groups/');
+    await groups.once('value', snap => {
+      snap.forEach(child => {
+        result.push(child.val());
+      });
+    });
+    return result;
+  }
+
   doLeaveGroup = (groupId, userId) => {
     const group = this.db.ref('groups/' + groupId + '/groupMembers/' + userId);
     group.remove();
