@@ -17,9 +17,9 @@ class discussionBoard extends Component {
     super(props);
     this.state = {
       posts: [],//this.props.posts.posts,
-      numPosts: this.props.posts.numPosts,
+      numPosts: props.posts.numPosts,
       isModalOpen: false,
-      groupIndex: 0//this.props.groupId
+      groupIndex: props.groupId
     }
     // this.state.posts = this.fetchPosts();
     this.toggle = this.toggle.bind(this);
@@ -51,9 +51,23 @@ class discussionBoard extends Component {
 
     this.setState({
       posts: allPosts
+      // numPosts: posts.length
     })
 
   }
+
+  componentDidUpdate(previousProps, previousState) {
+    if (previousProps.posts !== this.props.posts) {
+        this.setState({ posts: this.props.posts });
+    }
+    console.log(previousProps.posts);
+  }
+
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({
+  //     posts: nextProps.posts
+  //   })
+  // }
 
   renderPosts = () => {    
     let posts = this.state.posts.map((p, index) => {
@@ -80,7 +94,9 @@ class discussionBoard extends Component {
     post['upvotes'] = 0;
     firebase.doCreatePost(post, this.state.groupIndex)
     this.toggle();
-    this.setState({state: this.state});
+    this.setState({
+      numPosts: this.state.numPosts + 1
+    });
   }
     
  

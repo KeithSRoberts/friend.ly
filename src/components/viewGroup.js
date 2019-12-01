@@ -18,7 +18,8 @@ class ViewGroup extends Component {
       members: [],
       groupId: props.match.params.groupId,
       discussion: "",
-      isMember: false
+      isMember: false,
+      numPosts: 0
     }
 
     const { firebase } = props;
@@ -39,6 +40,7 @@ class ViewGroup extends Component {
                 description: data.groupDescription,
                 image: data.groupImage,
                 discussion: data.groupDiscussion,
+                numPosts: data.groupDiscussion.numPosts
             });
             if (data.groupMembers !== undefined && data.groupMembers.hasOwnProperty(this.state.userId)) {
                 this.setState({
@@ -154,7 +156,7 @@ class ViewGroup extends Component {
             { this.state.showMembers ? (
                 <MembersBoard key={this.state.members !== undefined ? this.state.members.length + "" : "0"} members={this.state.members !== undefined ? this.state.members : {} }/>
             ) : (
-                <DiscussionBoard key={this.state.title} posts={this.state.discussion !== undefined ? this.state.discussion : [] } groupId={this.state.groupId}/>
+                <DiscussionBoard key={this.state.discussion !== undefined ? this.state.discussion.length + "" : 0 } posts={this.state.discussion !== undefined ? this.state.discussion : [] } groupId={this.state.groupId}/>
             )}
           </div>
         </div>
