@@ -6,7 +6,7 @@ class Signin extends Component {
     this.state = {
       loggedIn: false,
       userID: 0,
-      userName: ""
+      username: ""
     }
   }
 
