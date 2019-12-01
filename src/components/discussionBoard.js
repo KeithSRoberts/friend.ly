@@ -4,78 +4,59 @@ import "./css/discussionBoard.css";
 import { withFirebase } from '../firebase';
 import CreatePost from "./createPost";
 import Post from './post';
-// import globals from  '../constants/globals'
-// import app from 'firebase/app';
-// import 'firebase/auth';
-// import 'firebase/database'
-
-
-// import * as routes from '../constants/routes';
 
 class discussionBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: [],//this.props.posts.posts,
-      numPosts: props.posts.numPosts,
+      posts: [], //this.props.posts.posts,
+      numPosts: 0, //props.posts.numPosts,
       isModalOpen: false,
-      groupIndex: props.groupId
+      groupId: props.groupId
     }
+
     // this.state.posts = this.fetchPosts();
     this.toggle = this.toggle.bind(this);
     this.createNewPost = this.createNewPost.bind(this);
     
   }
 
-  // pre: user must be logged in order to see posts (this.props.user != null)
-  // post: returns an array of posts that can be viewed on the user interface from the viewGroup
-  //       component
-  // fetchPosts = () => {
-  //   const { firebase } = this.props;
-
-  //   firebase.doRenderPosts(this.state.groupIndex).then((allPosts) => {
-  //     this.setState({posts : allPosts});
-  //   });
-  // }
-
   componentDidMount() {
     let allPosts = [];
     let data = this.props.posts.posts;
-    let numPosts = this.props.posts.numPosts;
-    console.log(data)
-    console.log(numPosts);
 
-    for (let i = 1; i <= numPosts; i++) {
+    for (let i = 1; i <= this.props.posts.numPosts; i++) {
       allPosts.push(data['post-' + i])
     }
 
     this.setState({
       posts: allPosts
-      // numPosts: posts.length
     })
 
   }
 
-  componentDidUpdate(previousProps, previousState) {
-    if (previousProps.posts !== this.props.posts) {
-        this.setState({ posts: this.props.posts });
-    }
-    console.log(previousProps.posts);
-  }
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({
-  //     posts: nextProps.posts
-  //   })
+  // componentDidUpdate(previousProps, previousState) {
+  //   if (previousProps.posts !== this.props.posts) {
+  //       this.setState({ posts: this.props.posts.posts });
+  //   }
   // }
 
+  // pre: user must be logged in order to see posts (this.props.user != null)
+  // post: returns an array of posts that can be viewed on the user interface from the viewGroup
+  //       component
   renderPosts = () => {    
-    let posts = this.state.posts.map((p, index) => {
-      return (
-        <Post key={"post-" + index} post={p} />
-      )
-    })
-    return posts;
+    // if (this.state.posts !== null) {
+
+      let posts = this.state.posts.map((p, index) => {
+        return (
+          <Post key={"post-" + index} post={p} />
+        )
+      })
+      return posts.reverse();
+
+    // } else {
+    //   return "";
+    // }
   }
 
   renderModal() {
@@ -89,14 +70,15 @@ class discussionBoard extends Component {
   createNewPost = (post) => { 
     const { firebase } = this.props;
 
-    post['groupIndex'] = this.state.groupIndex;
+    post['groupIndex'] = this.state.groupId;
     post['author'] = "Bojack";
     post['upvotes'] = 0;
-    firebase.doCreatePost(post, this.state.groupIndex)
+    firebase.doCreatePost(post, this.state.groupId)
     this.toggle();
     this.setState({
-      numPosts: this.state.numPosts + 1
+      numPosts: this.state.posts.length
     });
+    this.props.fetchData(firebase);
   }
     
  
@@ -113,12 +95,14 @@ class discussionBoard extends Component {
 
     // let posts = this.renderPosts();
     let posts = [];
+    console.log(this.props.canPost)
  
     return(
       <div>
         <div className="discussion-body">
           <div className="create-post-button-area">
-            <Button id="create-post-button" onClick={this.toggle}>New Post</Button>
+            {this.props.canPost ?
+              <Button id="create-post-button" onClick={this.toggle}>New Post</Button> : ""}
             {this.renderModal()}
           </div>
           <div className="discussion-content">

@@ -6,6 +6,18 @@
     width: 60px;
 }
 
+.accountChipInput > div {
+    width: 200px;
+    flex-direction: row !important;
+    flex-flow: nowrap !important;
+    overflow: auto !important;
+    -ms-overflow-style: none;
+}
+
+.accountChipInput > div::-webkit-scrollbar {
+    width: 0 !important
+}
+
 .mediaWrapper {
     align-items: center;
     flex-direction: row;
@@ -35,6 +47,13 @@
     /* width: 40%; */
 }
 
+#readOnly {
+    position: absolute;
+    height: 1350px;
+    width: 60vw;
+    z-index: 10000;
+}
+
 #facebookPic {
     background-image: url("../../constants/icons/facebook.png");
 }
@@ -53,8 +72,13 @@
 }
 
 #profilepic {
-    background-image: url("../../constants/icons/Profile.png");
-    background-size: 100% 100%;
+    cursor: pointer;
+    height: 100px;
+    margin: 20px;
+    width: 100px;
+}
+
+#previewImage {
     height: 100px;
     margin: 20px;
     width: 100px;

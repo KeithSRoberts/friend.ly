@@ -1,7 +1,6 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
-import SelectInput from '@material-ui/core/Select/SelectInput';
 
 const config = {
   apiKey: "AIzaSyCjFozSJS_UDFLvHZlOWtoivdjg5wK28x4",
@@ -35,7 +34,6 @@ class Firebase {
   */
 
   doRenderPosts(groupIndex) {
-
     let group = groupIndex.toString();
 
     this.db.ref('groups/' + group + '/groupDiscussion').once('value').then((snapshot) => {
@@ -103,7 +101,7 @@ class Firebase {
     });
   }
 
-  doCreateUser = (username, password, email, interests, media) => {
+  doCreateUser = (username, password, email, interests, media, avatar) => {
     let userIndex = this.db.ref("userIndex");
     let index = 0;
 
@@ -119,7 +117,39 @@ class Firebase {
         password,
         email,
         interests,
-        media
+        media,
+        avatar
+      });
+
+      let usernameRef = this.db.ref('usernames');
+      let emailRef = this.db.ref('emails');
+      
+      usernameRef.once("value", (snapshot) => {
+        let usernames = snapshot.val();
+
+        if (!!usernames) {
+          let newUsernames = usernames.slice(0);
+
+          newUsernames.push(username);
+
+          usernameRef.set(newUsernames);
+        } else {
+          usernameRef.set([username]);
+        }
+      });
+      
+      emailRef.once("value", (snapshot) => {
+        let emails = snapshot.val();
+
+        if (!!emails) {
+          let newEmails = emails.slice(0);
+
+          newEmails.push(email);
+
+          emailRef.set(newEmails);
+        } else {
+          emailRef.set([email]);
+        }
       });
 
       userIndex.update({ index });
