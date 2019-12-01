@@ -21,8 +21,7 @@ class Groups extends Component {
   componentWillReceiveProps(props) {
     const {firebase} = this.props
     if (props.queryFromApp != "") {
-      this.setState({query: props.queryFromApp})
-      this.searchGroup(firebase, this.state.query)
+      this.searchGroup(firebase, props.queryFromApp)
     }
 }
 
