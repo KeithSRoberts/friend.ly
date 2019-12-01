@@ -101,10 +101,6 @@ class Firebase {
     });
   }
 
-  getUserProfile = () => {
-    return this.db.ref('users/' + global.userId).once("value", (snapshot) => snapshot.val());
-  }
-
   doCreateUser = (username, password, email, interests, media, avatar) => {
     let userIndex = this.db.ref("userIndex");
     let index = 0;

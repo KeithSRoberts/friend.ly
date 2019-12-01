@@ -14,6 +14,8 @@ class Splash extends Component {
     this.state = {
       confirmPassword: "",
       email: "",
+      usernames: [],
+      emails: [],
       interests: {
         music: [],
         sports: [],
@@ -46,6 +48,22 @@ class Splash extends Component {
     }
   }
 
+  componentDidMount() {
+    const { firebase } = this.props;
+
+    firebase.db.ref('usernames').once("value", (snapshot) => {
+      let usernames = snapshot.val()
+
+      this.setState({ usernames })
+    });
+
+    firebase.db.ref('emails').once("value", (snapshot) => {
+      let emails = snapshot.val()
+
+      this.setState({ emails })
+    });
+  }
+
   // Pre: Username and password provided from user
   // Post: Authenticates username and password, returns true if sucessful login,
   // otherwise returns false
@@ -57,17 +75,48 @@ class Splash extends Component {
       if (global.userId !== -1) {
         this.props.history.push(routes.GROUPS);
       } else {
-        console.log("throw invalid credentials error");
+        alert("Invalid login credentials");
       }
     });
   }
 
   showEmail = (register) => {
-    this.setState({ register })
+    const { username, usernames, password } = this.state;
+
+    if (username.length === 0) {
+      alert("Username must not be empty")
+    } else if (password.length < 8) {
+      alert("Passwords must be at least 8 characters long")
+    } else if (usernames.indexOf(username) !== -1) {
+      alert("That username is taken");
+    } else {
+      this.setState({ register });
+    }
   }
 
+  testEmail = (email) => {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email.toLowerCase());
+}
+
   validateEmail = () => {
-    this.setState({ validEmail: true, header: "Tell us your interests!" });
+    const { username, password, confirmPassword, usernames, email, emails } = this.state;
+    
+    if (username.length === 0) {
+      alert("Username must not be empty")
+    } else if (password.length < 8) {
+      alert("Passwords must be at least 8 characters long")
+    } else if (!this.testEmail(email)) {
+      alert("Must enter a valid email")
+    } else if (usernames.indexOf(username) !== -1) {
+      alert("That username is taken");
+    } else if (emails.indexOf(email) !== -1) {
+      alert("That email already belongs to an account");
+    } else if (password !== confirmPassword) {
+      alert("Passwords must match")
+    } else {
+      this.setState({ validEmail: true, header: "Tell us your interests!" });
+    }
   }
 
   finish = () => {

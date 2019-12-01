@@ -17,20 +17,24 @@ class Account extends Component {
       this.props.history.push(routes.SPLASH);
     }
 
-    let path = window.location.hash;
+    let path = window.location.hash.split('/');
 
-    path = path.split('/');
+    let userId = path[path.length - 1];
 
-    path = path[path.length - 1];
+    let readOnly = true;
 
-    if (global.userId !== path) {
-      this.props.history.push(routes.ACCOUNT + '/' + global.userId);
+    if (global.userId == userId) {
+      readOnly = !readOnly;
     }
 
     this.state = {
+      id: userId,
       email: "",
       username: "",
       password: "",
+      usernames: [],
+      emails: [],
+      readOnly: readOnly,
       interests: {
         music: [],
         sports: [],
@@ -66,10 +70,16 @@ class Account extends Component {
   }
 
   componentDidMount() {
-    const { media, interests } = this.state;
+    const { media, interests, id } = this.state;
     const { firebase } = this.props;
 
-    firebase.db.ref('users/' + global.userId).once("value", (snapshot) => {
+    firebase.db.ref('usernames').once("value", (snapshot) => {
+      let usernames = snapshot.val()
+
+      this.setState({ usernames })
+    });
+
+    firebase.db.ref('users/' + id).once("value", (snapshot) => {
       let value = snapshot.val();
 
       if (!!value) {
@@ -78,15 +88,15 @@ class Account extends Component {
             let newMedia = Object.assign({}, media);
 
             Object.keys(value[key]).forEach((innerKey) => {
-              newMedia[key] = value[key][innerKey];
+              newMedia[innerKey] = value[key][innerKey];
             })
-            
+
             this.setState({ media: newMedia });
           } else if (key === 'interests') {
             let newInterests = Object.assign({}, interests);
 
             Object.keys(value[key]).forEach((innerKey) => {
-              newInterests[key] = value[key][innerKey];
+              newInterests[innerKey] = value[key][innerKey];
             })
 
             this.setState({ interests: newInterests});
@@ -104,38 +114,44 @@ class Account extends Component {
     });
   }
 
-  // updates the user"s email
-  // pre-condition: user must make changes to their email and
-  // the new email must be valid and not already be in the database
-  // post-condition: the changed email is displayed until the
-  // user leaves the profile page
-  updateEmail = () => {
-    
+  updateFacebook = (e) => {
+    const { media } = this.state;
+
+    const newMedia = Object.assign({}, media);
+
+    newMedia['facebook'] = e;
+
+    this.setState({ media: newMedia });
   }
 
-  // updates the user"s username
-  // pre-condition: user must make changes to their username and
-  // the new username must not already be in the database
-  // post-condition: the changed username is displayed until the
-  // user leaves the profile page
-  updateUsername = () => {
+  updateInstagram = (e) => {
+    const { media } = this.state;
 
+    const newMedia = Object.assign({}, media);
+
+    newMedia['instagram'] = e;
+
+    this.setState({ media: newMedia });
   }
 
-  // updates the user"s password
-  // pre-condition: user must make changes to their password
-  // post-condition: the changed password is displayed until the
-  // user leaves the profile page
-  updatePassword = () => {
+  updateSnapchat = (e) => {
+    const { media } = this.state;
 
+    const newMedia = Object.assign({}, media);
+
+    newMedia['snapchat'] = e;
+
+    this.setState({ media: newMedia });
   }
 
-  // updates the user"s interests
-  // pre-condition: user must make changes to their interests
-  // post-condition: the changed interests are displayed until the
-  // user leaves the profile page
-  updateInterests = () => {
+  updateTwitter = (e) => {
+    const { media } = this.state;
 
+    const newMedia = Object.assign({}, media);
+
+    newMedia['twitter'] = e;
+
+    this.setState({ media: newMedia });
   }
 
   // saves any changes the user made to their profile
@@ -145,17 +161,26 @@ class Account extends Component {
   saveChanges = () => {
     const { firebase } = this.props;
 
-    const { username, password, email, interests, media, avatar } = this.state;
+    const { username, password, email, interests, usernames, media, avatar } = this.state;
 
-    firebase.db.ref('users/' + global.userId).set({
-      username,
-      password,
-      email,
-      interests,
-      media,
-      avatar
-    });
+    if (username.length === 0) {
+      alert("Username must not be empty")
+    } else if (password.length < 8) {
+      alert("Passwords must be at least 8 characters long")
+    } else if (usernames.indexOf(username) !== -1 && usernames[global.userId] !== username) {
+      alert("That username is taken");
+    } else {
+      firebase.db.ref('users/' + global.userId).set({
+        username,
+        password,
+        email,
+        interests,
+        media,
+        avatar
+      });
+    }
   }
+
   addInterest = (index, e) => {
     const { interests } = this.state;
     let interestKeys = Object.keys(interests);
@@ -171,7 +196,7 @@ class Account extends Component {
     const { interests } = this.state;
     let interestKeys = Object.keys(interests);
     
-    let newInterests = Object.assign({}, interests);;
+    let newInterests = Object.assign({}, interests);
 
     newInterests[interestKeys[index]].splice(i, 1);
 
@@ -196,10 +221,10 @@ class Account extends Component {
             />
 
             <ChipInput
-              className="chipInput"
+              className="accountChipInput"
               value={interests[interestKeys[(2 * i) + j]]}
               onAdd={(e) => this.addInterest((2 * i) + j, e)}
-              onDelete={(e, i) => this.removeInterest((2 * i) + j, e, i)}
+              onDelete={(e, index) => this.removeInterest((2 * i) + j, e, index)}
             />
           </div>
         );
@@ -298,12 +323,11 @@ class Account extends Component {
   }
 
   toggle = () => {
-    console.log('yes')
     this.setState({
-        modal: !this.state.modal,
-        previewError: false,
-        errorText: "",
-        urlInput: "",
+      modal: !this.state.modal,
+      previewError: false,
+      errorText: "",
+      urlInput: "",
     });
   }
 
@@ -315,6 +339,14 @@ class Account extends Component {
     this.setState({ password });
   }
 
+  renderReadOnly = () => {
+    return(
+      <div id='readOnly'>
+
+      </div>
+    )
+  }
+
   // renders user profile
   // pre-condition: user must be logged in
   // post-condition: user"s profile form must be displayed on page with 
@@ -324,42 +356,44 @@ class Account extends Component {
       avatar,
       password,
       username,
-      media
+      media,
+      readOnly
     } = this.state;
 
     return(
-        <div id="cardWrapper">
-          {this.renderImageModal()}
-          <div id="accountHeader">
-            <img id='profilepic' className='profileIcon' src={avatar} onClick={() => this.toggle()} />
-            <div id='profileInputWrapper'>
-              <Input id="account-username" className="profile-input" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={username} />
-              <Input id="account-password" className="profile-input" onChange={(e) => this.updatePassword(e.target.value)}placeholder="Password" type="password" value={password} />
-            </div>
+      <div id="cardWrapper">
+        {readOnly ? this.renderReadOnly() : <div />}
+        {this.renderImageModal()}
+        <div id="accountHeader">
+          <img id='profilepic' alt='profilepic' className='profileIcon' src={avatar} onClick={() => this.toggle()} />
+          <div id='profileInputWrapper'>
+            <Input id="account-username" className="profile-input" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={username} />
+            <Input id="account-password" className="profile-input" onChange={(e) => this.updatePassword(e.target.value)} placeholder="Password" type="password" value={password} />
           </div>
-          <h2>Your Interests</h2>
-          {this.renderInterests()}
-          <h2 id="socialHeader">Your Social Links</h2>
-          <div>
-            <div className='mediaWrapper'>
-              <div id="facebookPic" className='mediaIcon' />
-              <Input id="account-facebook" className="profile-input" placeholder="Facebook profile" value={media['facebook']} />
-            </div>
-            <div className='mediaWrapper'>
-              <div id="instaPic" className='mediaIcon' />
-              <Input id="account-insta" className="profile-input" placeholder="Instagram profile" value={media['instagram']} />
-            </div>
-            <div className='mediaWrapper'>
-              <div id="twitterPic" className='mediaIcon' />
-              <Input id="account-twitter" className="profile-input" placeholder="Twitter profile" value={media['twitter']} />
-            </div>
-            <div className='mediaWrapper'>
-              <div id="snapPic" className='mediaIcon' />
-              <Input id="account-snap" className="profile-input" placeholder="Snapchat profile" value={media['snapchat']} />
-            </div>
-          </div>
-          <Button id="saveChanges" onClick={this.saveChanges}>Save Changes</Button>
         </div>
+        <h2>Interests</h2>
+        {this.renderInterests()}
+        <h2 id="socialHeader">Social Links</h2>
+        <div>
+          <div className='mediaWrapper'>
+            <div id="facebookPic" className='mediaIcon' />
+            <Input id="account-facebook" className="profile-input" onChange={(e) => this.updateFacebook(e.target.value)} placeholder="Facebook profile" value={media['facebook']} />
+          </div>
+          <div className='mediaWrapper'>
+            <div id="instaPic" className='mediaIcon' />
+            <Input id="account-insta" className="profile-input" onChange={(e) => this.updateInstagram(e.target.value)} placeholder="Instagram profile" value={media['instagram']} />
+          </div>
+          <div className='mediaWrapper'>
+            <div id="twitterPic" className='mediaIcon' />
+            <Input id="account-twitter" className="profile-input" onChange={(e) => this.updateTwitter(e.target.value)} placeholder="Twitter profile" value={media['twitter']} />
+          </div>
+          <div className='mediaWrapper'>
+            <div id="snapPic" className='mediaIcon' />
+            <Input id="account-snap" className="profile-input" onChange={(e) => this.updateSnapchat(e.target.value)} placeholder="Snapchat profile" value={media['snapchat']} />
+          </div>
+        </div>
+        { !readOnly ? <Button id="saveChanges" onClick={this.saveChanges}>Save Changes</Button> : <div /> }
+      </div>
     );
   }
 }

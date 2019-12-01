@@ -18,11 +18,14 @@ class ViewGroup extends Component {
       members: [],
       groupId: props.match.params.groupId,
       discussion: "",
-      isMember: false
+      isMember: false,
+      numPosts: ""
     }
 
     const { firebase } = props;
     this.fetchGroupData(firebase);
+    this.fetchGroupData = this.fetchGroupData.bind(this);
+
   }
 
   componentDidMount() {
@@ -39,6 +42,7 @@ class ViewGroup extends Component {
                 description: data.groupDescription,
                 image: data.groupImage,
                 discussion: data.groupDiscussion,
+                numPosts: data.groupDiscussion.numPosts
             });
             if (data.groupMembers !== undefined && data.groupMembers.hasOwnProperty(this.state.userId)) {
                 this.setState({
@@ -152,9 +156,15 @@ class ViewGroup extends Component {
           </div>
           <div id="content-view">
             { this.state.showMembers ? (
-                <MembersBoard key={this.state.members !== undefined ? this.state.members.length + "" : "0"} members={this.state.members !== undefined ? this.state.members : {} }/>
+                <MembersBoard 
+                  key={this.state.members !== undefined ? this.state.members.length + "" : "0"} 
+                  members={this.state.members !== undefined ? this.state.members : {} }/>
             ) : (
-                <DiscussionBoard key={this.state.title} posts={this.state.discussion !== undefined ? this.state.discussion : [] } groupId={this.state.groupId}/>
+                <DiscussionBoard 
+                  key={this.state.numPosts !== undefined ? this.state.numPosts + "" : "0" } 
+                  posts={this.state.discussion !== undefined ? this.state.discussion : [] } 
+                  groupId={this.state.groupId}
+                  fetchData={this.fetchGroupData}/>
             )}
           </div>
         </div>

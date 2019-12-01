@@ -5,15 +5,31 @@ import { Button } from 'reactstrap';
 // It renders the post's author, title, description, and author description
 class Post extends Component {
 
+  constructor(props) {
+    super();
+    this.state = {
+      data: props.post,
+      upvotes: 0
+    }
+  }
+
+  incrementScore() {
+    // this.setState({
+    //   upvotes: this.state.upvotes++
+    // });
+    console.log(this.state)
+  }
+
 
   render() {
     return (
       <div className="post-container">
           <div className="post-buttons">
             <Button className="button-upvote"
-              />
-            <h3>{this.props.post.upvotes}</h3>
-            <Button className="button-downvote"/>
+                    onClick={this.incrementScore}/>
+            <h3>{this.state.upvotes}</h3>
+            <Button className="button-downvote"
+                    onClick={this.incrementScore}/>
           </div>
           <div className="post-content">
             <div className="post-author-info">
