@@ -11,6 +11,16 @@ import ViewGroup from "./viewGroup";
 import * as routes from "../constants/routes";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      query: ""
+    }
+  }
+  navbarCallback = (query) => {
+    this.setState({query: query});
+
+  }
   render() {
     return(
       <HashRouter basename='/'>
@@ -30,13 +40,13 @@ class App extends Component {
           } />
           <Route exact path={routes.GROUPS} render={(props) => 
             <React.Fragment>
-              <Navbar currentPage="groups"/>
-              <Groups {...props} />
+              <Navbar currentPage="groups" callBackToApp={this.navbarCallback}/>
+              <Groups {...props} queryFromApp={this.state.query} />
             </React.Fragment>
           } />
           <Route exact path={`${routes.VIEW_GROUP}/:groupId`} render={(props) =>
             <React.Fragment>
-              <Navbar />
+              <Navbar/>
               <ViewGroup {...props} />
             </React.Fragment>
           } />

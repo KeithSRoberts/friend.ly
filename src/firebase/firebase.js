@@ -175,6 +175,11 @@ class Firebase {
         image: userImage
     });
   }
+
+  searchGroupList = (query) => {
+    let allGroup = this.fetchGroup;
+    
+  }
 }
 
 export default Firebase;

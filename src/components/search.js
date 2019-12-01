@@ -2,36 +2,25 @@ import React, { Component }  from "react";
 import { InputGroup, InputGroupAddon, Button, Input } from 'reactstrap';
 
 class Search extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     searchResults: []
-  //   }
-  //   this.state.results = this.getResults();
+  constructor(props){
+    super();
+    let query = "";
+  }
+  onChangeInput = (event) => {
+    this.query = event.target.value;
 
-
-  // }
-  // Pre: searchterm is provided to search groups with
-  // Post: groups with all relevant matching names are returned.
-  // getResults = (searchTerm) => {
-  //   groupMatch = [];
-  //   //filter by searchterm
-  //   return groupMatch
-  // }
-
-  // // Pre: there are groups to show
-  // // Post: results are populated into the DOM
-  // populateResults = (groupMatch) => {
-
-  // }
+  }
+  handleClick = (event) => {
+    this.props.callBackToNavbar(this.query);
+  }
 
   render() {
     return(
       <div className="search-box">
         <InputGroup className="d-flex p-2 flex-row search-bar"> 
-          <Input placeholder="Look for groups!" />
+          <Input placeholder="Look for groups!" onChange={this.onChangeInput}/>
           <InputGroupAddon addonType="append">
-            <Button id="search-button">Search</Button>
+            <Button id="search-button" onClick={this.handleClick}>Search</Button>
           </InputGroupAddon>
 
         </InputGroup>

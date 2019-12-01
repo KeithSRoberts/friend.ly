@@ -6,14 +6,28 @@ import "./css/groups.css";
 class Groups extends Component {
   constructor(props) {
     super();
+    const {firebase} = props
     this.state = {
         groups: [],
+        query: ""
     };
-    const { firebase } = props;
-    this.fetchGroupList(firebase);
+    
+    this.fetchGroupList(firebase)
+    
+    
+
+    
   }
+  componentWillReceiveProps(props) {
+    const {firebase} = this.props
+    if (props.queryFromApp != "") {
+      this.setState({query: props.queryFromApp})
+      this.searchGroup(firebase, this.state.query)
+    }
+}
 
   render() {
+    
     return (
     <div id="dash-content">
         {this.renderGroupCards()}
@@ -46,6 +60,24 @@ class Groups extends Component {
       this.setState({
         groups: data
       });
+    });
+  }
+
+  searchGroup = (firebase, query) => {
+    let titleMatch = [];
+    let descMatch = [];
+    firebase.fetchGroups().then((data)=> {
+      data.forEach(group => {
+        if (group.groupTitle.includes(query)) {
+          titleMatch.push(group);
+        } else if (group.groupDescription.includes(query)) {
+          descMatch.push(group);
+        }
+      });
+    
+    this.setState({
+      groups: titleMatch.concat(descMatch)
+    })
     });
   }
 }
