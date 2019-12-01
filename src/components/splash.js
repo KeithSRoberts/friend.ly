@@ -41,7 +41,7 @@ class Splash extends Component {
       finish: false,
       password: "",
       userID: 0,
-      userName: "",
+      username: "",
       validEmail: false,
     }
   }
@@ -51,19 +51,15 @@ class Splash extends Component {
   // otherwise returns false
   signIn = () => {
     const { firebase } = this.props;
-    const { userName, password } = this.state;
+    const { username, password } = this.state;
 
-    firebase.doSignInUser(userName, password, () => this.props.history.push(routes.GROUPS));
-
-    /*
-    firebase.doSignInUser(userName, password, () => {
+    firebase.doSignInUser(username, password, () => {
       if (global.userId !== -1) {
         this.props.history.push(routes.GROUPS);
       } else {
         console.log("throw invalid credentials error");
       }
     });
-    */
   }
 
   showEmail = (register) => {
@@ -79,16 +75,16 @@ class Splash extends Component {
   }
 
   register = () => {
-    const { userName, password, email, interests, media } = this.state;
+    const { username, password, email, interests, media } = this.state;
     const { firebase } = this.props;
 
-    firebase.doCreateUser(userName, password, email, interests, media)
+    firebase.doCreateUser(username, password, email, interests, media, "")
 
     this.props.history.push(routes.GROUPS);
   }
 
-  updateUsername = (userName) => {
-    this.setState({ userName });
+  updateUsername = (username) => {
+    this.setState({ username });
   }
 
   updateConfirmPassword =  (confirmPassword) => {
@@ -104,11 +100,11 @@ class Splash extends Component {
   }
 
   renderChoice = () => {
-    const { userName, password } = this.state;
+    const { username, password } = this.state;
 
     return(
       <div className="splash-form-choice">
-        <Input id="splash-username" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={userName} />
+        <Input id="splash-username" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={username} />
         <Input id="splash-password" onChange={(e) => this.updatePassword(e.target.value)} placeholder="Password" type="password" value={password} />
         <div className="splash-button-group">
           <Button id="splash-button-signup" onClick={() => this.showEmail(true)}>Signup</Button>
@@ -129,11 +125,11 @@ class Splash extends Component {
   }
 
   renderEmail = () => {
-    const { userName, confirmPassword, password, email } = this.state;
+    const { username, confirmPassword, password, email } = this.state;
 
     return(
       <div className="splash-form-email">
-        <Input id="splash-username" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={userName} />
+        <Input id="splash-username" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={username} />
         <Input id="splash-password" onChange={(e) => this.updatePassword(e.target.value)} placeholder="Password" type="password" value={password} />
         <Input id="splash-confirm-password" onChange={(e) => this.updateConfirmPassword(e.target.value)} placeholder="Confirm Password" type="password" value={confirmPassword} />
         <Input id="splash-email" onChange={(e) => this.updateEmail(e.target.value)} placeholder="Email" value={email} />
@@ -255,35 +251,23 @@ class Splash extends Component {
     let interestRows = [];
     let interestKeys = Object.keys(interests);
 
-    // for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
       let interestDivs = [];
 
-      // for (let j = 0; j < 6; j++) {
-      //   interestDivs.push(
-      //     <div key={(6 * i) + j} className="interest" tabIndex="0" onClick={() => this.setInterest((6 * i) + j)}>
-      //       <div 
-      //         id={`splash-${interestKeys[(6 * i) + j]}`}
-      //         key={(6 * i) + j}
-      //         className="interest-icon"
-      //       />
-      //     </div>
-      //   );
-      // }
-      for (let j = 0; j < 12; j++) {
+      for (let j = 0; j < 4; j++) {
         interestDivs.push(
-          <div key={j} className="interest" tabIndex="0" onClick={() => this.setInterest(j)}>
+          <div key={(4 * i) + j} className="interest" tabIndex="0" onClick={() => this.setInterest((4 * i) + j)}>
             <div 
-              id={`splash-${interestKeys[j]}`}
-              key={j}
+              id={`splash-${interestKeys[(4 * i) + j]}`}
+              key={(4 * i) + j}
               className="interest-icon"
             />
           </div>
         );
       }
 
-      // interestRows.push(<div className="interestRow" key={i}>{interestDivs}</div>);
-      interestRows.push(<div className="interestRow">{interestDivs}</div>);
-    // }
+      interestRows.push(<div className="interestRow" key={i}>{interestDivs}</div>);
+    }
 
     return(
       <div className="splash-form-interests">
