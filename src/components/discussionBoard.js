@@ -17,16 +17,13 @@ class discussionBoard extends Component {
     super(props);
     this.state = {
       posts: [],//this.props.posts.posts,
-      numPosts: 0, //this.props.posts.numPosts,
+      numPosts: this.props.posts.numPosts,
       isModalOpen: false,
       groupIndex: 0//this.props.groupId
     }
     // this.state.posts = this.fetchPosts();
     this.toggle = this.toggle.bind(this);
     this.createNewPost = this.createNewPost.bind(this);
-    console.log(this.props);
-
-    // this.postsRef = withFirebase.ref('groups/' + this.state.groupIndex + '/groupDiscussion');
     
   }
 
@@ -41,47 +38,49 @@ class discussionBoard extends Component {
   //   });
   // }
 
-  renderPosts() {
-    console.log(this.state.posts);
-    console.log(this.state.numPosts);
-
+  componentDidMount() {
     let allPosts = [];
+    let data = this.props.posts.posts;
+    let numPosts = this.props.posts.numPosts;
+    console.log(data)
+    console.log(numPosts);
 
-    for(let i = 1; i <= this.state.numPosts; i++) {
-      console.log(this.state.posts['post-' + i]);
-      // allPosts.push(
-      //     <Post key={"post-" + i} post={this.state.posts['post-' + i]} />
-      // )
+    for (let i = 1; i <= numPosts; i++) {
+      allPosts.push(data['post-' + i])
     }
-    console.log(allPosts);
 
-    // let posts = this.state.posts.posts.map((p, index) => {
-      // return(
-      //   <Post key={"post-" + index} post={p} />
-      // )
-      // console.log(p);
-    // }
-    // return posts
-    // this.setState({
-    //   posts: allPosts
-    // })
+    this.setState({
+      posts: allPosts
+    })
+
+  }
+
+  renderPosts = () => {    
+    let posts = this.state.posts.map((p, index) => {
+      return (
+        <Post key={"post-" + index} post={p} />
+      )
+    })
+    return posts;
   }
 
   renderModal() {
     return(
-      <CreatePost isOpen={this.state.isModalOpen} toggle={this.toggle} createNewPost={this.createNewPost}/>
+      <CreatePost isOpen={this.state.isModalOpen} 
+                  toggle={this.toggle} 
+                  createNewPost={this.createNewPost}/>
     )
   }
 
   createNewPost = (post) => { 
     const { firebase } = this.props;
-    console.log(post);
 
     post['groupIndex'] = this.state.groupIndex;
     post['author'] = "Bojack";
     post['upvotes'] = 0;
     firebase.doCreatePost(post, this.state.groupIndex)
     this.toggle();
+    this.setState({state: this.state});
   }
     
  

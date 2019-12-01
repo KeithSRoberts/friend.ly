@@ -38,7 +38,6 @@ class CreatePost extends Component {
       let field = event.target.name;
       let value = event.target.value;
       newPost[field] = value;
-      console.log(newPost);
     }
 
     return (

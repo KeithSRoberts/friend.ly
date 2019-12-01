@@ -21,11 +21,11 @@ class Post extends Component {
                 <img src={this.props.post.image} alt={this.props.post.author}/>
               </div>
               <div className="post-author">
-                <h5>{this.props.post.author}</h5>
+                <h5>{this.props.post.title}</h5>
               </div>
             </div>
             <div className="post-text">
-              <p>{this.props.post.description}</p>
+              <p>{this.props.post.text}</p>
             </div>
           </div>
         </div>

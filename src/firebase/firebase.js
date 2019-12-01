@@ -52,13 +52,13 @@ class Firebase {
       }
       posts.push(testPost);
 
-      console.log(value);
+      // console.log(value.posts['post-1']);
 
-      // for(let i = 1; i < numPosts; i++){
-      //   let post = this.db.ref('groups/' + group + '/groupDiscussion/post-' + i).val()
-      
-      //   console.log(post);
-      // }
+      for(let i = 1; i <= numPosts; i++) {
+        console.log(value.posts['post-' + i]);
+        posts.push(value.posts['post-' + i])
+      }
+
       return posts;
 
     })
