@@ -9,7 +9,6 @@ class Groups extends Component {
     const {firebase} = props
     this.state = {
         groups: [],
-        query: ""
     };
     
     this.fetchGroupList(firebase)
@@ -53,6 +52,7 @@ class Groups extends Component {
   }
 
   fetchGroupList = (firebase) => {
+    console.log("got here aight")
     // Preconditions: This.props.user is not null (user is signed in)
     // Postconditions: Groups array is populated with group data and returned
     firebase.fetchGroups().then((data) => {
@@ -67,9 +67,9 @@ class Groups extends Component {
     let descMatch = [];
     firebase.fetchGroups().then((data)=> {
       data.forEach(group => {
-        if (group.groupTitle.includes(query)) {
+        if (group.groupTitle.toLowerCase().includes(query.toLowerCase())) {
           titleMatch.push(group);
-        } else if (group.groupDescription.includes(query)) {
+        } else if (group.groupDescription.toLowerCase().includes(query.toLowerCase())) {
           descMatch.push(group);
         }
       });
