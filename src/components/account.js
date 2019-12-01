@@ -167,7 +167,7 @@ class Account extends Component {
       alert("Username must not be empty")
     } else if (password.length < 8) {
       alert("Passwords must be at least 8 characters long")
-    } else if (usernames.indexOf(username) !== -1 && usernames[global.userId] !== username) {
+    } else if (!!usernames && usernames.indexOf(username) !== -1 && usernames[global.userId] !== username) {
       alert("That username is taken");
     } else {
       firebase.db.ref('users/' + global.userId).set({
@@ -178,6 +178,8 @@ class Account extends Component {
         media,
         avatar
       });
+
+      alert('Changes have been saved!')
     }
   }
 

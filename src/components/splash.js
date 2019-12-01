@@ -87,7 +87,7 @@ class Splash extends Component {
       alert("Username must not be empty")
     } else if (password.length < 8) {
       alert("Passwords must be at least 8 characters long")
-    } else if (usernames.indexOf(username) !== -1) {
+    } else if (!!usernames && usernames.indexOf(username) !== -1) {
       alert("That username is taken");
     } else {
       this.setState({ register });
@@ -108,9 +108,9 @@ class Splash extends Component {
       alert("Passwords must be at least 8 characters long")
     } else if (!this.testEmail(email)) {
       alert("Must enter a valid email")
-    } else if (usernames.indexOf(username) !== -1) {
+    } else if (!!usernames && usernames.indexOf(username) !== -1) {
       alert("That username is taken");
-    } else if (emails.indexOf(email) !== -1) {
+    } else if (!!emails && emails.indexOf(email) !== -1) {
       alert("That email already belongs to an account");
     } else if (password !== confirmPassword) {
       alert("Passwords must match")
