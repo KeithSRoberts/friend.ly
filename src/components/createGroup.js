@@ -31,6 +31,7 @@ class CreateGroup extends Component {
       groupImage: create,
       groupLinks: [],
       groupMembers: [],
+      groupDiscussion: "",
       formImages: [
         [ music, art ],
         [ sports, theater],
@@ -90,6 +91,10 @@ class CreateGroup extends Component {
                 image: "",
                 text: "Lorem Ipsum"
             }
+        },
+        groupDiscussion: {
+          numPosts: 0,
+          posts: ""
         }
     }
     firebase.createNewGroup(payload);

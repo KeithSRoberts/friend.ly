@@ -34,38 +34,6 @@ class Firebase {
     this.auth.currentUser.updatePassword(password);
   */
 
-  doRenderPosts(groupIndex) {
-
-    let group = groupIndex.toString();
-
-    this.db.ref('groups/' + group + '/groupDiscussion').once('value').then((snapshot) => {
-
-      let value = snapshot.val();
-      let numPosts = value.numPosts;
-      let posts = [];
-
-      let testPost = {
-        author: "Bojack",
-        upvotes: 9,
-        title: "test post 1",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id nisi placerat, luctus nisi ac, semper tellus. Aenean tristique auctor quam    ,     vitae accumsan enim posuere sit amet.",
-      }
-      posts.push(testPost);
-
-      // console.log(value.posts['post-1']);
-
-      for(let i = 1; i <= numPosts; i++) {
-        console.log(value.posts['post-' + i]);
-        posts.push(value.posts['post-' + i])
-      }
-
-      return posts;
-
-    })
-
-    console.log("fetched posts");
-  }
-
   doCreatePost (post, groupIndex) { 
     let group = groupIndex.toString();
 
