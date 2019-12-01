@@ -17,7 +17,7 @@ class ViewGroup extends Component {
       links: [],
       members: [],
       groupId: props.match.params.groupId,
-      discussion: "",
+      discussion: [],
       isMember: false,
       numPosts: ""
     }
@@ -164,7 +164,8 @@ class ViewGroup extends Component {
                   key={this.state.numPosts !== undefined ? this.state.numPosts + "" : "0" } 
                   posts={this.state.discussion !== undefined ? this.state.discussion : [] } 
                   groupId={this.state.groupId}
-                  fetchData={this.fetchGroupData}/>
+                  fetchData={this.fetchGroupData}
+                  canPost={this.state.isMember}/>
             )}
           </div>
         </div>

@@ -9,7 +9,7 @@ class discussionBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: [],//this.props.posts.posts,
+      posts: [], //this.props.posts.posts,
       numPosts: 0, //props.posts.numPosts,
       isModalOpen: false,
       groupId: props.groupId
@@ -24,11 +24,8 @@ class discussionBoard extends Component {
   componentDidMount() {
     let allPosts = [];
     let data = this.props.posts.posts;
-    let numPosts = this.props.posts.numPosts;
-    console.log(data)
-    console.log(numPosts);
 
-    for (let i = 1; i <= numPosts; i++) {
+    for (let i = 1; i <= this.props.posts.numPosts; i++) {
       allPosts.push(data['post-' + i])
     }
 
@@ -38,29 +35,28 @@ class discussionBoard extends Component {
 
   }
 
-  componentDidUpdate(previousProps, previousState) {
-    if (previousProps.posts !== this.props.posts) {
-        this.setState({ posts: this.props.posts });
-    }
-    console.log(previousProps.posts);
-  }
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({
-  //     posts: nextProps.posts
-  //   })
+  // componentDidUpdate(previousProps, previousState) {
+  //   if (previousProps.posts !== this.props.posts) {
+  //       this.setState({ posts: this.props.posts.posts });
+  //   }
   // }
 
   // pre: user must be logged in order to see posts (this.props.user != null)
   // post: returns an array of posts that can be viewed on the user interface from the viewGroup
   //       component
   renderPosts = () => {    
-    let posts = this.state.posts.map((p, index) => {
-      return (
-        <Post key={"post-" + index} post={p} />
-      )
-    })
-    return posts.reverse();
+    // if (this.state.posts !== null) {
+
+      let posts = this.state.posts.map((p, index) => {
+        return (
+          <Post key={"post-" + index} post={p} />
+        )
+      })
+      return posts.reverse();
+
+    // } else {
+    //   return "";
+    // }
   }
 
   renderModal() {
@@ -77,14 +73,12 @@ class discussionBoard extends Component {
     post['groupIndex'] = this.state.groupId;
     post['author'] = "Bojack";
     post['upvotes'] = 0;
-    console.log(this.state.numPosts);
     firebase.doCreatePost(post, this.state.groupId)
     this.toggle();
     this.setState({
       numPosts: this.state.posts.length
     });
     this.props.fetchData(firebase);
-    console.log(this.state.numPosts);
   }
     
  
@@ -101,12 +95,14 @@ class discussionBoard extends Component {
 
     // let posts = this.renderPosts();
     let posts = [];
+    console.log(this.props.canPost)
  
     return(
       <div>
         <div className="discussion-body">
           <div className="create-post-button-area">
-            <Button id="create-post-button" onClick={this.toggle}>New Post</Button>
+            {this.props.canPost ?
+              <Button id="create-post-button" onClick={this.toggle}>New Post</Button> : ""}
             {this.renderModal()}
           </div>
           <div className="discussion-content">

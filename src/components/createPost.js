@@ -17,14 +17,6 @@ class CreatePost extends Component {
         alert("Please enter valid text");
       }
 
-    // render() {
-    //   return(
-    //     <div>
-    //       Create Post content goes here
-    //     </div>
-    //   );
-    // }
-
   }
 
   render() {
