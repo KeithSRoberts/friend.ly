@@ -10,6 +10,7 @@ class ViewGroup extends Component {
     super();
     this.state = {
       userId: global.userId,
+      notFound: false,
       showMembers: true,
       image: "http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png",
       title: String.fromCharCode(160),
@@ -36,8 +37,16 @@ class ViewGroup extends Component {
   fetchGroupData(firebase) {
     firebase.fetchGroup(this.state.groupId).then((data) => {
         if (data != null) {
+            Object.keys(data.groupMembers).forEach((member) => {
+              firebase.fetchUser(member).then((memData) => {
+                let newData = data.groupMembers;;
+                newData[member].data = memData;
+                this.setState({
+                  members: newData
+                });
+              });
+            })
             this.setState({
-                members: data.groupMembers,
                 title: data.groupTitle,
                 description: data.groupDescription,
                 image: data.groupImage,
@@ -56,7 +65,8 @@ class ViewGroup extends Component {
         } else {
             this.setState({
                 title: "This group does not exist",
-                description: "No group could be found for groupID: " + this.state.groupId
+                description: "No group could be found for groupID: " + this.state.groupId,
+                notFound: true
             });
         }
     });
@@ -104,8 +114,11 @@ class ViewGroup extends Component {
   }
 
   joinGroup = () => {
+    if (this.state.notFound) {
+        return;
+    }
     const { firebase } = this.props;
-    firebase.doJoinGroup(this.state.groupId, this.state.userId, "Test User", "Test Text", "https://scx2.b-cdn.net/gfx/news/hires/2018/2-dog.jpg");
+    firebase.doJoinGroup(this.state.groupId, this.state.userId);
     this.fetchGroupData(firebase);
   }
 

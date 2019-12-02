@@ -1,34 +1,14 @@
 import React, { Component }  from "react";
+import { withFirebase } from '../firebase';
 import "./css/membersBoard.css";
 
 class membersBoard extends Component {
   constructor(props) {
     super();
     this.state = {
-      members: props.members
+      members: props.members,
+      placeholder: "https://ra.ac.ae/wp-content/uploads/2017/02/user-icon-placeholder.png"
     }
-  }
-
-  shouldComponentUpdate(previousProps, previousState) {
-    if (previousProps.data !== this.props.data) {
-        this.setState({ members: this.props.members });
-        return true;
-    }
-    return false;
-  }
-
-  componentDidUpdate(previousProps, previousState) {
-    if (previousProps.data !== this.props.data) {
-        this.setState({ members: this.props.members });
-    }
-  }
-
-  // pre: user must be logged in order to see posts (this.props.user != null)
-  // post: returns an array of posts that can be viewed on the user interface from the viewGroup
-  //       component
-  getMembers() {
-    let members = [];
-    return members;
   }
 
   createCards() {
@@ -37,11 +17,11 @@ class membersBoard extends Component {
         <div key={index}>
           <div className="member-card">
             <div className="member-pic">
-              <img src={this.state.members[member].image} alt=""/>
+              <img src={this.state.members[member].data !== undefined ? (this.state.members[member].data.avatar !== "" ? this.state.members[member].data.avatar : this.state.placeholder) : this.state.placeholder } alt=""/>
             </div>
             <div className="member-desc">
-              <h5 className="member-title"> {this.state.members[member].name} </h5>
-              <p className="member-text"> {this.state.members[member].text} </p>
+              <h5 className="member-title"> {this.state.members[member].data !== undefined ? this.state.members[member].data.username : "User"} </h5>
+              <p className="member-text"> {this.state.members[member].data !== undefined ? this.state.members[member].data.email : "Text"} </p>
             </div>
           </div>
         </div>
@@ -56,4 +36,4 @@ class membersBoard extends Component {
   }
 }
 
-export default membersBoard;
+export default withFirebase(membersBoard);

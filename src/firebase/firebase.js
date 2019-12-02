@@ -192,23 +192,27 @@ class Firebase {
     return result;
   }
 
+  fetchUser = async (userId) => {
+    const user = this.db.ref('users/' + userId);
+    const snapshot = await user.once('value');
+    const value = snapshot.val();
+    return value;
+  }
+
   doLeaveGroup = (groupId, userId) => {
     const group = this.db.ref('groups/' + groupId + '/groupMembers/' + userId);
     group.remove();
   }
 
-  doJoinGroup = (groupId, userId, username, userText, userImage) => {
+  doJoinGroup = (groupId, userId) => {
     const group = this.db.ref('groups/' + groupId + '/groupMembers/' + userId);
     group.set({
-        name: username,
-        text: userText,
-        image: userImage
+        userId: userId
     });
   }
 
   searchGroupList = (query) => {
     let allGroup = this.fetchGroup;
-    
   }
 }
 
