@@ -9,13 +9,12 @@ class discussionBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: [], //this.props.posts.posts,
-      numPosts: 0, //props.posts.numPosts,
+      posts: [], 
+      numPosts: 0, 
       isModalOpen: false,
       groupId: props.groupId
     }
 
-    // this.state.posts = this.fetchPosts();
     this.toggle = this.toggle.bind(this);
     this.createNewPost = this.createNewPost.bind(this);
     
@@ -35,30 +34,20 @@ class discussionBoard extends Component {
 
   }
 
-  // componentDidUpdate(previousProps, previousState) {
-  //   if (previousProps.posts !== this.props.posts) {
-  //       this.setState({ posts: this.props.posts.posts });
-  //   }
-  // }
-
-  // pre: user must be logged in order to see posts (this.props.user != null)
+  // pre: user must join the group in order to post
   // post: returns an array of posts that can be viewed on the user interface from the viewGroup
   //       component
   renderPosts = () => {    
-    // if (this.state.posts !== null) {
-
-      let posts = this.state.posts.map((p, index) => {
-        return (
-          <Post key={"post-" + index} post={p} />
-        )
-      })
-      return posts.reverse();
-
-    // } else {
-    //   return "";
-    // }
+    let posts = this.state.posts.map((p, index) => {
+      return (
+        <Post key={"post-" + index} name={"post-" + index} post={p} />
+      )
+    })
+    return posts.reverse();
   }
 
+  // pre: user must click on 'Create Post' button for modal to render and post
+  // post: renders a modal object in which user can input text and a title to make a new post
   renderModal() {
     return(
       <CreatePost isOpen={this.state.isModalOpen} 
@@ -67,6 +56,8 @@ class discussionBoard extends Component {
     )
   }
 
+  // pre: user must enter valid text into createPost input fields
+  // post: creates a new post in the group that renders immediately at the top of discussion board
   createNewPost = (post) => { 
     const { firebase } = this.props;
 
@@ -80,9 +71,6 @@ class discussionBoard extends Component {
     });
     this.props.fetchData(firebase);
   }
-    
- 
-
 
   toggle() {
     this.setState({
@@ -90,13 +78,7 @@ class discussionBoard extends Component {
     });
   }
 
-
   render() {
-
-    // let posts = this.renderPosts();
-    let posts = [];
-    console.log(this.props.canPost)
- 
     return(
       <div>
         <div className="discussion-body">
@@ -112,10 +94,6 @@ class discussionBoard extends Component {
       </div>       
     );
   }
-
-
-
-
 
 }
 

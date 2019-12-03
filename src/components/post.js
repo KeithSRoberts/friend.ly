@@ -9,15 +9,25 @@ class Post extends Component {
     super();
     this.state = {
       data: props.post,
+      name: props.name,
       upvotes: 0
     }
   }
 
-  incrementScore() {
-    // this.setState({
-    //   upvotes: this.state.upvotes++
-    // });
-    console.log(this.state)
+  incrementScore(event) {
+    this.setState({
+      upvotes: this.state.upvotes + 1
+    });
+    console.log(event.target.name);
+    console.log(this.state.upvotes);
+  }
+
+  decrementScore(event) {
+    this.setState({
+      upvotes: this.state.upvotes - 1
+    });
+    console.log(event.target.name);
+    console.log(this.state.upvotes);
   }
 
 
@@ -26,10 +36,12 @@ class Post extends Component {
       <div className="post-container">
           <div className="post-buttons">
             <Button className="button-upvote"
-                    onClick={this.incrementScore}/>
+                    name={this.props.name}
+                    onClick={(e) => this.incrementScore(e)}/>
             <h3>{this.state.upvotes}</h3>
             <Button className="button-downvote"
-                    onClick={this.incrementScore}/>
+                    name={this.props.name}
+                    onClick={(e) => this.decrementScore(e)}/>
           </div>
           <div className="post-content">
             <div className="post-author-info">
