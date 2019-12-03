@@ -80,6 +80,14 @@ class Firebase {
     })
   }
 
+  doUpdatePostScore (post, groupIndex) {
+    let postScore = post.upvotes;
+    let group = groupIndex.toString();
+
+    this.db.ref('groups/' + group + '/groupDiscussion/posts/' + post.name + '/upvotes').set(postScore)
+
+  }
+
   doSignInUser = (username, password, callback) => {
     let users = this.db.ref("users");
 

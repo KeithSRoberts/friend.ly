@@ -10,24 +10,23 @@ class Post extends Component {
     this.state = {
       data: props.post,
       name: props.name,
-      upvotes: 0
+      upvotes: props.post.upvotes
     }
   }
 
   incrementScore(event) {
     this.setState({
       upvotes: this.state.upvotes + 1
-    });
-    console.log(event.target.name);
-    console.log(this.state.upvotes);
+    },
+    function() {this.props.updateScore(this.state)});
+
   }
 
   decrementScore(event) {
     this.setState({
       upvotes: this.state.upvotes - 1
-    });
-    console.log(event.target.name);
-    console.log(this.state.upvotes);
+    }, 
+    function() {this.props.updateScore(this.state)});
   }
 
 

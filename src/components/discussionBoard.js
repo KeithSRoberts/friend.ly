@@ -38,24 +38,20 @@ class discussionBoard extends Component {
   // post: returns an array of posts that can be viewed on the user interface from the viewGroup
   //       component
   renderPosts = () => {    
-    let posts = this.state.posts.map((p, index) => {
+    let posts = this.state.posts.map((p, i) => {
       return (
-        <Post key={"post-" + index} name={"post-" + index} post={p} />
+        <Post key={"post-" + i} name={"post-" + (i + 1)} post={p} updateScore={this.updatePostScore}/>
       )
     })
     return posts.reverse();
   }
+  
+  updatePostScore = (post) => {
+    const { firebase } = this.props;
 
-  // pre: user must click on 'Create Post' button for modal to render and post
-  // post: renders a modal object in which user can input text and a title to make a new post
-  renderModal() {
-    return(
-      <CreatePost isOpen={this.state.isModalOpen} 
-                  toggle={this.toggle} 
-                  createNewPost={this.createNewPost}/>
-    )
+    firebase.doUpdatePostScore(post, this.state.groupId);
   }
-
+  
   // pre: user must enter valid text into createPost input fields
   // post: creates a new post in the group that renders immediately at the top of discussion board
   createNewPost = (post) => { 
@@ -70,6 +66,16 @@ class discussionBoard extends Component {
       numPosts: this.state.posts.length
     });
     this.props.fetchData(firebase);
+  }
+
+  // pre: user must click on 'Create Post' button for modal to render and post
+  // post: renders a modal object in which user can input text and a title to make a new post
+  renderModal() {
+    return(
+      <CreatePost isOpen={this.state.isModalOpen} 
+                  toggle={this.toggle} 
+                  createNewPost={this.createNewPost}/>
+    )
   }
 
   toggle() {
