@@ -28,7 +28,7 @@ class CreateGroup extends Component {
     }
 
     this.state = {
-      userId: 1,
+      userId: global.userId,
       modal: false,
       previewError: false,
       urlInput: "",
@@ -94,9 +94,7 @@ class CreateGroup extends Component {
         },
         groupMembers: {
             [this.state.userId]: {
-                name: "Test user",
-                image: "",
-                text: "Lorem Ipsum"
+                userId: this.state.userId
             }
         },
         groupDiscussion: {
