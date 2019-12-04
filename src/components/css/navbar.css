@@ -180,6 +180,10 @@
         width: 30%;
     }
 
+    
+}
+
+@media (max-width: 1200px) {
     .navbar li {
         /* display: block; */
         /* position: absolute; */
