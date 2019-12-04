@@ -42,7 +42,8 @@ class ViewGroup extends Component {
                 description: data.groupDescription,
                 image: data.groupImage,
                 discussion: data.groupDiscussion,
-                numPosts: data.groupDiscussion.numPosts
+                numPosts: data.groupDiscussion.numPosts,
+                members: []
             });
             if (data.groupMembers !== undefined && data.groupMembers.hasOwnProperty(this.state.userId)) {
                 this.setState({
