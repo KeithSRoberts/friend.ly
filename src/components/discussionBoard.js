@@ -50,6 +50,7 @@ class discussionBoard extends Component {
     const { firebase } = this.props;
 
     firebase.doUpdatePostScore(post, this.state.groupId);
+    this.props.fetchData(firebase);
   }
   
   // pre: user must enter valid text into createPost input fields
@@ -58,7 +59,7 @@ class discussionBoard extends Component {
     const { firebase } = this.props;
 
     post['groupIndex'] = this.state.groupId;
-    post['author'] = "Bojack";
+    post['author'] = global.userId;
     post['upvotes'] = 0;
     firebase.doCreatePost(post, this.state.groupId)
     this.toggle();

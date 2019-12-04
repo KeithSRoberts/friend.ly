@@ -10,7 +10,9 @@ class Post extends Component {
     this.state = {
       data: props.post,
       name: props.name,
-      upvotes: props.post.upvotes
+      upvotes: props.post.upvotes,
+      author: props.post.author,
+      image: "https://ra.ac.ae/wp-content/uploads/2017/02/user-icon-placeholder.png"
     }
   }
 
@@ -19,7 +21,7 @@ class Post extends Component {
       upvotes: this.state.upvotes + 1
     },
     function() {this.props.updateScore(this.state)});
-
+    console.log(this.state.image);
   }
 
   decrementScore(event) {
@@ -27,6 +29,7 @@ class Post extends Component {
       upvotes: this.state.upvotes - 1
     }, 
     function() {this.props.updateScore(this.state)});
+    console.log(this.state.author);
   }
 
 
@@ -35,24 +38,24 @@ class Post extends Component {
       <div className="post-container">
           <div className="post-buttons">
             <Button className="button-upvote"
-                    name={this.props.name}
+                    name={this.state.name}
                     onClick={(e) => this.incrementScore(e)}/>
             <h3>{this.state.upvotes}</h3>
             <Button className="button-downvote"
-                    name={this.props.name}
+                    name={this.state.name}
                     onClick={(e) => this.decrementScore(e)}/>
           </div>
           <div className="post-content">
             <div className="post-author-info">
               <div className="post-image">
-                <img src={this.props.post.image} alt={this.props.post.author}/>
+                <img src={this.state.image} alt={this.state.author}/>
               </div>
               <div className="post-author">
-                <h5>{this.props.post.title}</h5>
+                <h5>{this.state.data.title}</h5>
               </div>
             </div>
             <div className="post-text">
-              <p>{this.props.post.text}</p>
+              <p>{this.state.data.text}</p>
             </div>
           </div>
         </div>
