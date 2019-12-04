@@ -22,9 +22,9 @@ class Groups extends Component {
 
     
   }
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     const {firebase} = this.props
-    if (props.queryFromApp != "") {
+    if (props.queryFromApp !== "") {
       this.searchGroup(firebase, props.queryFromApp)
     }
 }

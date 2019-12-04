@@ -23,7 +23,7 @@ class Account extends Component {
 
     let readOnly = true;
 
-    if (global.userId == userId) {
+    if (global.userId === userId) {
       readOnly = !readOnly;
     }
 
