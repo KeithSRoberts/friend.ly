@@ -37,15 +37,6 @@ class ViewGroup extends Component {
   fetchGroupData(firebase) {
     firebase.fetchGroup(this.state.groupId).then((data) => {
         if (data != null) {
-            Object.keys(data.groupMembers).forEach((member) => {
-              firebase.fetchUser(member).then((memData) => {
-                let newData = data.groupMembers;;
-                newData[member].data = memData;
-                this.setState({
-                  members: newData
-                });
-              });
-            })
             this.setState({
                 title: data.groupTitle,
                 description: data.groupDescription,
@@ -57,6 +48,15 @@ class ViewGroup extends Component {
                 this.setState({
                   isMember: true
                 });
+                Object.keys(data.groupMembers).forEach((member) => {
+                  firebase.fetchUser(member).then((memData) => {
+                  let newData = data.groupMembers;
+                  newData[member].data = memData;
+                  this.setState({
+                    members: newData
+                  });
+              });
+            })
             } else {
                 this.setState({
                   isMember: false
