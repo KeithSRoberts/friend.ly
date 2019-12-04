@@ -1,20 +1,26 @@
 import React, { Component }  from "react";
 import { withFirebase } from '../firebase';
+import * as routes from "../constants/routes";
+import { withRouter } from "react-router-dom";
 import "./css/membersBoard.css";
 
 class membersBoard extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       members: props.members,
       placeholder: "https://ra.ac.ae/wp-content/uploads/2017/02/user-icon-placeholder.png"
     }
   }
 
+  membersPage(member) {
+    this.props.history.push(routes.ACCOUNT + "/" + member)
+  }
+
   createCards() {
     let cards = Object.keys(this.state.members).map((member, index) => {
       return(
-        <div key={index}>
+        <div key={index} onClick={() => this.membersPage(member)}>
           <div className="member-card">
             <div className="member-pic">
               <img src={this.state.members[member].data !== undefined ? (this.state.members[member].data.avatar !== "" ? this.state.members[member].data.avatar : this.state.placeholder) : this.state.placeholder } alt=""/>
@@ -36,4 +42,4 @@ class membersBoard extends Component {
   }
 }
 
-export default withFirebase(membersBoard);
+export default withFirebase(withRouter(membersBoard));
