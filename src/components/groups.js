@@ -5,7 +5,12 @@ import "./css/groups.css";
 
 class Groups extends Component {
   constructor(props) {
-    super();
+    super(props);
+
+    if (global.userId === -1) {
+      this.props.history.push(routes.SPLASH);
+    }
+    
     const {firebase} = props
     this.state = {
         groups: [],

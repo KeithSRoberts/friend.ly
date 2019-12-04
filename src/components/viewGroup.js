@@ -3,11 +3,18 @@ import MembersBoard from "./membersBoard";
 import DiscussionBoard from "./discussionBoard";
 import { withFirebase } from '../firebase';
 
+import * as routes from "../constants/routes";
+
 import "./css/viewGroup.css";
 
 class ViewGroup extends Component {
   constructor(props) {
-    super();
+    super(props);
+
+    if (global.userId === -1) {
+      this.props.history.push(routes.SPLASH);
+    }
+    
     this.state = {
       userId: global.userId,
       notFound: false,
