@@ -69,6 +69,18 @@ class ViewGroup extends Component {
                 this.setState({
                   isMember: false
                 });
+                if (data.groupMembers !== null) {
+                  Object.keys(data.groupMembers).forEach((member) => {
+                    firebase.fetchUser(member).then((memData) => {
+                    let newData = data.groupMembers;
+                    newData[member].data = memData;
+                    this.setState({
+                      members: newData
+                    });
+                });
+            })
+
+                }
             }
         } else {
             this.setState({
