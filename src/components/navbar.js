@@ -1,5 +1,5 @@
 import React, { Component, useState }  from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Nav, NavItem, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, NavLink} from 'reactstrap';
 import Search from "../components/search"
 
@@ -9,16 +9,15 @@ import "./css/navbar.css";
 
 class Navbar extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
         currentPage:"",
     };
   }
   searchCallBack = (dataFromSearch) => {
-    console.log("clicked")
-    this.props.callBackToApp(dataFromSearch)
-    console.log("in navbar.js " + dataFromSearch)
-
+    this.props.callBackToApp(dataFromSearch);
+    this.props.history.push(routes.GROUPS, {query: "test"} )
+    console.log("pusheed")
   }
   render() {
     return(
@@ -38,13 +37,10 @@ class Navbar extends Component {
             </NavItem>
             
             <NavItem>
-              <Link to={routes.SPLASH} id="nav-pill">asdf</Link>
+              <Link to={routes.ACCOUNT} id="nav-pill">My Profile</Link>
             </NavItem>
             <NavItem>
-              <Link to={routes.SPLASH} id="nav-pill">Link</Link>
-            </NavItem>
-            <NavItem>
-              <Link disabled to={routes.SPLASH} id="nav-pill">Hello</Link>
+              <Link to={routes.CREATE_GROUP} id="nav-pill">Create Group</Link>
             </NavItem>
           </Nav>
           <Search id="search-bar" callBackToNavbar={this.searchCallBack}>
@@ -71,4 +67,4 @@ class Navbar extends Component {
           </Dropdown>
 */}
 
-export default Navbar;
+export default withRouter(Navbar);

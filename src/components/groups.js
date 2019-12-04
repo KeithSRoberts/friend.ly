@@ -5,13 +5,16 @@ import "./css/groups.css";
 
 class Groups extends Component {
   constructor(props) {
-    super();
+    super(props);
     const {firebase} = props
     this.state = {
         groups: [],
     };
-    
-    this.fetchGroupList(firebase)
+    if (props.queryFromApp!= null) {
+      this.searchGroup(firebase, props.queryFromApp)
+    } else {
+      this.fetchGroupList(firebase)
+    }
     
     
 

@@ -1,5 +1,5 @@
 import React, { Component }  from "react";
-import { HashRouter, Route, Redirect, Switch } from "react-router-dom";
+import { HashRouter, Route, Redirect, Switch, withRouter} from "react-router-dom";
 import Account from "./account";
 import CreateGroup from "./createGroup";
 import Groups from "./groups";
@@ -11,14 +11,15 @@ import ViewGroup from "./viewGroup";
 import * as routes from "../constants/routes";
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       query: ""
     }
   }
   navbarCallback = (query) => {
     this.setState({query: query});
+
 
   }
   render() {
@@ -28,13 +29,13 @@ class App extends Component {
           <Route exact path={routes.SPLASH} render={(props) => <Splash {...props} />} />
           <Route exact path={`${routes.ACCOUNT}/:userId`} render={(props) =>
             <React.Fragment>
-              <Navbar />
+              <Navbar callBackToApp={this.navbarCallback}/>
               <Account {...props} />
             </React.Fragment>
           } />
           <Route exact path={routes.CREATE_GROUP} render={(props) => 
             <React.Fragment>
-              <Navbar />
+              <Navbar callBackToApp={this.navbarCallback}/>
               <CreateGroup {...props} />
             </React.Fragment>
           } />
@@ -46,13 +47,13 @@ class App extends Component {
           } />
           <Route exact path={`${routes.VIEW_GROUP}/:groupId`} render={(props) =>
             <React.Fragment>
-              <Navbar/>
+              <Navbar callBackToApp={this.navbarCallback}/>
               <ViewGroup {...props} />
             </React.Fragment>
           } />
           <Route exact path={routes.DASH} render={(props) =>
             <React.Fragment>
-              <Navbar currentPage="dash"/>
+              <Navbar currentPage="dash" callBackToApp={this.navbarCallback}/>
               <Dash {...props} />
             </React.Fragment>
           } />
