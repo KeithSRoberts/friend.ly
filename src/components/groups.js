@@ -6,6 +6,11 @@ import "./css/groups.css";
 class Groups extends Component {
   constructor(props) {
     super(props);
+
+    if (global.userId === -1) {
+      this.props.history.push(routes.SPLASH);
+    }
+    
     const {firebase} = props
     this.state = {
         groups: [],
@@ -20,9 +25,9 @@ class Groups extends Component {
 
     
   }
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     const {firebase} = this.props
-    if (props.queryFromApp != "") {
+    if (props.queryFromApp !== "") {
       this.searchGroup(firebase, props.queryFromApp)
     }
 }

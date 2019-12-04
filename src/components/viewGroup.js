@@ -3,11 +3,18 @@ import MembersBoard from "./membersBoard";
 import DiscussionBoard from "./discussionBoard";
 import { withFirebase } from '../firebase';
 
+import * as routes from "../constants/routes";
+
 import "./css/viewGroup.css";
 
 class ViewGroup extends Component {
   constructor(props) {
-    super();
+    super(props);
+
+    if (global.userId === -1) {
+      this.props.history.push(routes.SPLASH);
+    }
+    
     this.state = {
       userId: global.userId,
       notFound: false,
@@ -37,30 +44,43 @@ class ViewGroup extends Component {
   fetchGroupData(firebase) {
     firebase.fetchGroup(this.state.groupId).then((data) => {
         if (data != null) {
-            Object.keys(data.groupMembers).forEach((member) => {
-              firebase.fetchUser(member).then((memData) => {
-                let newData = data.groupMembers;;
-                newData[member].data = memData;
-                this.setState({
-                  members: newData
-                });
-              });
-            })
             this.setState({
                 title: data.groupTitle,
                 description: data.groupDescription,
                 image: data.groupImage,
                 discussion: data.groupDiscussion,
-                numPosts: data.groupDiscussion.numPosts
+                numPosts: data.groupDiscussion.numPosts,
+                members: []
             });
             if (data.groupMembers !== undefined && data.groupMembers.hasOwnProperty(this.state.userId)) {
                 this.setState({
                   isMember: true
                 });
+                Object.keys(data.groupMembers).forEach((member) => {
+                  firebase.fetchUser(member).then((memData) => {
+                  let newData = data.groupMembers;
+                  newData[member].data = memData;
+                  this.setState({
+                    members: newData
+                  });
+              });
+            })
             } else {
                 this.setState({
                   isMember: false
                 });
+                if (!!data.groupMembers) {
+                  Object.keys(data.groupMembers).forEach((member) => {
+                    firebase.fetchUser(member).then((memData) => {
+                    let newData = data.groupMembers;
+                    newData[member].data = memData;
+                    this.setState({
+                      members: newData
+                    });
+                });
+            })
+
+                }
             }
         } else {
             this.setState({

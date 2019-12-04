@@ -17,11 +17,18 @@ import theater from "../constants/icons/theater.png";
 import video_games from "../constants/icons/video_games.png";
 import create from "../constants/icons/Create_fill.png";
 
+import * as routes from "../constants/routes";
+
 class CreateGroup extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    if (global.userId === -1) {
+      this.props.history.push(routes.SPLASH);
+    }
+
     this.state = {
-      userId: 1,
+      userId: global.userId,
       modal: false,
       previewError: false,
       urlInput: "",
@@ -87,9 +94,7 @@ class CreateGroup extends Component {
         },
         groupMembers: {
             [this.state.userId]: {
-                name: "Test user",
-                image: "",
-                text: "Lorem Ipsum"
+                userId: this.state.userId
             }
         },
         groupDiscussion: {

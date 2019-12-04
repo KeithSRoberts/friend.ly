@@ -1,4 +1,4 @@
-.account {
+/* .account {
     background-image: url("../../constants/icons/Profile.png");
     background-size: 100% 100%;
     height: 30px;
@@ -24,7 +24,7 @@
     background-size: 100% 100%;
     height: 30px;
     width: 30px;
-}
+} */
 
 /* .icon {
     cursor: pointer;
@@ -97,23 +97,23 @@
     right: 1000px;
     flex-direction: row;
 } */
-#icons {
+/* #icons {
     display: block;
     position: absolute;
     right: 12em;
     flex-direction: row;
     display: inline-flex;
     height: 60px;
-}
+} */
 
-.nav-buttons {
+/* .nav-buttons {
     justify-content: right;
-}
+} */
 
-.nav-pill {
+/* .nav-pill {
     margin-top: 15px;
     margin-left: 1em;
-}
+} */
 
 /* .nav-pill a {
     color: #4b2e83 !important;
@@ -121,21 +121,76 @@
     margin-top: 10px;
 } */
 
-.nav-pill a:hover {
+/* .nav-pill a:hover {
     color:#85754d !important;
-}
+} */
 
-#search-bar {
+/* #search-bar {
     justify-content: right;
-}
+} */
 
-.search-box {
+/* .search-box {
     width: 50%;
-}
+} */
 
 .navigation-bar-inside {
     margin-left: 2em;
+    margin-right: 2em;
     /* margin-right: 3%; */
     /* flex-grow: 1; */
 }
 
+/* new css */
+
+.navbar a {
+    color: #4b2d83;
+}
+
+.navbar a:hover {
+    color:#85754d !important;
+}
+
+.navbar ul {
+    margin-left: 50em;
+}
+
+.navbar li {
+    /* display: block; */
+    /* position: absolute; */
+    right: 0em;
+    flex-direction: row;
+    display: inline-flex;
+    margin: 3em;
+    /* height: 60px; */
+}
+
+.search-box {
+    position: absolute;
+    float: right;
+    right: 0em;
+    width: 20%;
+}
+
+#search-button {
+    background-color: #4b2d83;
+}
+
+@media (max-width: 1000px) {
+    .search-box {
+        width: 30%;
+    }
+
+    
+}
+
+@media (max-width: 1200px) {
+    .navbar li {
+        /* display: block; */
+        /* position: absolute; */
+        right: 0em;
+        flex-direction: row;
+        display: inline-flex;
+        margin: 0.75em;
+        /* height: 60px; */
+    }
+}
