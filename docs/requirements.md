@@ -4,13 +4,17 @@
 
 #### User Registration/Sign-in:
 
-* All sensitive user data such as username/password will be stored in a SHA-256 encrypted Google Firebase key-value store.
-* Non-logged in users will be greeted with a splash page with two text-fields (username and password) and two buttons (sign-up and login)
-* After the user enters a valid username and password and clicks/taps on the login button, they will log into their account and be redirected to the dashboard page
-* If the user enters an invalid username and password and presses login, an error message will be displayed above the inputs notifying them that they have entered an invalid username or password.
-* After the user enters a username and password and clicks/taps on the sign-up button, they will be redirected to the ‘enter interests’ page when they finish their registration if the username is not already taken. If the username is already in use, an error message is displayed above the input fields asking the user to select a different username.
+* All sensitive user data such as username/password will be stored in a SHA-256 encrypted Google Firebase key-value store. **COMPLETE**
+* Non-logged in users will be greeted with a splash page with two text-fields (username and password) and two buttons (sign-up and login) **COMPLETE**
+* After the user enters a valid username and password and clicks/taps on the login button, they will log into their account and be redirected to the dashboard page **COMPLETE**
+* If the user enters an invalid username and password and presses login, an error message will be displayed above the inputs notifying them that they have entered an invalid username or password. **COMPLETE**
+* After the user enters a username and password and clicks/taps on the sign-up button, they will be redirected to the ‘enter interests’ page when they finish their registration if the username is not already taken. If the username is already in use, an error message is displayed above the input fields asking the user to select a different username. **COMPLETE**
 * The ‘enter interests’ page will have token input fields for each of these categories: TV/movies, books, video games, sports, music and other. The user will be able to input whatever they like about their interests into these token input fields, and there will be no limit to how many interests the user can input. The ‘enter interests’ page will also have a ‘sign-up’ button that will make an account for the user when pressed, automatically log them into the newly created account, and redirecting them to the dashboard page.
-* After a user signs in for the first time, they will be greeted by a short paragraph describing what a group is and explaining how to create a group. (“Click on the ‘Create’ button to start your first group.
+
+**REVISED**: Instead of having all token inputs displayed at once, the user can instead click on a corresponding icon for each category to be brought to the token input for that category. All other functionality is according the requirement otherwise.
+* After a user signs in for the first time, they will be greeted by a short paragraph describing what a group is and explaining how to create a group. (“Click on the ‘Create’ button to start your first group. 
+
+**REMOVED**: We felt that the create group form was intuitive enough for the user to understand how to create their group and what content is involved. The short paragraph would have simply added more clutter to our dashboard when the user first signs in.
 
 ##### Verification:
 * As the UI for the User Registration & Sign-in is being built, we will be systematically testing that the site is functional by manually going through registration/sign-in process in the browser to ensure that users are able to successfully create accounts/sign-in by inputting e-mails, passwords (and interests for registration) with all the expected behavior detailed above (error messages for bad input etc.).
@@ -21,9 +25,9 @@
 
 #### User Profiles:
 
-* Logged in users will have access to their own ‘Profile’ page which will have editable text-fields for username and password and token input fields for their interests.
-* If a user makes a change to their profile page (editing any of the text/token fields), they can persist those changes by clicking the ‘Save Changes’ button located at the bottom of the ‘Profile page’.
-* Users can also view other users’ profile pages by clicking on another user’s username (which will redirect them to that user’s profile page). These profile pages will be read-only (not editable by the user) and the password field will be absent.
+* Logged in users will have access to their own ‘Profile’ page which will have editable text-fields for username and password and token input fields for their interests. **COMPLETE**
+* If a user makes a change to their profile page (editing any of the text/token fields), they can persist those changes by clicking the ‘Save Changes’ button located at the bottom of the ‘Profile page’. **COMPLETE**
+* Users can also view other users’ profile pages by clicking on another user’s username (which will redirect them to that user’s profile page). These profile pages will be read-only (not editable by the user) and the password field will be absent. **COMPLETE**
 
 ##### Verification:
 * Like registration/signin, the user profile page will need to make calls to the database should the user make changes to their own
@@ -34,10 +38,12 @@ profile details. As such, assert() statements in our API will be used to verify 
 
 #### Search Feature:
 
-* User can search groups via a search bar on the site, located at the top of the dashboard in the nav-bar, where they can enter a string to be shown groups with names that match the provided input after pressing the search button to the right of the bar. A group is considered matching if the provided search string occurs somewhere in the title of the group.
-* The user will be presented with a search results page consisting of a list of card entries for each relevant group that matches, which they can scroll down. The search results section no longer scrolls down when there are no more matching results.
-* Users will be able to visit a group’s page from the results by clicking/tapping on its card entry, which will bring the user to the group page/view for that group
+* User can search groups via a search bar on the site, located at the top of the dashboard in the nav-bar, where they can enter a string to be shown groups with names that match the provided input after pressing the search button to the right of the bar. A group is considered matching if the provided search string occurs somewhere in the title of the group. **COMPLETE**
+* The user will be presented with a search results page consisting of a list of card entries for each relevant group that matches, which they can scroll down. The search results section no longer scrolls down when there are no more matching results. **COMPLETE**
+* Users will be able to visit a group’s page from the results by clicking/tapping on its card entry, which will bring the user to the group page/view for that group **COMPLETE**
 * Users can click on a navigation button at the top left of the results page to navigate back to the dashboard page from the search results page.
+
+**REVISED**: Instead of having users navigate back to the dashboard via a back button, we allow users to instead navigate to the dashboard or elsewhere via the navbar at the top of the page to avoid having to store a history of what the previous page the user was at.
 
 ##### Verification:
 
@@ -65,6 +71,8 @@ profile details. As such, assert() statements in our API will be used to verify 
 **REVISED**: We decided to remove "location" and "links" fields as they did not seem to be necessary when putting information into the post, as all this info can just be typed into the "description" field. In addition, this makes the "Create a post" modal look much simpler and cleaner. However, all the other parts of this requirement have been met. 
 
 * The user can navigate back to the dashboard view by clicking on the left arrow at the top left of the page within the group view. 
+
+**REVISED** As mentioned in a previous revision, the user no longer navigates back via a back button, but should instead use the navbar located at the top of the screen to navigate to the dashboard or elsewhere.
 * When viewing the list of groups displayed in the dashboard view, if the user already belongs to a group, they can leave that group by clicking on the “Leave” button located on the top right corner of that group entry. When the user clicks the button to leave, they no longer are part of that group and the button becomes a “join” button. 
 
 **REVISED**: Instead of being able to leave the group from a button on each card in the dashboard view, the user must click on the card and navigate to the group view to leave the group with the button included on that page.
