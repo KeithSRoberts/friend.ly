@@ -70,6 +70,10 @@ Button {
    border: 1px solid #F0F0F0;
    background-color: #f7fbfc;
    flex: 6;
+   word-break: break-all; 
+   word-break: break-word;
+   overflow-wrap: break-word;
+   hyphens: auto;
 }
 
 .post-author-info {

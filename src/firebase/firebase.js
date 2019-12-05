@@ -85,6 +85,8 @@ class Firebase {
     let group = groupIndex.toString();
 
     this.db.ref('groups/' + group + '/groupDiscussion/posts/' + post.name + '/upvotes').set(postScore)
+    this.db.ref('groups/' + group + '/groupDiscussion/posts/' + post.name + '/upvoted').set(post.upvoted)
+    this.db.ref('groups/' + group + '/groupDiscussion/posts/' + post.name + '/downvoted').set(post.downvoted)
 
   }
 

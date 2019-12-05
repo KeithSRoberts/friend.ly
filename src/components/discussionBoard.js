@@ -61,6 +61,8 @@ class discussionBoard extends Component {
     post['groupIndex'] = this.state.groupId;
     post['author'] = global.userId;
     post['upvotes'] = 0;
+    post['upvoted'] = false;
+    post['downvoted'] = false;
     firebase.doCreatePost(post, this.state.groupId)
     this.toggle();
     this.setState({

@@ -12,26 +12,30 @@ class Post extends Component {
       name: props.name,
       upvotes: props.post.upvotes,
       author: props.post.author,
-      image: "https://ra.ac.ae/wp-content/uploads/2017/02/user-icon-placeholder.png"
+      image: "https://ra.ac.ae/wp-content/uploads/2017/02/user-icon-placeholder.png",
+      upvoted: props.post.upvoted,
+      downvoted: props.post.downvoted
     }
   }
 
-  incrementScore(event) {
+  incrementScore() {
     this.setState({
-      upvotes: this.state.upvotes + 1
+      upvotes: this.state.upvotes + 1,
+      upvoted: this.state.upvoted || !this.state.downvoted,
+      downvoted: this.state.upvoted && this.state.downvoted
     },
     function() {this.props.updateScore(this.state)});
-    console.log(this.state.image);
   }
 
-  decrementScore(event) {
+  decrementScore() {    
     this.setState({
-      upvotes: this.state.upvotes - 1
+      upvotes: this.state.upvotes - 1,
+      upvoted: this.state.upvoted && this.state.downvoted,
+      downvoted: !this.state.upvoted || this.state.downvoted
     }, 
     function() {this.props.updateScore(this.state)});
-    console.log(this.state.author);
+    // console.log(this.state.author);
   }
-
 
   render() {
     return (
@@ -39,11 +43,13 @@ class Post extends Component {
           <div className="post-buttons">
             <Button className="button-upvote"
                     name={this.state.name}
-                    onClick={(e) => this.incrementScore(e)}/>
+                    onClick={(e) => this.incrementScore(e)}
+                    disabled={this.state.upvoted}/>
             <h3>{this.state.upvotes}</h3>
             <Button className="button-downvote"
                     name={this.state.name}
-                    onClick={(e) => this.decrementScore(e)}/>
+                    onClick={(e) => this.decrementScore(e)}
+                    disabled={this.state.downvoted}/>
           </div>
           <div className="post-content">
             <div className="post-author-info">
