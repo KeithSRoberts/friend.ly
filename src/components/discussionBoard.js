@@ -59,7 +59,7 @@ class discussionBoard extends Component {
     const { firebase } = this.props;
 
     post['groupIndex'] = this.state.groupId;
-    post['author'] = global.userId;
+    post['userId'] = global.userId;
     post['upvotes'] = 0;
     post['upvoted'] = false;
     post['downvoted'] = false;

@@ -1,5 +1,5 @@
 import React, { Component }  from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, InputGroup } from 'reactstrap';
 
 class CreatePost extends Component {
  
@@ -12,9 +12,8 @@ class CreatePost extends Component {
         // post.author.length !== 0
       ) {
         this.props.createNewPost(post);
-        // alert("Your post has been submitted!")
       } else {
-        alert("Please enter valid text");
+        alert("Please fill out all fields with valid text");
       }
 
   }
@@ -36,10 +35,14 @@ class CreatePost extends Component {
       <Modal isOpen={this.props.isOpen} toggle={this.props.toggle}>
         <ModalHeader>Create a post</ModalHeader>
         <ModalBody id="create-post-body">
-          <Input id="post-title-form" placeholder="Title" name="title"
+          <InputGroup>
+            <Input id="post-title-form" placeholder="Title" name="title" maxLength="50"
                  onChange={(e) => handleChange(e)}/>
-          <Input id="post-text-form" placeholder="Text" name="text"
-                 onChange={(e) => handleChange(e)}/>
+          </InputGroup>
+          <InputGroup>
+            <textarea id="post-text-form" placeholder="Text goes here" name="text" maxLength="400"
+                  onChange={(e) => handleChange(e)}></textarea>
+          </InputGroup>
         </ModalBody>
         <ModalFooter>
           <div className="modal-buttons">

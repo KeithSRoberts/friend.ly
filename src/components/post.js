@@ -12,10 +12,21 @@ class Post extends Component {
       name: props.name,
       upvotes: props.post.upvotes,
       author: props.post.author,
-      image: "https://ra.ac.ae/wp-content/uploads/2017/02/user-icon-placeholder.png",
+      image: props.post.avatarImg, 
       upvoted: props.post.upvoted,
       downvoted: props.post.downvoted
     }
+  }
+
+  getValidAvatar(imgUrl) {
+    let defaultAvatar = "https://ra.ac.ae/wp-content/uploads/2017/02/user-icon-placeholder.png"
+    if (imgUrl === "" || imgUrl === undefined) {
+      return defaultAvatar;
+    } else if (imgUrl.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+      return imgUrl;
+    }
+    
+    return defaultAvatar;
   }
 
   incrementScore() {
@@ -34,7 +45,6 @@ class Post extends Component {
       downvoted: !this.state.upvoted || this.state.downvoted
     }, 
     function() {this.props.updateScore(this.state)});
-    // console.log(this.state.author);
   }
 
   render() {
@@ -54,7 +64,7 @@ class Post extends Component {
           <div className="post-content">
             <div className="post-author-info">
               <div className="post-image">
-                <img src={this.state.image} alt={this.state.author}/>
+                <img src={this.getValidAvatar(this.state.image)} alt={this.state.author}/>
               </div>
               <div className="post-author">
                 <h5>{this.state.data.title}</h5>

@@ -66,11 +66,15 @@ class Firebase {
 
   doCreatePost (post, groupIndex) { 
     let group = groupIndex.toString();
+    console.log(post.userId);
+    
+    this.db.ref('users/' + post.userId + "/avatar").once('value').then((snapshot) => {
+      post['avatarImg'] = snapshot.val();
+    });
 
     this.db.ref('groups/' + group + '/groupDiscussion').once('value').then((snapshot) => {
 
       let value = snapshot.val();
-      console.log(value);
       let numPosts = value.numPosts + 1;    
 
       // create new post-# and update number of posts in groupDiscussion
