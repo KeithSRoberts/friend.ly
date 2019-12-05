@@ -23,7 +23,6 @@ class Account extends Component {
 
     let readOnly = true;
 
-    console.log(global.userId, userId)
     if (global.userId == userId) {
       readOnly = !readOnly;
     }
@@ -65,8 +64,85 @@ class Account extends Component {
   }
 
   componentDidUpdate() {
+    const { firebase, history } = this.props;
+    const { id } = this.state;
+
     if (global.userId === -1) {
-      this.props.history.push(routes.SPLASH);
+      history.push(routes.SPLASH);
+    }
+
+    let path = window.location.hash.split('/');
+
+    let userId = path[path.length - 1];
+
+    if (id !== userId) {
+      firebase.db.ref('users/' + userId).once("value", (snapshot) => {
+        let value = snapshot.val();
+  
+        if (!!value) {
+          let media = {
+            facebook: "",
+            instagram: "",
+            snapchat: "",
+            twitter: ""
+          };
+
+          let interests = {
+            music: [],
+            sports: [],
+            video_games: [],
+            travel: [],
+            politics: [],
+            photography: [],
+            art: [],
+            theater: [],
+            food: [],
+            books: [],
+            board_games: [],
+            other: []
+          };
+
+          let keys = Object.keys(value);
+
+          if (keys.indexOf('interests') === -1) {
+            this.setState({ interests });
+          } else if (keys.indexOf('media') === -1) {
+            this.setState({ media });
+          }
+
+          keys.forEach((key) => {
+            if (key === 'media') {
+              let newMedia = Object.assign({}, media);
+  
+              Object.keys(value[key]).forEach((innerKey) => {
+                newMedia[innerKey] = value[key][innerKey];
+              })
+  
+              this.setState({ media: newMedia });
+            } else if (key === 'interests') {
+              let newInterests = Object.assign({}, interests);
+              
+              Object.keys(value[key]).forEach((innerKey) => {
+                newInterests[innerKey] = value[key][innerKey];
+              })
+
+              this.setState({ interests: newInterests});
+            } else {
+              if (key === 'avatar') {
+                if (!!value[key]) {
+                  this.setState({ [key]: value[key] });
+                } else {
+                  this.setState({ avatar: profile })
+                }
+              } else {
+                this.setState({ [key]: value[key] });
+              }
+            }
+          })
+        }
+      });
+
+      this.setState({ id: userId });
     }
   }
 
@@ -207,7 +283,7 @@ class Account extends Component {
   }
 
   renderInterests = () => {
-    const { interests } = this.state;
+    const { readOnly, interests } = this.state;
     let interestRows = [];
     let interestKeys = Object.keys(interests);
 
@@ -225,6 +301,7 @@ class Account extends Component {
 
             <ChipInput
               className="accountChipInput"
+              placeholder={!readOnly ? `Press Enter to add ${interestKeys[(2 * i) + j]}` : ""}
               value={interests[interestKeys[(2 * i) + j]]}
               onAdd={(e) => this.addInterest((2 * i) + j, e)}
               onDelete={(e, index) => this.removeInterest((2 * i) + j, e, index)}

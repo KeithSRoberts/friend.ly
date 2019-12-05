@@ -4,7 +4,6 @@ import { InputGroup, InputGroupAddon, Button, Input } from 'reactstrap';
 class Search extends Component {
   constructor(props){
     super();
-    let query = "";
   }
   onChangeInput = (event) => {
     this.query = event.target.value;

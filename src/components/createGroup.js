@@ -7,7 +7,7 @@ import art from "../constants/icons/art.png";
 import board_games from "../constants/icons/board_games.png";
 import books from "../constants/icons/books.png";
 import food from "../constants/icons/food.png";
-import instagram from "../constants/icons/instagram.png";
+import photography from "../constants/icons/photography.png";
 import music from "../constants/icons/music.png";
 import other from "../constants/icons/other.png";
 import travel from "../constants/icons/travel.png";
@@ -45,11 +45,11 @@ class CreateGroup extends Component {
         [ video_games, food ],
         [ travel, books ],
         [ politics, board_games ],
-        [ instagram, other ]
+        [ photography, other ]
       ],
       categories: ['music', 'art', 'sports', 'theater', 'video_games',
                    'food', 'travel', 'books', 'politics', 'board_games',
-                   'instagram', 'other'],
+                   'photography', 'other'],
       music: [],
       art: [],
       sports: [],
@@ -60,7 +60,7 @@ class CreateGroup extends Component {
       books: [],
       politics: [],
       board_games: [],
-      instagram: [],
+      photography: [],
       other: []
     }
     this.toggle = this.toggle.bind(this);
@@ -73,38 +73,43 @@ class CreateGroup extends Component {
   // Post: Updates new group in firebase database
   createNewGroup() {
     const { firebase } = this.props;
-    let payload = {
-        groupId: 0,
-        groupTitle: this.state.groupTitle,
-        groupDescription: this.state.groupDescr,
-        groupImage: this.state.groupImage,
-        groupInterests: {
-          music: this.state.music,
-          art: this.state.art,
-          sports: this.state.sports,
-          theater: this.state.theater,
-          video_games: this.state.video_games,
-          food: this.state.food,
-          travel: this.state.travel,
-          books: this.state.books,
-          politics: this.state.politics,
-          board_games: this.state.board_games,
-          social: this.state.instagram,
-          other: this.state.other
-        },
-        groupMembers: {
-            [this.state.userId]: {
-                userId: this.state.userId
-            }
-        },
-        groupDiscussion: {
-          numPosts: 0,
-          posts: ""
-        }
+
+    if (!this.validForm()) {
+      let payload = {
+          groupId: 0,
+          groupTitle: this.state.groupTitle,
+          groupDescription: this.state.groupDescr,
+          groupImage: this.state.groupImage,
+          groupInterests: {
+            music: this.state.music,
+            art: this.state.art,
+            sports: this.state.sports,
+            theater: this.state.theater,
+            video_games: this.state.video_games,
+            food: this.state.food,
+            travel: this.state.travel,
+            books: this.state.books,
+            politics: this.state.politics,
+            board_games: this.state.board_games,
+            photography: this.state.photography,
+            other: this.state.other
+          },
+          groupMembers: {
+              [this.state.userId]: {
+                  userId: this.state.userId
+              }
+          },
+          groupDiscussion: {
+            numPosts: 0,
+            posts: ""
+          }
+      }
+      firebase.createNewGroup(payload);
+      alert("New group successfully created!");
+      this.props.history.push('/groups');
+    } else {
+      alert("You are required to include a description, title, and image in order to create group.")
     }
-    firebase.createNewGroup(payload);
-    alert("New group successfully created!");
-    this.props.history.push('/groups');
   }
 
   createFormRows() {
@@ -114,25 +119,25 @@ class CreateGroup extends Component {
       let name1 = this.state.categories[count];
       let name2 = this.state.categories[count + 1];
       return <div className="interest-row" key={key}>
-              <div className="interest-category">
+              <div className="profile-interest">
                   <div className="interest-img">
                     <img src={row[0]} alt={this.state.categories[count]}/>
                   </div>
-                  <div className="interest-input">
-                    <ChipInput
-                      onChange={(chips) => this.handleChange(chips, name1)}
-                    />
-                  </div>
+                  <ChipInput
+                    className="accountChipInput"
+                    placeholder={`Press Enter to add ${this.state.categories[count]}`}
+                    onChange={(chips) => this.handleChange(chips, name1)}
+                  />
               </div>
-              <div className="interest-category">
+              <div className="profile-interest">
                   <div className="interest-img">
                     <img src={row[1]} alt={this.state.categories[count + 1]}/>
                   </div>
-                  <div className="interest-input">
-                    <ChipInput
-                      onChange={(chips) => this.handleChange(chips, name2)}
-                    />
-                  </div>
+                  <ChipInput
+                    className="accountChipInput"
+                    placeholder={`Press Enter to add ${this.state.categories[count + 1]}`}
+                    onChange={(chips) => this.handleChange(chips, name2)}
+                  />
               </div>
             </div>
     })
@@ -146,19 +151,7 @@ class CreateGroup extends Component {
   validForm() {
     return (this.state.groupTitle === "" ||
             this.state.groupDescr === "" ||
-            this.state.groupImage === create ||
-            this.state.music.length > 10 ||
-            this.state.art.length > 10 ||
-            this.state.board_games.length > 10 ||
-            this.state.books.length > 10 ||
-            this.state.food.length > 10 ||
-            this.state.instagram.length > 10 ||
-            this.state.other.length > 10 ||
-            this.state.politics.length > 10 ||
-            this.state.sports.length > 10 ||
-            this.state.theater.length > 10 ||
-            this.state.travel.length > 10 ||
-            this.state.video_games.length > 10);
+            this.state.groupImage === create);
   }
 
   changeImage() {
@@ -268,13 +261,13 @@ class CreateGroup extends Component {
               </textarea>
             </div>
           </div>
-           <h5>Your Group&#39;s Interests (Up to 10 per category)</h5>
+           <h5>Your Group&#39;s Interests</h5>
           <div id="create-interests">
             { this.createFormRows() }
           </div>
-          <p id="sub-text">Note: You are required to include a description, title, and image in order to submit.</p>
+          <p id="sub-text">Note: You are required to include a description, title, and image in order to create group.</p>
           <div id="create-button">
-            <button id="create-group-btn" onClick={() => this.createNewGroup()} disabled={this.validForm()}>Create Group</button>
+            <button id="create-group-btn" onClick={() => this.createNewGroup()}>Create Group</button>
           </div>
         </div>
       </div>

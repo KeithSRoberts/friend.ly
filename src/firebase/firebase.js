@@ -205,10 +205,6 @@ class Firebase {
         userId: userId
     });
   }
-
-  searchGroupList = (query) => {
-    let allGroup = this.fetchGroup;
-  }
 }
 
 export default Firebase;

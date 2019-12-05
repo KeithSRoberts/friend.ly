@@ -278,14 +278,18 @@ class Splash extends Component {
 
     return(
       <div id="chipDiv">
-        <div id="chipIcon" className="interest">
-          <div 
-            id={`splash-${interestKeys[interestIndex]}`}
-            className="interest-icon"
-          />
+        <div id="interestParent">
+          <div id="chipIcon" className="interest">
+            <div 
+              id={`splash-${interestKeys[interestIndex]}`}
+              className="interest-icon"
+            />
+          </div>
+          <h1 id="coloredheader">{interestKeys[interestIndex]}</h1>
         </div>
         <ChipInput
           className="chipInput"
+          placeholder={`Press Enter to add ${interestKeys[interestIndex]} interests`}
           value={interests[interestKeys[interestIndex]]}
           onAdd={(e) => this.addInterest(interestIndex, e)}
           onDelete={(e, i) => this.removeInterest(interestIndex, e, i)}
@@ -305,7 +309,7 @@ class Splash extends Component {
 
       for (let j = 0; j < 4; j++) {
         interestDivs.push(
-          <div key={(4 * i) + j} className="interest" tabIndex="0" onClick={() => this.setInterest((4 * i) + j)}>
+          <div key={(4 * i) + j} className="interest wubba" tabIndex="0" onClick={() => this.setInterest((4 * i) + j)}>
             <div 
               id={`splash-${interestKeys[(4 * i) + j]}`}
               key={(4 * i) + j}

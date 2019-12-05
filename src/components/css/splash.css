@@ -32,7 +32,7 @@
 .interest {
   background-color: #140b3a;
   border-radius: 15px;
-  cursor: pointer;
+  
   margin: 20px;
   outline: 0;
   padding: 20px;
@@ -43,6 +43,19 @@
   height: 100px;
   width: 100px;
   filter: invert(97%) sepia(4%) saturate(447%) hue-rotate(20deg) brightness(84%) contrast(88%); /*#c7c7bb*/
+}
+
+#interestParent {
+  flex-direction: row;
+  align-items: center;
+}
+
+.wubba {
+  cursor: pointer;
+}
+
+.wubba:hover {
+  background-color: #4b2e83;
 }
 
 .interestRow {
@@ -215,6 +228,10 @@
   padding: 0 1.5em;
 }
 
+#coloredheader {
+  color: #e0e0e0;
+}
+
 #splash-username::placeholder,
 #splash-password::placeholder,
 #splash-email::placeholder,
@@ -224,6 +241,11 @@
 #splash-insta::placeholder,
 #splash-snap::placeholder {
   color: #d3d3d3;
+}
+
+button:hover {
+  cursor: pointer !important;
+  filter: brightness(85%) !important;
 }
 
 #splash-username:focus,
@@ -323,19 +345,19 @@
   background-image: url("../../constants/icons/snapchat.png");
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 0px) {
+  .splash-form-interests {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1020px) {
   .splash-form-interests {
     width: 80%;
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .splash-form-interests {
-    width: 70%;
-  }
-}
-
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1450px) {
   .splash-form-interests {
     width: 50%;
   }

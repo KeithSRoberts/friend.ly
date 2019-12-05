@@ -1,6 +1,6 @@
-import React, { Component, useState }  from "react";
+import React, { Component }  from "react";
 import { Link, withRouter } from "react-router-dom";
-import { Nav, NavItem, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, NavLink} from 'reactstrap';
+import { Nav, NavItem } from 'reactstrap';
 import Search from "../components/search"
 
 import * as routes from "../constants/routes";
@@ -17,7 +17,6 @@ class Navbar extends Component {
   searchCallBack = (dataFromSearch) => {
     this.props.callBackToApp(dataFromSearch);
     this.props.history.push(routes.GROUPS, {query: "test"} )
-    console.log("pusheed")
   }
   render() {
     return(
@@ -25,18 +24,18 @@ class Navbar extends Component {
       <div className="navigation-bar">
         <div className="navigation-bar-inside d-flex flex-row">
           <div className="logo-group nav-group nav-icon">
-              <Link to={routes.SPLASH}>
+              <Link to={routes.GROUPS}>
                 <div className="logo" />
                 </Link>
               <h1 className="nav-title"><span className="nav-friend">Friend</span><span className="nav-ly">.ly</span></h1>
             </div>
           <Nav pills className="navbar navbar-expand-lg nav-buttons d-flex justify-content-center">
             <NavItem>
-              <Link to={routes.GROUPS} active id="nav-pill">Dashboard</Link>
+              <Link to={routes.GROUPS} id="nav-pill">Dashboard</Link>
             </NavItem>
             
             <NavItem>
-              <Link to={routes.ACCOUNT + '/' + global.userId} id="nav-pill">My Profile</Link>
+              <Link to={routes.ACCOUNT + '/' + global.userId} id="nav-profile">My Profile</Link>
             </NavItem>
             <NavItem>
               <Link to={routes.CREATE_GROUP} id="nav-pill">Create Group</Link>

@@ -60,7 +60,6 @@ class Groups extends Component {
   }
 
   fetchGroupList = (firebase) => {
-    console.log("got here aight")
     // Preconditions: This.props.user is not null (user is signed in)
     // Postconditions: Groups array is populated with group data and returned
     firebase.fetchGroups().then((data) => {
