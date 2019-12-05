@@ -51,7 +51,7 @@
   width: 420px;
 }
 
-.interest-input > .MuiFormControl-root, .interest-input .WAMuiChipInput-standard-62 {
+.interest-input > .MuiFormControl-root, .interest-input > .MuiFormControl-root > div {
     overflow: scroll;
     overflow-y: auto;
 }
