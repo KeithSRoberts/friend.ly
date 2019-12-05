@@ -24,7 +24,7 @@ class Account extends Component {
     let readOnly = true;
 
     if (global.userId == userId) {
-      readOnly = !readOnly;
+      readOnly = false;
     }
 
     this.state = {
@@ -65,7 +65,7 @@ class Account extends Component {
 
   componentDidUpdate() {
     const { firebase, history } = this.props;
-    const { id } = this.state;
+    const { id, readOnly } = this.state;
 
     if (global.userId === -1) {
       history.push(routes.SPLASH);
@@ -143,6 +143,12 @@ class Account extends Component {
       });
 
       this.setState({ id: userId });
+    }
+
+    if (global.userId == userId && readOnly === true) {
+      this.setState({ readOnly: false });
+    } else if (global.userId != userId && readOnly === false) {
+      this.setState({ readOnly: true });
     }
   }
 
