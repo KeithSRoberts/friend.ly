@@ -37,7 +37,7 @@ class Navbar extends Component {
             </NavItem>
             
             <NavItem>
-              <Link to={routes.ACCOUNT} id="nav-pill">My Profile</Link>
+              <Link to={routes.ACCOUNT + '/' + global.userId} id="nav-pill">My Profile</Link>
             </NavItem>
             <NavItem>
               <Link to={routes.CREATE_GROUP} id="nav-pill">Create Group</Link>
