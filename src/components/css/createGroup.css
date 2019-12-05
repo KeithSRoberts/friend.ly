@@ -1,9 +1,8 @@
 #create-content {
-    width: 60%;
+    width: 700px;
     color: black;
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-top: 3%; 
+    margin: auto;
+    margin-top: 20px;
     background-color: white;
     border-radius: 15px 15px 0px 0px;
     border: 2px solid #F0F0F0;
