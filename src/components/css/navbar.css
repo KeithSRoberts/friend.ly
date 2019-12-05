@@ -66,6 +66,13 @@
     flex-direction: row;
 } */
 
+#yuge {
+    flex-direction: row;
+    margin-top: 10px;
+    margin-right: 20px;
+    width: 90%;
+}
+
 .nav-ly {
     color: #4b2d83;
 }

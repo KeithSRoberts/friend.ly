@@ -16,12 +16,11 @@ class Search extends Component {
   render() {
     return(
       <div className="search-box">
-        <InputGroup className="d-flex p-2 flex-row search-bar"> 
+        <InputGroup id="yuge">
           <Input placeholder="Look for groups!" onChange={this.onChangeInput}/>
           <InputGroupAddon addonType="append">
             <Button id="search-button" onClick={this.handleClick}>Search</Button>
           </InputGroupAddon>
-
         </InputGroup>
       </div>
     );
