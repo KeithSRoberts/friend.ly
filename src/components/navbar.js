@@ -30,7 +30,6 @@ class Navbar extends Component {
                 </Link>
               <h1 className="nav-title"><span className="nav-friend">Friend</span><span className="nav-ly">.ly</span></h1>
             </div>
-          {/* Pills */}
           <Nav pills className="navbar navbar-expand-lg nav-buttons d-flex justify-content-center">
             <NavItem>
               <Link to={routes.GROUPS} active id="nav-pill">Dashboard</Link>
