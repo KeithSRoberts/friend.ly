@@ -51,6 +51,11 @@
   width: 420px;
 }
 
+.interest-input > .MuiFormControl-root, .interest-input .WAMuiChipInput-standard-62 {
+    overflow: scroll;
+    overflow-y: auto;
+}
+
 .interest-input textarea, .interest-input > div {
   padding: 10px 20px 10px 20px;
   margin: 20px 15px 0px 10px;
@@ -63,6 +68,13 @@
 
 .interest-input .MuiChip-clickable {
   flex-direction: row;
+}
+
+#sub-text {
+  color: gray;
+  padding-top: 30px;
+  padding-left: 70px;
+  font-size: 11pt;
 }
 
 .interest-input .WAMuiChipInput-chipContainer-4 {

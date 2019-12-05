@@ -272,6 +272,7 @@ class CreateGroup extends Component {
           <div id="create-interests">
             { this.createFormRows() }
           </div>
+          <p id="sub-text">Note: You are required to include a description, title, and image in order to submit.</p>
           <div id="create-button">
             <button id="create-group-btn" onClick={() => this.createNewGroup()} disabled={this.validForm()}>Create Group</button>
           </div>
