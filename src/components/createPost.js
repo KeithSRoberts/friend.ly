@@ -7,8 +7,8 @@ class CreatePost extends Component {
   // Pre: User is signed in and member of group
   // Post: Updates new post in firebase database
   handleNewPost(post) {
-    if(  post.title.length !== 0 &&
-        post.text.length !== 0
+    if(  post.title.trim().length !== 0 &&
+        post.text.trim().length !== 0
       ) {
         this.props.createNewPost(post);
       } else {
