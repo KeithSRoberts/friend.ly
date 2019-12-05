@@ -127,9 +127,13 @@ class Splash extends Component {
     const { username, password, email, interests, media } = this.state;
     const { firebase } = this.props;
 
-    firebase.doCreateUser(username, password, email, interests, media, "")
-
-    this.props.history.push(routes.GROUPS);
+    firebase.doCreateUser(username, password, email, interests, media, "", () => firebase.doSignInUser(username, password, () => {
+      if (global.userId !== -1) {
+        this.props.history.push(routes.GROUPS);
+      } else {
+        alert("Something went wrong");
+      }
+    }));
   }
 
   updateUsername = (username) => {

@@ -96,7 +96,7 @@ class Firebase {
     });
   }
 
-  doCreateUser = (username, password, email, interests, media, avatar) => {
+  doCreateUser = (username, password, email, interests, media, avatar, callback) => {
     let userIndex = this.db.ref("userIndex");
     let index = 0;
 
@@ -148,6 +148,8 @@ class Firebase {
       });
 
       userIndex.update({ index });
+
+      callback();
     }, (errorObject) => {
       console.log("The read failed: " + errorObject.code);
     });
