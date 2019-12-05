@@ -9,7 +9,6 @@ class CreatePost extends Component {
   handleNewPost(post) {
     if(  post.title.length !== 0 &&
         post.text.length !== 0
-        // post.author.length !== 0
       ) {
         this.props.createNewPost(post);
       } else {

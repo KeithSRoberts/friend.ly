@@ -20,19 +20,6 @@ class Firebase {
     this.db = app.database();
   }
 
-  /*
-  doCreateUserWithEmailAndPassword = (email, password) =>
-    this.auth.createUserWithEmailAndPassword(email, password);
-  
-  doSignInWithEmailAndPassword = (email, password) =>
-    this.auth.signInWithEmailAndPassword(email, password);
-  
-  doSignOut = () => this.auth.signOut();
-
-  doPasswordUpdate = (password) =>
-    this.auth.currentUser.updatePassword(password);
-  */
-
   doRenderPosts(groupIndex) {
     let group = groupIndex.toString();
 
@@ -50,23 +37,17 @@ class Firebase {
       }
       posts.push(testPost);
 
-      // console.log(value.posts['post-1']);
-
       for(let i = 1; i <= numPosts; i++) {
-        console.log(value.posts['post-' + i]);
         posts.push(value.posts['post-' + i])
       }
 
       return posts;
 
     })
-
-    console.log("fetched posts");
   }
 
   doCreatePost (post, groupIndex) { 
     let group = groupIndex.toString();
-    console.log(post.userId);
     
     this.db.ref('users/' + post.userId + "/avatar").once('value').then((snapshot) => {
       post['avatarImg'] = snapshot.val();
