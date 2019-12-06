@@ -157,8 +157,8 @@ class Splash extends Component {
 
     return(
       <div className="splash-form-choice">
-        <Input id="splash-username" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={username} />
-        <Input id="splash-password" onChange={(e) => this.updatePassword(e.target.value)} placeholder="Password" type="password" value={password} />
+        <Input id="splash-username" onChange={(e) => this.updateUsername(e.target.value.trim())} placeholder="Username" value={username} />
+        <Input id="splash-password" onChange={(e) => this.updatePassword(e.target.value.trim())} placeholder="Password" type="password" value={password} />
         <div className="splash-button-group">
           <Button id="splash-button-signup" onClick={() => this.showEmail(true)}>Signup</Button>
           <Button id="splash-button-signin" onClick={() => this.signIn()}>Login</Button>
@@ -182,10 +182,10 @@ class Splash extends Component {
 
     return(
       <div className="splash-form-email">
-        <Input id="splash-username" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={username} />
-        <Input id="splash-password" onChange={(e) => this.updatePassword(e.target.value)} placeholder="Password" type="password" value={password} />
-        <Input id="splash-confirm-password" onChange={(e) => this.updateConfirmPassword(e.target.value)} placeholder="Confirm Password" type="password" value={confirmPassword} />
-        <Input id="splash-email" onChange={(e) => this.updateEmail(e.target.value)} placeholder="Email" value={email} />
+        <Input id="splash-username" onChange={(e) => this.updateUsername(e.target.value.trim())} placeholder="Username" value={username} />
+        <Input id="splash-password" onChange={(e) => this.updatePassword(e.target.value.trim())} placeholder="Password" type="password" value={password} />
+        <Input id="splash-confirm-password" onChange={(e) => this.updateConfirmPassword(e.target.value.trim())} placeholder="Confirm Password" type="password" value={confirmPassword} />
+        <Input id="splash-email" onChange={(e) => this.updateEmail(e.target.value.trim())} placeholder="Email" value={email} />
         <div className="splash-button-group">
           <Button id="splash-button-interests" onClick={() => this.validateEmail()}>Next: Interests</Button>
         </div>
@@ -339,19 +339,19 @@ class Splash extends Component {
       <div className="splash-form-social">
         <div className='splash-mediaWrapper'>
           <div id="splash-facebookPic" className='splash-mediaIcon' />
-          <Input id="splash-facebook" placeholder="Facebook profile" onChange={(e) => this.updateMedia(e.target.value, 'facebook')} />
+          <Input id="splash-facebook" placeholder="Facebook profile" onChange={(e) => this.updateMedia(e.target.value.trim(), 'facebook')} />
         </div>
         <div className='splash-mediaWrapper'>
           <div id="splash-instaPic" className='splash-mediaIcon' />
-          <Input id="splash-insta"placeholder="Instagram profile" onChange={(e) => this.updateMedia(e.target.value, 'instagram')} />
+          <Input id="splash-insta"placeholder="Instagram profile" onChange={(e) => this.updateMedia(e.target.value.trim(), 'instagram')} />
         </div>
         <div className='splash-mediaWrapper'>
           <div id="splash-twitterPic" className='splash-mediaIcon' />
-          <Input id="splash-twitter" placeholder="Twitter profile" onChange={(e) => this.updateMedia(e.target.value, 'twitter')} />
+          <Input id="splash-twitter" placeholder="Twitter profile" onChange={(e) => this.updateMedia(e.target.value.trim(), 'twitter')} />
         </div>
         <div className='splash-mediaWrapper'>
           <div id="splash-snapPic" className='splash-mediaIcon' />
-          <Input id="splash-snap" placeholder="Snapchat profile" onChange={(e) => this.updateMedia(e.target.value, 'snapchat')}/>
+          <Input id="splash-snap" placeholder="Snapchat profile" onChange={(e) => this.updateMedia(e.target.value.trim(), 'snapchat')}/>
         </div>
         <Button id="splash-button-register" onClick={() => this.register()}>Finish signup</Button>
       </div>

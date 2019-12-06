@@ -450,12 +450,15 @@ class Account extends Component {
       <div id="cardWrapper">
         {readOnly ? this.renderReadOnly() : <div />}
         {this.renderImageModal()}
+        {readOnly ? <div /> : <div>Please click the save changes button to persist all edits to account details</div>}
         <div id="accountHeader">
           <img id='profilepic' alt='profilepic' className='profileIcon' src={avatar} onClick={() => this.toggle()} />
           <div id='profileInputWrapper'>
-            <Input id="account-username" className="profile-input" onChange={(e) => this.updateUsername(e.target.value)} placeholder="Username" value={username} />
-            <Input id="account-password" className="profile-input" onChange={(e) => this.updatePassword(e.target.value)} placeholder="Password" type="password" value={password} />
-          </div>
+            <Input id="account-username" className="profile-input" onChange={(e) => this.updateUsername(e.target.value.trim())} placeholder="Username" value={username} />
+            {readOnly ? <div /> : 
+            <Input id="account-password" className="profile-input" onChange={(e) => this.updatePassword(e.target.value.trim())} placeholder="Password" type="password" value={password} />
+            }
+            </div>
         </div>
         <h2>Interests</h2>
         {this.renderInterests()}
@@ -463,19 +466,19 @@ class Account extends Component {
         <div>
           <div className='mediaWrapper'>
             <div id="facebookPic" className='mediaIcon' />
-            <Input id="account-facebook" className="profile-input" onChange={(e) => this.updateFacebook(e.target.value)} placeholder="Facebook profile" value={media['facebook']} />
+            <Input id="account-facebook" className="profile-input" onChange={(e) => this.updateFacebook(e.target.value.trim())} placeholder="Facebook profile" value={media['facebook']} />
           </div>
           <div className='mediaWrapper'>
             <div id="instaPic" className='mediaIcon' />
-            <Input id="account-insta" className="profile-input" onChange={(e) => this.updateInstagram(e.target.value)} placeholder="Instagram profile" value={media['instagram']} />
+            <Input id="account-insta" className="profile-input" onChange={(e) => this.updateInstagram(e.target.value.trim())} placeholder="Instagram profile" value={media['instagram']} />
           </div>
           <div className='mediaWrapper'>
             <div id="twitterPic" className='mediaIcon' />
-            <Input id="account-twitter" className="profile-input" onChange={(e) => this.updateTwitter(e.target.value)} placeholder="Twitter profile" value={media['twitter']} />
+            <Input id="account-twitter" className="profile-input" onChange={(e) => this.updateTwitter(e.target.value.trim())} placeholder="Twitter profile" value={media['twitter']} />
           </div>
           <div className='mediaWrapper'>
             <div id="snapPic" className='mediaIcon' />
-            <Input id="account-snap" className="profile-input" onChange={(e) => this.updateSnapchat(e.target.value)} placeholder="Snapchat profile" value={media['snapchat']} />
+            <Input id="account-snap" className="profile-input" onChange={(e) => this.updateSnapchat(e.target.value.trim())} placeholder="Snapchat profile" value={media['snapchat']} />
           </div>
         </div>
         { !readOnly ? <Button id="saveChanges" onClick={this.saveChanges}>Save Changes</Button> : <div /> }
