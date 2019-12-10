@@ -14,10 +14,6 @@
     -ms-overflow-style: none;
 }
 
-.accountChipInput > div::-webkit-scrollbar {
-    width: 0 !important;
-}
-
 .mediaWrapper {
     align-items: center;
     flex-direction: row;
