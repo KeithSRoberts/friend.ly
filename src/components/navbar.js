@@ -24,7 +24,7 @@ class Navbar extends Component {
       <div className="navigation-bar">
         <div className="navigation-bar-inside d-flex flex-row">
           <div className="logo-group nav-group nav-icon">
-              <Link to={routes.GROUPS}>
+              <Link to={{pathname: routes.GROUPS, search: "reload"}}>
                 <div className="logo" />
                 </Link>
               <h1 className="nav-title"><span className="nav-friend">Friend</span><span className="nav-ly">.ly</span></h1>

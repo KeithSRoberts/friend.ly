@@ -15,20 +15,14 @@ class Groups extends Component {
     this.state = {
         groups: [],
     };
-    if (props.queryFromApp!= null) {
-      this.searchGroup(firebase, props.queryFromApp)
-    } else {
-      this.fetchGroupList(firebase)
-    }
-    
-    
-
-    
+    this.fetchGroupList(firebase)
   }
   UNSAFE_componentWillReceiveProps(props) {
     const {firebase} = this.props
-    if (props.queryFromApp !== "") {
+    if (props.queryFromApp !== "" && props.location.search !== "?reload") {
       this.searchGroup(firebase, props.queryFromApp)
+    } else {
+      this.fetchGroupList(firebase);
     }
 }
 
@@ -56,6 +50,9 @@ class Groups extends Component {
           </div>
       );
     });
+    if (groupCards.length < 1) {
+        groupCards = <h4>No results found...</h4>;
+    }
     return groupCards
   }
 
