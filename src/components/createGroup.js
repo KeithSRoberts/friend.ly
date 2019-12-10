@@ -151,6 +151,8 @@ class CreateGroup extends Component {
   validForm() {
     return (this.state.groupTitle === "" ||
             this.state.groupDescr === "" ||
+            this.state.groupTitle.replace(/[\s\W.;,?%0-9]+/, '').length < 1 ||
+            this.state.groupDescr.replace(/[\s\W.;,?%0-9]+/, '').length < 1 ||
             this.state.groupImage === create);
   }
 
