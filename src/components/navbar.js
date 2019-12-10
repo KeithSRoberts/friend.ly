@@ -31,7 +31,7 @@ class Navbar extends Component {
             </div>
           <Nav pills className="navbar navbar-expand-lg nav-buttons d-flex justify-content-center">
             <NavItem>
-              <Link to={routes.GROUPS} id="nav-pill">Dashboard</Link>
+              <Link to={{pathname: routes.GROUPS, search: "reload"}} id="nav-pill">Dashboard</Link>
             </NavItem>
             
             <NavItem>
