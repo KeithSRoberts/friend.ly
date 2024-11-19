@@ -6,7 +6,7 @@
   "dependencies": {
     "@material-ui/core": "^4.6.1",
     "bootstrap": "^4.3.1",
-    "firebase": "^7.4.0",
+    "firebase": "^10.9.0",
     "gh-pages": "^2.1.1",
     "material-ui-chip-input": "^1.0.0",
     "react": "^16.10.2",
